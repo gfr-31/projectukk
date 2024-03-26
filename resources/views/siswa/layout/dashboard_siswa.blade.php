@@ -15,6 +15,24 @@
         </div>
 
         <div class=" row">
+            @foreach ($data_informasi as $info)
+                <div class=" col-3">
+                    <div class="card">
+                        <div class=" mt-2"
+                            style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                            <img src="{{ asset('post_image/' . $info->gambar) }}" id="preview" class="rounded"
+                                alt="Cinque Terre" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $info->judul }}</h5>
+                            <p class="card-text">{!! strip_tags($info->deskripsi) !!}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class=" row ">
             <div class=" col-lg-5" style="">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner ">
@@ -23,7 +41,7 @@
                                 <div class="card">
                                     <div class=" mt-2"
                                         style="display: flex; justify-content: center; align-items: center; height: 200px;">
-                                        <img src="{{ asset('post-image/' . $info->gambar) }}" id="preview" class="rounded"
+                                        <img src="{{ asset('post_image/' . $info->gambar) }}" id="preview" class="rounded"
                                             alt="Cinque Terre" style="max-width: 100%; max-height: 100%;">
                                     </div>
                                     <div class="card-body">

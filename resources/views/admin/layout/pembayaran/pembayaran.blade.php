@@ -349,7 +349,7 @@
                                                                     <td style="text-align: left">
                                                                         <button type="submit" class="btn-sm btn"
                                                                             name="juli{{ $t->id }}"
-                                                                            value="{{ $t->juli }}" id="bulan"
+                                                                            value="{{ $t->juli }}" 
                                                                             onclick="setTanggal('juli{{ $t->id }}', '{{ $t->id }}')">
                                                                             @if (is_numeric($t->juli))
                                                                                 {{ 'Rp. ' . number_format($t->juli, 0, ',', '.') }}
@@ -357,6 +357,7 @@
                                                                                 {{ $t->juli }}
                                                                             @endif
                                                                         </button>
+                                                                        <input type="hidden" value="{{ $t->id }}"id="bulan">
                                                                     </td>
                                                                     <td style="text-align: left">
                                                                         <button type="submit" class="btn-sm btn"
@@ -543,9 +544,9 @@
                                                 <td style="text-align: left">
                                                     <center>
                                                         <button type="button" class="btn btn-sm btn-success btn-bayar"
-                                                            data-toggle="modal"
-                                                            data-target="#popupModal{{ $t->id }}">
-                                                            <i class="fa fa-money"></i> Bayar
+                                                            data-toggle="modal" 
+                                                            data-target="#popupModal{{ $t->id }}" onclick="rpBayar({{ $t->id }})"
+                                                            <i class="fa fa-money"></i> Bayar  
                                                         </button>
                                                     </center>
                                                 </td>
@@ -600,7 +601,7 @@
                                                                     <label for="exampleInputEmail1"
                                                                         style="float: left;">Tanggal</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="waktu" placeholder="Enter email" readonly>
+                                                                        id="waktu{{ $t->id }}" name="" value="" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -632,7 +633,7 @@
                                                                     <label style="float: left;">Jumlah
                                                                         Bayar</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="tarifInput" name="jumlahBayar" required>
+                                                                        name="jumlahBayar" id="inputJumlahBayar{{ $t->id }}" value="Rp. " required>
                                                                 </div>
                                                             </div>
                                                             <div class=" col-6">
@@ -648,7 +649,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-sm btn-secondary"
                                                             data-dismiss="modal">Tutup</button>
-                                                        <button type="submit" onclick="simpanNilai()"
+                                                        <button type="submit" onclick="btnbebas('{{ $t->id }}')"
                                                             class="btn btn-success btn-sm"><i class=" fa fa-money"></i>
                                                             Bayar</button>
                                                     </div>
@@ -678,14 +679,14 @@
                                         <div class="input-group">
                                             <input type="hidden" id="nis" value="{{ $siswa->nis }}">
                                             <input type="text" value="" id="total{{ $siswa->nis }}"
-                                                class="form-control form-control-sm">
+                                                class="form-control form-control-sm" readonly>
                                         </div>
                                     </div>
                                     <div class=" col-6">
                                         <label for="">Dibayar</label>
                                         <div class="input-group ">
                                             <input type="text" id="dibayar{{ $siswa->nis }}" value=""
-                                                class="form-control form-control-sm">
+                                                class="form-control form-control-sm" >
                                         </div>
                                     </div>
                                 </div>
