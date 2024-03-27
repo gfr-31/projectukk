@@ -633,13 +633,13 @@
                                                                     <label style="float: left;">Jumlah
                                                                         Bayar</label>
                                                                     <input type="text" class="form-control"
-                                                                        name="jumlahBayar" id="inputJumlahBayar{{ $t->id }}" value="Rp. " required>
+                                                                        name="jumlahBayar" id="inputJumlahBayar{{ $t->id }}"  required >
                                                                 </div>
                                                             </div>
                                                             <div class=" col-6">
                                                                 <div class="form-group">
                                                                     <label style="float: left;">Keterangan</label>
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="text" class="form-control" id="keterangan{{ $t->id }}"
                                                                         name="keterangan" required>
                                                                 </div>
                                                             </div>
@@ -649,8 +649,8 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-sm btn-secondary"
                                                             data-dismiss="modal">Tutup</button>
-                                                        <button type="submit" onclick="btnbebas('{{ $t->id }}')"
-                                                            class="btn btn-success btn-sm"><i class=" fa fa-money"></i>
+                                                        <button type="submit" id="submit{{ $t->id }}" onclick="btnbebas('{{ $t->id }}')"
+                                                            class="btn btn-success btn-sm" ><i class=" fa fa-money"></i>
                                                             Bayar</button>
                                                     </div>
                                                 </div>
@@ -686,7 +686,7 @@
                                         <label for="">Dibayar</label>
                                         <div class="input-group ">
                                             <input type="text" id="dibayar{{ $siswa->nis }}" value=""
-                                                class="form-control form-control-sm" >
+                                                class="form-control form-control-sm" oninput="formatrp(this)" onkeypress="enterDibayar(event)">
                                         </div>
                                     </div>
                                 </div>
@@ -694,7 +694,7 @@
                                     <label for="">Kembalian</label>
                                     <div class=" input-group mb-3">
                                         <input type="text" id="kembalian{{ $siswa->nis }}" value=""
-                                            class=" form-control form-control-sm">
+                                            class=" form-control form-control-sm" readonly>
                                     </div>
                                 </div>
                             </div>

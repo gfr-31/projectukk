@@ -23,9 +23,33 @@ dateButtons.forEach(function (button) {
     }
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////
-// Hitung Pembayaran
-// Kosong
 var nis = document.getElementById("nis").value;
+// Hitung Pembayaran
+// parseInt(a.replace(/\D/g, ""));
+// Kembalian
+function enterDibayar(event){
+    if (event.key === 'Enter') {
+        var dibayar = document.getElementById('dibayar' + nis).value
+        var a = parseInt(dibayar.replace(/\D/g, ""));
+        var total = sessionStorage.getItem('total' + nis) 
+        var b = parseInt(total);
+        if (!a) {
+            a = '0'
+            var kembalian = b-a
+            // alert(kembalian)
+            // alert('abc')
+            var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            document.getElementById('kembalian'+nis).value = rp
+        }else{
+            var kembalian = a-b
+            // alert(kembalian)
+            // alert('123')
+            var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            document.getElementById('kembalian'+nis).value = rp
+        }
+    }
+}
+// Kosong
 function kosong() {
     sessionStorage.removeItem("bulan" + nis);
     sessionStorage.removeItem("bebas" + nis);
@@ -72,7 +96,9 @@ if (idnama) {
             }
         }
     }
-    // alert(total)
+    sessionStorage.setItem('total'+nis, total)
+    // var coba = sessionStorage.getItem('total'+nis)
+    // alert(coba)
 }
 // Bebas
 function btnbebas(id) {
@@ -177,9 +203,7 @@ function tampilkanDivTerakhir() {
 }
 
 // Tambahkan event listener untuk setiap hyperlink
-document
-    .getElementById("bulanan_link")
-    .addEventListener("click", function (event) {
+document.getElementById("bulanan_link").addEventListener("click", function (event) {
         event.preventDefault();
         // Tampilkan div untuk jenis pembayaran bulanan
         document.getElementById("bulanan").style.display = "block";
@@ -195,9 +219,7 @@ document
         localStorage.setItem("jenis_pembayaran", "bulanan");
     });
 
-document
-    .getElementById("bebas_link")
-    .addEventListener("click", function (event) {
+document.getElementById("bebas_link").addEventListener("click", function (event) {
         event.preventDefault();
         // Menyembunyikan div untuk jenis pembayaran bulanan
         document.getElementById("bulanan").style.display = "none";
@@ -226,12 +248,30 @@ window.onload = function () {
     var kembalianInput = document.getElementById("kembalian" + nis);
 
     totalInput.value = "Rp. " + totalInput.value;
-    dibayarInput.value = "Rp. " + dibayarInput.value;
+    // dibayarInput.value = "Rp. " + dibayarInput.value;
     kembalianInput.value = "Rp. " + kembalianInput.value;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Format Rp Jumlah Buyar Bebas
 function rpBayar(id) {
+    // Falidasi Form Bebas
+    var jumlahBayar = document.getElementById('inputJumlahBayar'+id);
+    var keterangan =  document.getElementById('keterangan'+id);
+    var button = document.getElementById('submit'+id);
+
+    function check(){
+        return jumlahBayar.value.trim() !== '' && keterangan.value.trim() !== ''
+    }
+    
+    function updateButton(){
+        button.disabled = !check();
+    };
+
+    jumlahBayar.addEventListener('input', updateButton);
+    keterangan.addEventListener('input', updateButton);
+    button.disabled = true;
+
+
     // Fungsi untuk mendapatkan tanggal dan waktu saat ini dalam format YYYY-MM-DD HH:MM:SS
     function getWaktu() {
         const now = new Date();
@@ -277,4 +317,25 @@ function rpBayar(id) {
         // Menampilkan nilai dalam format Rupiah di dalam input
         event.target.value = tarifRupiah;
     });
+
+// document.getElementById('submit'+id).disabled = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Format Rupiah
+function formatrp(input){
+    // Mengambil nilai input tanpa tanda titik atau Rp
+    var nilai = input.value.replace(/\D/g, '');
+    
+    // Memformat nilai ke format mata uang Rupiah
+    var formatted = formatRupiah(nilai);
+    
+    // Memperbarui nilai input dengan format Rupiah
+    input.value = formatted;
+}
+function formatRupiah(angka){
+    var reverse = angka.toString().split('').reverse().join('');
+    var ribuan = reverse.match(/\d{1,3}/g);
+    ribuan = ribuan.join('.').split('').reverse().join('');
+    return 'Rp ' + ribuan;
 }
