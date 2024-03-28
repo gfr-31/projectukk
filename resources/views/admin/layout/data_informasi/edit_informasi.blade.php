@@ -25,7 +25,7 @@
                         <div class="">
                             <div class="card card-default">
                                 <div class="card-header">
-                                    <h3 class="card-title">Tambah Data Informasi</h3>
+                                    <h3 class="card-title">Edit Data Informasi</h3>
                                 </div>
                                 <div class="bs-stepper-content">
                                     <div id="logins-part" class="content" role="tabpanel"
@@ -55,9 +55,9 @@
                                                 <div class="card card-primary card-outline"
                                                     style="height: 25% ;width: 100%">
                                                     <div class="  text-center">
-                                                        <img src="{{ asset('post-image/' . $di->gambar) }}" id="preview"
+                                                        <img src="{{ asset('post_image/' . $di->gambar) }}" id="preview"
                                                             class="rounded mt-3" alt="Cinque Terre" height="0%"
-                                                            width="90%">
+                                                            width="50%">
                                                     </div>
                                                     <div class="card-body box-profile">
                                                         <label for="">Unggah Gambar</label>
@@ -132,19 +132,7 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('foto').addEventListener('change', function(e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function() {
-                var imgElement = document.getElementById('preview');
-                imgElement.src = reader.result;
-            }
-
-            reader.readAsDataURL(file);
-        });
-    </script>
+    <script src="{{ asset('js/main/data_informasi/edit_informasi.js') }}"></script>
     <script>
         CKEDITOR.replace('content');
     </script>

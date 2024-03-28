@@ -349,7 +349,7 @@
                                                                     <td style="text-align: left">
                                                                         <button type="submit" class="btn-sm btn"
                                                                             name="juli{{ $t->id }}"
-                                                                            value="{{ $t->juli }}" 
+                                                                            value="{{ $t->juli }}"
                                                                             onclick="setTanggal('juli{{ $t->id }}', '{{ $t->id }}')">
                                                                             @if (is_numeric($t->juli))
                                                                                 {{ 'Rp. ' . number_format($t->juli, 0, ',', '.') }}
@@ -357,7 +357,8 @@
                                                                                 {{ $t->juli }}
                                                                             @endif
                                                                         </button>
-                                                                        <input type="hidden" value="{{ $t->id }}"id="bulan">
+                                                                        <input type="hidden"
+                                                                            value="{{ $t->id }}"id="bulan">
                                                                     </td>
                                                                     <td style="text-align: left">
                                                                         <button type="submit" class="btn-sm btn"
@@ -544,9 +545,10 @@
                                                 <td style="text-align: left">
                                                     <center>
                                                         <button type="button" class="btn btn-sm btn-success btn-bayar"
-                                                            data-toggle="modal" 
-                                                            data-target="#popupModal{{ $t->id }}" onclick="rpBayar({{ $t->id }})"
-                                                            <i class="fa fa-money"></i> Bayar  
+                                                            data-toggle="modal"
+                                                            data-target="#popupModal{{ $t->id }}"
+                                                            onclick="rpBayar({{ $t->id }})" <i
+                                                            class="fa fa-money"></i> Bayar
                                                         </button>
                                                     </center>
                                                 </td>
@@ -601,7 +603,8 @@
                                                                     <label for="exampleInputEmail1"
                                                                         style="float: left;">Tanggal</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="waktu{{ $t->id }}" name="" value="" readonly>
+                                                                        id="waktu{{ $t->id }}" name=""
+                                                                        value="" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -633,13 +636,16 @@
                                                                     <label style="float: left;">Jumlah
                                                                         Bayar</label>
                                                                     <input type="text" class="form-control"
-                                                                        name="jumlahBayar" id="inputJumlahBayar{{ $t->id }}"  required >
+                                                                        name="jumlahBayar"
+                                                                        id="inputJumlahBayar{{ $t->id }}"
+                                                                        required>
                                                                 </div>
                                                             </div>
                                                             <div class=" col-6">
                                                                 <div class="form-group">
                                                                     <label style="float: left;">Keterangan</label>
-                                                                    <input type="text" class="form-control" id="keterangan{{ $t->id }}"
+                                                                    <input type="text" class="form-control"
+                                                                        id="keterangan{{ $t->id }}"
                                                                         name="keterangan" required>
                                                                 </div>
                                                             </div>
@@ -649,8 +655,9 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-sm btn-secondary"
                                                             data-dismiss="modal">Tutup</button>
-                                                        <button type="submit" id="submit{{ $t->id }}" onclick="btnbebas('{{ $t->id }}')"
-                                                            class="btn btn-success btn-sm" ><i class=" fa fa-money"></i>
+                                                        <button type="submit" id="submit{{ $t->id }}"
+                                                            onclick="btnbebas('{{ $t->id }}')"
+                                                            class="btn btn-success btn-sm"><i class=" fa fa-money"></i>
                                                             Bayar</button>
                                                     </div>
                                                 </div>
@@ -686,7 +693,8 @@
                                         <label for="">Dibayar</label>
                                         <div class="input-group ">
                                             <input type="text" id="dibayar{{ $siswa->nis }}" value=""
-                                                class="form-control form-control-sm" oninput="formatrp(this)" onkeypress="enterDibayar(event)">
+                                                class="form-control form-control-sm" oninput="formatrp(this)"
+                                                onkeypress="enterDibayar(event)">
                                         </div>
                                     </div>
                                 </div>
@@ -703,82 +711,178 @@
                 </div>
             </div>
 
+            {{--  --}}
             <div class=" card card-olive card-outline">
-                <div class=" mx-5 mt-2 text-center">
-                    <label style="font-size: 18px">Transaksi Pembayaran</label>
-                </div>
-                <div class=" row mx-2">
-                    <div class=" table-responsive" style="height: 227px">
+                <div class="text-center">
+                    <label style="font-size: 20px">Transaksi Pembayaran</label>
+                    <ul class=" nav">
+                        <li class=" nav-item">
+                            <a href="" id="bulanan_link2">
+                                <p class="ml-3 mt-1 h6"><strong>Bulanan</strong></p>
+                            </a>
+                        </li>
+                        <li class=" nav-item">
+                            <a href="" id="bebas_link2">
+                                <p class="ml-3 mt-1 h6"><strong>Bebas</strong></p>
+                            </a>
+                        </li>
+                        <li class=" nav-item ml-auto mr-2 mb-2">
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" id="searchInput" class="form-control float-right"
+                                        placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div id="bulanan2" class=" table-responsive" style="height: 190px">
+                        <table class="table table-sm">
+                            @if ($t_bulanan->isEmpty())
+                                <thead>
+                                    <tr>
+                                        <th>Data Transaksi Tidak Ada</th>
+                                    </tr>
+                                </thead>
+                            @else
+                                <thead>
+                                    <tr>
+                                        <th>No. </th>
+                                        <th style="text-align: left">Pembayaran</th>
+                                        <th style="text-align: left">
+                                            <center>Tagihan</center>
+                                        </th>
+                                        <th style="text-align: left">
+                                            <center>Sisa Tagihan</center>
+                                        </th>
+                                        <th style="text-align: left">
+                                            <center>Tanggal</center>
+                                        </th>
+                                        <th>
+                                            <center>Cetak</center>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <?php $no = 1; ?>
+                                @foreach ($t_bulanan as $t)
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
+                                            <td style="text-align: left">
+                                                <center>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
+                                                </center>
+                                            </td>
+                                            <td style="text-align: left">
+                                                <center>
+                                                    {{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>{{ $t->created_at->format('d-m-Y') }}</center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a href="" class=" btn btn-sm btn-primary">
+                                                        <i class=" fa fa-download"></i>
+                                                    </a>
+                                                    <a href="" class=" btn btn-success btn-sm">
+                                                        <i class=" fa fa-print"></i>
+                                                    </a>
+                                                    |
+                                                    <a href="" class=" btn btn-sm btn-danger">
+                                                        <i class=" fa fa-trash"></i>
+                                                    </a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                @endforeach
+                            @endif
+                        </table>
+                    </div>
+
+                    <div id="bebas2" class=" table-responsive" style="height: 190px">
                         <table class="table table-sm ">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10px">No</th>
-                                    <th>Pembayaran</th>
-                                    <th>Tagihan</th>
-                                    <th>Sisa Tagihan</th>
-                                    <th>
-                                        <center>Tanggal</center>
-                                    </th>
-                                    <th>
-                                        <center>Cetak</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <?php $no = 1; ?>
-                            @foreach ($t_bebas as $t)
-                                <tbody>
+                            @if ($t_bebas->isEmpty())
+                                <thead>
                                     <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $t->nama_pembayaran }}</td>
-                                        <td>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}</td>
-                                        <td>{{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
-                                        </td>
-                                        <td>
-                                            <center>{{ $t->created_at->format('d-m-Y') }}</center>
-                                        </td>
-                                        <td>
-                                            <center>
-                                                <a href="" class=" btn btn-success btn-sm">
-                                                    <i class=" fa fa-print"></i>
-                                                </a>
-                                            </center>
-                                        </td>
+                                        <th>Data Transaksi Tidak Ada</th>
                                     </tr>
-                                </tbody>
-                            @endforeach
-                            @foreach ($t_bulanan as $t)
-                                <tbody>
+                                </thead>
+                            @else
+                                <thead>
                                     <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $t->nama_pembayaran }}</td>
-                                        <td>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}</td>
-                                        <td>{{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
-                                        </td>
-                                        <td>
-                                            <center>{{ $t->created_at->format('d-m-Y') }}</center>
-                                        </td>
-                                        <td>
-                                            <center>
-                                                <a href="" class=" btn btn-success btn-sm">
-                                                    <i class=" fa fa-print"></i>
-                                                </a>
-                                            </center>
-                                        </td>
+                                        <th>No. </th>
+                                        <th style="text-align: left">Pembayaran</th>
+                                        <th style="text-align: left">
+                                            <center>Tagihan</center>
+                                        </th>
+                                        <th style="text-align: left">
+                                            <center>Sisa Tagihan</center>
+                                        </th>
+                                        <th style="text-align: left">
+                                            <center>Tanggal</center>
+                                        </th>
+                                        <th>
+                                            <center>Cetak</center>
+                                        </th>
                                     </tr>
-                                </tbody>
-                            @endforeach
+                                </thead>
+                                <?php $no = 1; ?>
+                                @foreach ($t_bebas as $t)
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
+                                            <td style="text-align: left">
+                                                <center>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
+                                                </center>
+                                            </td>
+                                            <td style="text-align: left">
+                                                <center>
+                                                    {{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>{{ $t->created_at->format('d-m-Y') }}</center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a href="" class=" btn btn-sm btn-primary">
+                                                        <i class=" fa fa-download"></i>
+                                                    </a>
+                                                    <a href="" class=" btn btn-success btn-sm">
+                                                        <i class=" fa fa-print"></i>
+                                                    </a>
+                                                    |
+                                                    <a href="" class=" btn btn-sm btn-danger">
+                                                        <i class=" fa fa-trash"></i>
+                                                    </a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                @endforeach
+                            @endif
                         </table>
                     </div>
                 </div>
             </div>
-        @elseif(isset($pesan))
-            <script type="text/javascript">
-                toastr.error("{{ $pesan }}")
-            </script>
-        @endif
+    </div>
+@elseif(isset($pesan))
+    <script type="text/javascript">
+        toastr.error("{{ $pesan }}")
+    </script>
+    @endif
     </div>
 
-    <script src="{{ asset('js/pembayaran.js') }}"></script>
+    <script src="{{ asset('js/main/pembayaran/pembayaran.js') }}"></script>
     <style>
         .red-button {
             background-color: red;

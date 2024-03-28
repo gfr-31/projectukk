@@ -176,7 +176,7 @@
                             </button>
                         </div>
                         @foreach ($kelas as $k)
-                            <form action="/admin/edit/tarif-pembayaran/kelas/{{ $jp->tipe }}/{{ $jp->id }}"
+                            <form action="/admin/edit/tarif-pembayaran/kelas/{{ $jp->tahun_ajaran }}/{{ $jp->tipe }}/{{ $jp->nama_pembayaran }}"
                                 method="get">
                         @endforeach
                         <div class="modal-body">
@@ -212,42 +212,7 @@
                 </div>
             </div>
 
-            <script>
-                document.getElementById("searchInput").addEventListener("keyup", function() {
-                    var input, filter, table, tr, td, i, j;
-                    input = document.getElementById("searchInput");
-                    filter = input.value.toUpperCase();
-                    table = document.querySelector(".table-responsive table");
-                    tr = table.getElementsByTagName("tr");
-
-                    // Loop melalui semua baris tabel
-                    for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td");
-                        // Loop melalui semua sel dalam baris
-                        for (j = 0; j < td.length; j++) {
-                            if (td[j]) {
-                                // Jika teks dalam sel cocok dengan pencarian, tampilkan baris, jika tidak, sembunyikan
-                                if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                    tr[i].style.display = "";
-                                    break; // Keluar dari loop saat pencocokan ditemukan
-                                } else {
-                                    tr[i].style.display = "none";
-                                }
-                            }
-                        }
-                    }
-                });
-            </script>
-            <script>
-                $(document).ready(function() {
-                    $("#EDK").click(function() {
-                        var confirmation = confirm("Apakah Anda yakin ingin melanjutkan?");
-                        if (confirmation) {} else {
-                            return false;
-                        }
-                    });
-                });
-            </script>
+            <script src="{{ asset('js/main/keuangan/tarif_pembayaran/tarif_pembayaran_bulanan.js') }}"></script>
         </div>
     </div>
     @endforeach
