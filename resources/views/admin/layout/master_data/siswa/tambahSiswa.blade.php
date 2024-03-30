@@ -255,4 +255,13 @@
     </div>
 
     <script src="{{ asset('js/main/master_data/siswa/tambahSiswa.js') }}"></script>
+    @yield('toastr')
+    @if (session()->has('gagalInput'))
+        <script type="text/javascript">
+            toastr.error('{{ session('gagalInput') }}', "", {
+                "closeButton": true,
+                "timeOut": 2500,
+            });
+        </script>
+    @endif
 @endsection

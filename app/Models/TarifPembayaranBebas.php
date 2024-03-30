@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,14 @@ class TarifPembayaranBebas extends Model
     public function TahunAjaran()
     {
         return $this->belongsTo(TahunAjaran::class);
+    }
+
+    public static function rules($id = null)
+    {
+        return [
+            'kelas_id' => [
+                Rule::unique('tarif_pembayaran_bebas')->ignore($id)
+            ]
+        ];
     }
 }

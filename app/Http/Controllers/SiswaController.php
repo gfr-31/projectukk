@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DateTime;
 
 use App\Models\Siswa;
+use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -25,6 +26,15 @@ class SiswaController extends Controller
     }
     public function insert_siswa(Request $request)
     {
+        $validasi = Validator::make($request->all(), [
+            'nis' => 'unique:siswas,nis'
+        ]);
+        // dd($validasi);
+        if($validasi->fails()){
+            return redirect()->back()->with('gagalInput', 'NIS Tidak Boleh Sama Atau Data Sudah Ada');
+            // return redirect()->back()->withErrors($validasi)->withInput();
+        }
+        
         $file_foto = $request->file('fotos');
         $foto_ekstensi = $file_foto->getClientOriginalName();
 

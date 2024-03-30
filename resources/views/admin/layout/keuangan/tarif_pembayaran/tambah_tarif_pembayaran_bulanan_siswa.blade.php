@@ -377,4 +377,13 @@
     </div>
 
     <script src="{{ asset('js/main/keuangan/tarif_pembayaran/tambah_tarif_pembayaran_bulanan_siswa.js') }}"></script>
+    @yield('toastr')
+    @if (session()->has('dataSama'))
+        <script type="text/javascript">
+            toastr.error('{{ session('dataSama') }}', "", {
+                "closeButton": true,
+                "timeOut": 2500,
+            });
+        </script>
+    @endif
 @endsection

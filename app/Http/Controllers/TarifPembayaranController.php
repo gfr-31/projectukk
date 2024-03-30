@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\TarifPembayaranBulanan;
 use App\Models\TarifPembayaranBebas;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\JenisPembayaran;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -83,6 +85,13 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bulanan(Request $request)
     {
         // dd($request->all());    
+
+        $validasi = TarifPembayaranBulanan::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->first();
+        // dd($validasi);
+        if ($validasi) {
+            $kelas = DB::table('kelas')->where('id', $request->kelas)->value('kelas');
+            return redirect()->back()->with('dataSama', 'Maaf Pembayaran Bulanan Untuk Kelas ' . $kelas . ' Sudah Ada.');
+        }
         // Validasi request jika diperlukan
         $kelasId = $request->kelas;
         // Ambil semua siswa yang terkait dengan kelas tersebut
@@ -128,7 +137,6 @@ class TarifPembayaranController extends Controller
                 'created_at' => now()
             ]);
         }
-        // dd($siswas);
         $tipe = $request->tipe;
         $tj = $request->tj;
         $id = $request->id;
@@ -138,6 +146,12 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bulanan_siswa(Request $request)
     {
         // dd($request->all());
+        $validasi = TarifPembayaranBulanan::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->first();
+        // dd($validasi);
+        if ($validasi){
+            $siswa = DB::table('siswas')->where('id', $request->siswa)->value('nama_lengkap');
+            return redirect()->back()->with('dataSama', 'Maaf Pembayaran Bulanan Atas Nama ' . $siswa . ' Sudah Ada.');
+        }
         // Supaya Meghapus Data yang ada Rp.
         $juli = (int) preg_replace('/\D/', '', $request->juli);
         $agustus = (int) preg_replace('/\D/', '', $request->agustus);
@@ -414,6 +428,14 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bebas(Request $request)
     {
         // dd($request->all());
+        $validasi = TarifPembayaranBebas::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->first();
+        // dd($validasi);
+        if($validasi)  {
+            $kelas = DB::table('kelas')->where('id', $request->kelas)->value('kelas');
+            $np = $request->namaPembayaran;
+            // dd($np);
+            return redirect()->back()->with('dataSama', 'Maaf Pembayaran ' . $np . '  Untuk Kelas ' . $kelas . ' Sudah Ada.');
+        }
         // Validasi request jika diperlukan
         $kelasId = $request->kelas;
         // Ambil semua siswa yang terkait dengan kelas tersebut
@@ -443,6 +465,13 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bebas_siswa(Request $request)
     {
         // dd($request->all());
+        $validasi = TarifPembayaranBebas::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->first();
+        // dd($validasi);
+        if($validasi){
+            $siswa = DB::table('siswas')->where('id', $request->siswa)->value('nama_lengkap');
+            $nm = $request->namaPembayaran;
+            return redirect()->back()->with('dataSama', 'Maaf Pembayaran ' . $nm .' Atas Nama ' . $siswa . ' Sudah Ada.');
+        }
         $tarif = (int) preg_replace('/\D/', '', $request->tarif);
         DB::table('tarif_pembayaran_bebas')->insert([
             'kelas_id' => $request->kelas,

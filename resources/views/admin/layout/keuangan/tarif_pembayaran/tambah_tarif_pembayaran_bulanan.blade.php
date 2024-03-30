@@ -35,8 +35,7 @@
                                                 <div class=" col-8">
                                                     <input class="form-control" type="text" name="namaPembayaran"
                                                         id=""
-                                                        value="{{ $jp->pos }} - T.A {{ $jp->tahun_ajaran }}"
-                                                        readonly>
+                                                        value="{{ $jp->pos }} - T.A {{ $jp->tahun_ajaran }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +87,8 @@
                                                         aria-label="Default select example">
                                                         <option value="" selected>-- Kelas --</option>
                                                         @foreach ($kelas as $k)
-                                                            <option value="{{ $k->id }}">{{ $k->kelas }}</option>
+                                                            <option value="{{ $k->id }}">{{ $k->kelas }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -109,7 +109,8 @@
                                             <div class=" row">
                                                 <div class=" col-5">
                                                     <label for="" class=" col-form-label">Tarif Bulanan
-                                                        (Rp.)</label>
+                                                        (Rp.)
+                                                    </label>
                                                 </div>
                                                 <div class=" col-7">
                                                     <input class="form-control" type="text" name=""
@@ -356,6 +357,14 @@
         @endforeach
 
     </div>
-
     <script src="{{ asset('js/main/keuangan/tarif_pembayaran/tambah_tarif_pembayaran_bulanan.js') }}"></script>
+    @yield('toastr')
+    @if (session()->has('dataSama'))
+        <script type="text/javascript">
+            toastr.error('{{ session('dataSama') }}', "", {
+                "closeButton": true,
+                "timeOut": 2500,
+            });
+        </script>
+    @endif
 @endsection

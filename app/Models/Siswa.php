@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,7 +26,6 @@ class Siswa extends Authenticatable
 
     protected $fillable = [
         'nama_lengkap',
-
         'nis',
         'password',
     ];
@@ -49,5 +50,14 @@ class Siswa extends Authenticatable
     public function TarifPembayaranBebas()
     {
         return $this->hasMany(TarifPembayaranBebas::class);
+    }
+
+    public static function rules($id = null)
+    {
+        return [
+            'nis' => [
+                Rule::unique('siswas')->ignore($id)
+            ]
+        ];
     }
 }

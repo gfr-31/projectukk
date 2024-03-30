@@ -120,4 +120,13 @@
     </div>
     <script src="{{ asset('js/main/keuangan/tarif_pembayaran/edit_tarif_pembayaran_bebas_kelas.js') }}"></script>
     @endforeach
+    @yield('toastr')
+    @if (session()->has('dataSama'))
+        <script type="text/javascript">
+            toastr.error('{{ session('dataSama') }}', "", {
+                "closeButton": true,
+                "timeOut": 2500,
+            });
+        </script>
+    @endif
 @endsection
