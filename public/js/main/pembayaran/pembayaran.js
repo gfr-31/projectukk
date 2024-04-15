@@ -1,8 +1,7 @@
 function validasiEdit(tipe, id) {
     var konfirmasi = confirm("Apakah Anda Yakin Untuk Mengedit Data Ini???");
     if (konfirmasi) {
-        window.location.href =
-            "/admin/edit/tarif-pembayaran/" + tipe + "/" + id;
+        window.open("/admin/edit/tarif-pembayaran/" + tipe + "/" + id, "_blank");
     } else {
         window.location.history;
     }
@@ -445,3 +444,54 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
         }
     }
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function(){
+    // Menampilkan popover saat mouse masuk ke setiap tombol unduh
+    $('.popover-trigger').mouseenter(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover({
+            trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
+        });
+        $('#' + popoverId).popover('show'); // Menampilkan popover
+    });
+
+    // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
+    $('.popover-trigger').mouseleave(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover('hide'); // Menyembunyikan popover
+    });
+});
+$(document).ready(function(){
+    // Menampilkan popover saat mouse masuk ke setiap tombol unduh
+    $('.popover-trigger2').mouseenter(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover({
+            trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
+        });
+        $('#' + popoverId).popover('show'); // Menampilkan popover
+    });
+
+    // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
+    $('.popover-trigger2').mouseleave(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover('hide'); // Menyembunyikan popover
+    });
+});
+$(document).ready(function(){
+    // Menampilkan popover saat mouse masuk ke setiap tombol unduh
+    $('.popover-trigger3').mouseenter(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover({
+            trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
+        });
+        $('#' + popoverId).popover('show'); // Menampilkan popover
+    });
+
+    // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
+    $('.popover-trigger3').mouseleave(function(){
+        var popoverId = $(this).attr('id');
+        $('#' + popoverId).popover('hide'); // Menyembunyikan popover
+    });
+});
+ 

@@ -11,7 +11,6 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KirimTagihanController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifPembayaranController;
@@ -33,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 // });
 // Route::get('/404', function() {
 //     return view('404');
+// });
+// Route::get('/transaksi', function() {
+//     return view('admin.layout.bukti_pembayaran_bulanan');
 // });
 
 Route::prefix('/')->group(function () {
@@ -60,7 +62,10 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('pembayaran', [PembayaranController::class, 'transaksi']);
     Route::get('pembayaran-', [PembayaranController::class, 'cariSiswa']);
     Route::post('simpan-pembayaran/{tipe}', [PembayaranController::class, 'simpanPembayaran']);
-    Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
+    Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
+    Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
+    // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);
+    // Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
 
     //Kirim Tagihan WA
     Route::get('kirim-tagihan', [KirimTagihanController::class, 'kirimTagihan']);

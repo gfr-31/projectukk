@@ -291,7 +291,7 @@ class TarifPembayaranController extends Controller
                 // dd($idj);
                 return redirect('/admin/tarif-pembayaran/' . $tj . '/' . $tipe . '/id=' . $idj . '/' . $nama_pembayaran)->with('berhasilUpdatePos', 'Data Pos Berhasil Diperbaharui');
             } elseif ($request->tipe == "Bebas") {
-                dd($request->all());
+                // dd($request->all());
                 $tarif = (int) preg_replace('/\D/', '', $request->tarif);
                 DB::table("tarif_pembayaran_bebas")->where("id", $request->id)->update([
                     'nama_pembayaran' => $request->namaPembayaran,

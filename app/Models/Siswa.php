@@ -51,6 +51,10 @@ class Siswa extends Authenticatable
     {
         return $this->hasMany(TarifPembayaranBebas::class);
     }
+    public function TransaksiBulanan()
+    {
+        return $this->hasMany(TransaksiBulanan::class);
+    }
 
     public static function rules($id = null)
     {

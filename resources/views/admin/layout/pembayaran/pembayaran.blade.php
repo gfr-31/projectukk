@@ -66,23 +66,6 @@
         </div>
 
         @if (isset($siswa))
-            @if (session()->has('key'))
-                {
-                <script type="text/javascript">
-                    toastr.success("{{ session('key') }}", "", {
-                        "closeButton": true,
-                        "timeOut": 2500,
-                    });
-                </script>
-                }
-            @elseif ($pesan)
-                <script type="text/javascript">
-                    toastr.success("{{ $pesan }}", "", {
-                        "closeButton": true,
-                        "timeOut": 2500,
-                    });
-                </script>
-            @endif
             <div class=" row">
                 <div class=" col-12">
                     <div class=" card card-olive card-outline" style="height: 270px">
@@ -257,7 +240,7 @@
                                                         <div class=" col-1">
                                                             <a href="#" id="edit"
                                                                 onclick="validasiEdit('{{ $t->tipe }}', '{{ $t->id }}')"
-                                                                class=" btn btn-primary btn-sm ml-3" target="_blank">
+                                                                class=" btn btn-primary btn-sm ml-3">
                                                                 <i class="fa fa-cog"></i>
                                                             </a>
                                                         </div>
@@ -729,8 +712,8 @@
                         <li class=" nav-item ml-auto mr-2 mb-2">
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" id="searchInput" class="form-control float-right"
-                                        placeholder="Search">
+                                    <input type="text" name="table_search" id="searchInput"
+                                        class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
                                             <i class="fas fa-search"></i>
@@ -740,7 +723,7 @@
                             </div>
                         </li>
                     </ul>
-                    
+
                     <div id="bulanan2" class=" table-responsive" style="height: 190px">
                         <table class="table table-sm">
                             @if ($t_bulanan->isEmpty())
@@ -752,7 +735,8 @@
                             @else
                                 <thead>
                                     <tr>
-                                        <th>No. </th>
+                                        <th>No </th>
+                                        <th style="text-align: left">Kode Transaksi</th>
                                         <th style="text-align: left">Pembayaran</th>
                                         <th style="text-align: left">
                                             <center>Tagihan</center>
@@ -773,6 +757,7 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>
+                                            <td style="text-align: left">{{ $t->kode_transaksi }}</td>
                                             <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
                                             <td style="text-align: left">
                                                 <center>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
@@ -788,14 +773,18 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" class=" btn btn-sm btn-primary">
-                                                        <i class=" fa fa-download"></i>
-                                                    </a>
-                                                    <a href="" class=" btn btn-success btn-sm">
-                                                        <i class=" fa fa-print"></i>
+                                                    {{-- <a href="/admin/bukti-pembayaran-{{ $t->id }}/download" target="_blank" class="btn btn-sm btn-primary popover-trigger" id="popover-trigger-{{ $loop->index }}" data-toggle="popover" title="Download PDF" >
+                                                        <i class="fa fa-download"></i> 
+                                                    </a> --}}
+                                                    <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                                        target="_blank" class=" btn btn-success btn-sm popover-trigger"
+                                                        id="popover-trigger-2-{{ $loop->index }}" data-toggle="popover"
+                                                        title="Lihat & Cetak PDF">
+                                                        <i class=" fa fa-print"></i> | <i class=" fa fa-search"></i>
                                                     </a>
                                                     |
-                                                    <a href="" class=" btn btn-sm btn-danger">
+                                                    <a href="bukti-pembayaran{{ $t->tipe }}/hapus/{{ $t->kode_transaksi }}"
+                                                        class=" btn btn-sm btn-danger">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </center>
@@ -818,7 +807,8 @@
                             @else
                                 <thead>
                                     <tr>
-                                        <th>No. </th>
+                                        <th>No </th>
+                                        <th style="text-align: left">Kode Transaksi</th>
                                         <th style="text-align: left">Pembayaran</th>
                                         <th style="text-align: left">
                                             <center>Tagihan</center>
@@ -839,6 +829,7 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>
+                                            <td style="text-align: left">{{ $t->kode_transaksi }}</td>
                                             <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
                                             <td style="text-align: left">
                                                 <center>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
@@ -854,14 +845,18 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" class=" btn btn-sm btn-primary">
+                                                    {{-- <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}" download="coba.pdf" class=" btn btn-sm btn-primary">
                                                         <i class=" fa fa-download"></i>
-                                                    </a>
-                                                    <a href="" class=" btn btn-success btn-sm">
-                                                        <i class=" fa fa-print"></i>
+                                                    </a> --}}
+                                                    <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                                        target="_blank" class=" btn btn-success btn-sm popover-trigger"
+                                                        id="popover-trigger-3-{{ $loop->index }}" data-toggle="popover"
+                                                        title="Lihat & Cetak PDF">
+                                                        <i class=" fa fa-print"></i> | <i class=" fa fa-search"></i>
                                                     </a>
                                                     |
-                                                    <a href="" class=" btn btn-sm btn-danger">
+                                                    <a href="bukti-pembayaran{{ $t->tipe }}/hapus/{{ $t->kode_transaksi }}"
+                                                        class=" btn btn-sm btn-danger">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </center>
@@ -874,12 +869,11 @@
                     </div>
                 </div>
             </div>
-    </div>
-@elseif(isset($pesan))
-    <script type="text/javascript">
-        toastr.error("{{ $pesan }}")
-    </script>
-    @endif
+        @elseif(isset($pesan))
+            <script type="text/javascript">
+                toastr.error("{{ $pesan }}")
+            </script>
+        @endif
     </div>
 
     <script src="{{ asset('js/main/pembayaran/pembayaran.js') }}"></script>
@@ -917,4 +911,15 @@
             /* Teks tebal */
         }
     </style>
+    @if (session()->has('success1'))
+        <script type="text/javascript">
+            toastr.success('{{ session('success1') }}')
+        </script>
+    @endif
+    @if (session()->has('success2'))
+        <script type="text/javascript">
+            toastr.success('{{ session('success2') }}')
+        </script>
+    @endif
+
 @endsection

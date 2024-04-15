@@ -13,7 +13,6 @@ class AdminController extends Controller
     }
 
     public function authenticat(Request $request){
-        
         $credentials = $request -> validate([
             'email' => 'required|email:dns',
             'password' => 'required'
@@ -24,9 +23,7 @@ class AdminController extends Controller
 
             return redirect()->intended('admin/dashboard')->with('success', 'Anda Berhasil Login');
         }
-
         return back()->with('loginError', 'Login Gagal !!!');
-
         // dd('berhasil login');
     }
 

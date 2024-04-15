@@ -14,18 +14,23 @@ function formatRupiah(angka) {
 }
 
 // Event listener untuk menangani input tarif
-document.getElementById('tarifInput').addEventListener('input', function(event) {
+document.getElementById('tarifInput').addEventListener('keypress', function(event) {
+    if(event.key == 'Enter'){
     // Mendapatkan nilai dari input
     var tarifInput = event.target.value;
 
     // Menghapus karakter selain digit
     tarifInput = tarifInput.replace(/\D/g, '');
-
+    
     // Mengonversi nilai menjadi format Rupiah
     var tarifRupiah = formatRupiah(tarifInput);
 
+    document.getElementById('sisaTagihan').value = tarifRupiah
+
     // Menampilkan nilai dalam format Rupiah di dalam input
     event.target.value = tarifRupiah;
+    }
+
 });
 
 // Event listener untuk menangani input tarif

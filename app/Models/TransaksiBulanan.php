@@ -9,7 +9,10 @@ class TransaksiBulanan extends Model
 {
     use HasFactory;
     protected $table = "transaksi_bulanan";
-    protected $guarded = ['id'];
+    protected $guarded = ['id_transaksi'];
+    // protected $fillable = [
+    //     'id',
+    // ];
     public function Siswa()
     {
         return $this->belongsTo(Siswa::class);

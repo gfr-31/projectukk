@@ -1,3 +1,14 @@
+
+function rp(input){
+    var a = input.value.replace(/\D/g, '')
+    var b = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(a)
+    input.value = b
+}
+
 function formatRupiah(tagihanId) {
     // Mengonversi angka menjadi format Rupiah dengan koma sebagai pemisah ribuan
     var rupiah = new Intl.NumberFormat('id-ID', {
@@ -10,8 +21,9 @@ function formatRupiah(tagihanId) {
     rupiah = rupiah.replace(/\d(?=(\d{3})+,)/g, '');
 
     return rupiah;
-    alert
+    // alert
 }
+
 document.getElementById('tarif_bulanan').addEventListener('input', function(event) {
     // Mendapatkan nilai dari input
     var tarifInput = event.target.value;

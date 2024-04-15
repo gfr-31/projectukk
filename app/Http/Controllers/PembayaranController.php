@@ -39,16 +39,15 @@ class PembayaranController extends Controller
 
             $t_bulanan = TransaksiBulanan::whereHas('Siswa', function ($query) use ($nis) {
                 $query->where('nis', $nis);
-            })->orderBy('created_at', 'asc')->get(['kelas_id', 'siswa_id', 'nama_pembayaran', 'tahun_ajaran', 'tipe', 'tagihan', 'sisa_tagihan', 'jumlah_bayar', 'bulan', 'created_at']);
-
+            })->orderBy('created_at', 'desc')->get();
+            // dd($t_bulanan);
             $t_bebas = TransaksiBebas::whereHas('Siswa', function ($query) use ($nis) {
                 $query->where('nis', $nis);
-            })->orderBy('created_at', 'asc')->get(['tahun_ajaran', 'kelas_id', 'siswa_id', 'nama_pembayaran', 'tipe', 'tarif', 'jumlah_bayar', 'sisa_tagihan', 'keterangan', 'created_at']);
+            })->orderBy('created_at', 'desc')->get();
             // $transaksi = $transaksi_bulanan->union($transaksi_bebas)->get();
             // dd($transaksi);
-            $pesan = "Data Siswa Berhasil Ditemukan";
             // dd($tpBebas);
-            return view('admin.layout.pembayaran.pembayaran', compact('admin', 'siswa', 'tpBulanan', 'tpBebas', 'pesan', 't_bulanan', 't_bebas'));
+            return view('admin.layout.pembayaran.pembayaran', compact('admin', 'siswa', 'tpBulanan', 'tpBebas', 't_bulanan', 't_bebas'));
         } else {
             $pesan = "Data Siswa Tidak Ditemukan";
             // dd($pesan);
@@ -59,11 +58,12 @@ class PembayaranController extends Controller
     public function simpanPembayaran(Request $request)
     {
         // dd($request->all());
-        // dd($total);
+        // dd($idBulanan);
 
-        return back();
+        // return back();
         try {
             if ($request->tipe == "Bulanan") {
+                // dd();
                 $juli = $request->input('juli' . $request->id);
                 $agustus = $request->input('agustus' . $request->id);
                 $september = $request->input('september' . $request->id);
@@ -79,7 +79,15 @@ class PembayaranController extends Controller
                 $tagihan = $request->input('tagihan' . $request->id);
                 $sisa_tagihan = $request->input('sisa_tagihan' . $request->id);
                 // dd($sisa_tagihan);
+                $a = date('ymd');
+                $b = TransaksiBulanan::max('id') + 1 ;
+                $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $c = substr(str_shuffle($huruf), 0, 3);
+                $d = mt_rand(100, 999);;
+                $kode = 'BPS'.$d.'-'.$a.'-'.$c.$b;
+                // dd($b);
                 DB::table('transaksi_bulanan')->insert([
+                    'kode_transaksi'=>$kode,
                     'kelas_id' => $request->kelas,
                     'siswa_id' => $request->siswa,
                     'nama_pembayaran' => $request->np,
@@ -113,7 +121,7 @@ class PembayaranController extends Controller
                     'sisa_tagihan' => $sisa_tagihan
                 ]);
                 // dd($i->sql());
-                $nm =  $request->np;
+                $nm = $request->np;
                 $pesan = "Pembayaran  $nm  Berhasil";
                 session()->flash('key', $pesan);
                 return redirect()->back();
@@ -121,8 +129,16 @@ class PembayaranController extends Controller
                 $tarif = (int) preg_replace('/\D/', '', $request->tarif);
                 $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
                 $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
-                // dd($jumlahBayar);
+
+                $a = date('ymd');
+                $b = TransaksiBebas::max('id') + 1;
+                $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $c = substr(str_shuffle($huruf), 0, 3);
+                $d = mt_rand(100, 999);;
+                $kode = 'BPS'.$d.'-'.$a.'-'.$c.$b;
+                // dd($kode);
                 DB::table('transaksi_bebas')->insert([
+                    'kode_transaksi'=>$kode,
                     'tahun_ajaran' => $request->ta,
                     'kelas_id' => $request->kelas,
                     'siswa_id' => $request->siswa,
@@ -139,13 +155,95 @@ class PembayaranController extends Controller
                     'jumlah_bayar' => $jumlahBayar,
                     'keterangan' => $request->keterangan,
                 ]);
-                $nm =  $request->namaPembayaran;
+                $nm = $request->namaPembayaran;
                 $pesan = "Pembayaran  $nm  Berhasil";
                 session()->flash('key', $pesan);
                 return redirect()->back();
             }
         } catch (\Exception $e) {
             dd($e->getMessage());
+        }
+
+    }
+    
+    public function bukti(Request $request)
+    {
+        // dd($request->tipe);
+        if ($request->tipe == 'Bulanan') {
+            $t_bulanan = TransaksiBulanan::with('Siswa')->where('id', $request->id)->get();
+            // dd($t_bulanan);
+            foreach ($t_bulanan as $transaksi) {
+                $transaksi->jumlah_bayar_terbilang = $this->terbilang($transaksi->jumlah_bayar) . ' RUPIAH';
+            }
+            foreach ($t_bulanan as $transaksi) {
+                $transaksi->tanggal_formatted = $this->formatTanggal($transaksi->created_at);
+                // dd($transaksi);
+            }
+            // dd($transaksi);
+            return view('admin.layout.bukti_pembayaran', compact('t_bulanan'));
+        } elseif ($request->tipe == 'Bebas') {
+            $t_bebas = TransaksiBebas::with('Siswa')->where('id', $request->id)->get();
+            // dd($t_bebas);
+            foreach ($t_bebas as $transaksi) {
+                $transaksi->jumlah_bayar_terbilang = $this->terbilang($transaksi->jumlah_bayar) . ' RUPIAH';
+            }
+            foreach ($t_bebas as $transaksi) {
+                $transaksi->tanggal_formatted = $this->formatTanggal($transaksi->created_at);
+                // dd($transaksi);
+            }
+            return view('admin.layout.bukti_pembayaran', compact('t_bebas'));
+        }
+
+    }
+    private function terbilang($angka)
+    {
+        $angka = abs($angka);
+        $bilangan = array(
+            '',
+            'SATU',
+            'DUA',
+            'TIGA',
+            'EMPAT',
+            'LIMA',
+            'ENAM',
+            'TUJUH',
+            'DELAPAN',
+            'SEMBILAN',
+            'SEPULUH',
+            'SEBELAS'
+        );
+        $terbilang = '';
+        if ($angka < 12) {
+            $terbilang = ' ' . $bilangan[$angka];
+        } elseif ($angka < 20) {
+            $terbilang = $this->terbilang($angka - 10) . ' BELAS';
+        } elseif ($angka < 100) {
+            $terbilang = $this->terbilang($angka / 10) . ' PULUH' . $this->terbilang($angka % 10);
+        } elseif ($angka < 200) {
+            $terbilang = ' SERATUS' . $this->terbilang($angka - 100);
+        } elseif ($angka < 1000) {
+            $terbilang = $this->terbilang($angka / 100) . ' RATUS' . $this->terbilang($angka % 100);
+        } elseif ($angka < 2000) {
+            $terbilang = ' SERIBU' . $this->terbilang($angka - 1000);
+        } elseif ($angka < 1000000) {
+            $terbilang = $this->terbilang($angka / 1000) . ' RIBU' . $this->terbilang($angka % 1000);
+        } elseif ($angka < 1000000000) {
+            $terbilang = $this->terbilang($angka / 1000000) . ' JUTA' . $this->terbilang($angka % 1000000);
+        }
+        return $terbilang;
+    }
+    private function formatTanggal($tanggal)
+    {
+        // Memformat tanggal dari format standar ke format yang diinginkan
+        return date('d F Y', strtotime($tanggal));
+    }
+    public function hapus_bukti(Request $request){
+        if($request->tipe == 'Bulanan'){
+            TransaksiBulanan::where('kode_transaksi', $request->kode_transaksi)->delete();
+            return redirect()->back()->with('success1', 'Anda Berhasil Menghapus Data');
+        }elseif($request->tipe == 'Bebas'){
+            TransaksiBebas::where('kode_transaksi', $request->kode_transaksi)->delete();
+            return redirect()->back()->with('success2', 'Anda Berhasil Menghapus Data');
         }
     }
 
