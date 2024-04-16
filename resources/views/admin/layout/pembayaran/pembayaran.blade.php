@@ -54,7 +54,7 @@
                                             value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}">
                                     </div>
                                 </div>
-                                <a href="" class="col-12 btn btn-danger btn-sm mb-3">
+                                <a href="/admin/cetak-tagihan/{{  $siswa->id}}" class="col-12 btn btn-danger btn-sm mb-3" target="_blank">
                                     <i class=" fa fa-print"></i>
                                     Cetak Semua Tagihan
                                 </a>
@@ -112,7 +112,7 @@
                                     <a href="{{ asset('post_image/' . $siswa->foto_siswa) }}" data-lightbox="galery"
                                         data-title="Foto Siswa | {{ $siswa->nama_lengkap }}">
                                         <img src="{{ asset('post_image/' . $siswa->foto_siswa) }}" id="preview"
-                                            class="rounded" alt="Cinque Terre" height="0%" width="210px">
+                                            class="rounded" alt="Cinque Terre" height="0%" width="210px" loading="lazy">
                                     </a>
                                 </div>
                             </div>
@@ -773,9 +773,9 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    {{-- <a href="/admin/bukti-pembayaran-{{ $t->id }}/download" target="_blank" class="btn btn-sm btn-primary popover-trigger" id="popover-trigger-{{ $loop->index }}" data-toggle="popover" title="Download PDF" >
+                                                    <a target="_blank" class="btn btn-sm btn-primary popover-trigger" id="popover-trigger-{{ $loop->index }}" data-toggle="popover" title="Download PDF" >
                                                         <i class="fa fa-download"></i> 
-                                                    </a> --}}
+                                                    </a>
                                                     <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                         target="_blank" class=" btn btn-success btn-sm popover-trigger"
                                                         id="popover-trigger-2-{{ $loop->index }}" data-toggle="popover"
@@ -810,6 +810,7 @@
                                         <th>No </th>
                                         <th style="text-align: left">Kode Transaksi</th>
                                         <th style="text-align: left">Pembayaran</th>
+                                        <th style="text-align: left">Keterangan</th>
                                         <th style="text-align: left">
                                             <center>Tagihan</center>
                                         </th>
@@ -831,6 +832,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td style="text-align: left">{{ $t->kode_transaksi }}</td>
                                             <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
+                                            <td style="text-align: left">{{ $t->keterangan }}</td>
                                             <td style="text-align: left">
                                                 <center>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
                                                 </center>
@@ -877,6 +879,7 @@
     </div>
 
     <script src="{{ asset('js/main/pembayaran/pembayaran.js') }}"></script>
+
     <style>
         .red-button {
             background-color: red;
@@ -921,5 +924,6 @@
             toastr.success('{{ session('success2') }}')
         </script>
     @endif
+
 
 @endsection

@@ -57,7 +57,7 @@
                                                     <div class="  text-center">
                                                         <img src="{{ asset('post_image/' . $di->gambar) }}" id="preview"
                                                             class="rounded mt-3" alt="Cinque Terre" height="0%"
-                                                            width="50%">
+                                                            width="50%" loading="lazy">
                                                     </div>
                                                     <div class="card-body box-profile">
                                                         <label for="">Unggah Gambar</label>

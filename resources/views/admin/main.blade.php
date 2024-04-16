@@ -65,13 +65,13 @@
                 @foreach ($admin as $a)
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('gambar/icon.png') }}" class="user-image img-circle " alt="User Image">
+                            <img src="{{ asset('gambar/icon.png') }}" class="user-image img-circle " alt="User Image" loading="lazy">
                             <span class="d-none d-md-inline">{{ $a->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
                             <li class="user-header bg-olive">
-                                <img src="{{ asset('gambar/icon.png') }}" alt="User Image">
+                                <img src="{{ asset('gambar/icon.png') }}" alt="User Image" loading="lazy">
                                 @auth
                                     <p>
                                         {{ auth()->user()->name }} - Aplikasi Pembayaran
@@ -115,7 +115,7 @@
                 <!-- Sidebar user panel (optional) -->
                 {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('gambar/icon.png') }}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('gambar/icon.png') }}" class="img-circle" alt="User Image" loading="lazy">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">SMK BPM</a>

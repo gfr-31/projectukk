@@ -58,9 +58,7 @@ class PembayaranController extends Controller
     public function simpanPembayaran(Request $request)
     {
         // dd($request->all());
-        // dd($idBulanan);
-
-        // return back();
+        return back();
         try {
             if ($request->tipe == "Bulanan") {
                 // dd();
@@ -80,14 +78,15 @@ class PembayaranController extends Controller
                 $sisa_tagihan = $request->input('sisa_tagihan' . $request->id);
                 // dd($sisa_tagihan);
                 $a = date('ymd');
-                $b = TransaksiBulanan::max('id') + 1 ;
+                $b = TransaksiBulanan::max('id') + 1;
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
-                $d = mt_rand(100, 999);;
-                $kode = 'BPS'.$d.'-'.$a.'-'.$c.$b;
+                $d = mt_rand(100, 999);
+                ;
+                $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($b);
                 DB::table('transaksi_bulanan')->insert([
-                    'kode_transaksi'=>$kode,
+                    'kode_transaksi' => $kode,
                     'kelas_id' => $request->kelas,
                     'siswa_id' => $request->siswa,
                     'nama_pembayaran' => $request->np,
@@ -134,11 +133,12 @@ class PembayaranController extends Controller
                 $b = TransaksiBebas::max('id') + 1;
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
-                $d = mt_rand(100, 999);;
-                $kode = 'BPS'.$d.'-'.$a.'-'.$c.$b;
+                $d = mt_rand(100, 999);
+                ;
+                $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($kode);
                 DB::table('transaksi_bebas')->insert([
-                    'kode_transaksi'=>$kode,
+                    'kode_transaksi' => $kode,
                     'tahun_ajaran' => $request->ta,
                     'kelas_id' => $request->kelas,
                     'siswa_id' => $request->siswa,
@@ -165,7 +165,7 @@ class PembayaranController extends Controller
         }
 
     }
-    
+
     public function bukti(Request $request)
     {
         // dd($request->tipe);
@@ -237,14 +237,30 @@ class PembayaranController extends Controller
         // Memformat tanggal dari format standar ke format yang diinginkan
         return date('d F Y', strtotime($tanggal));
     }
-    public function hapus_bukti(Request $request){
-        if($request->tipe == 'Bulanan'){
+    public function hapus_bukti(Request $request)
+    {
+        if ($request->tipe == 'Bulanan') {
             TransaksiBulanan::where('kode_transaksi', $request->kode_transaksi)->delete();
             return redirect()->back()->with('success1', 'Anda Berhasil Menghapus Data');
-        }elseif($request->tipe == 'Bebas'){
+        } elseif ($request->tipe == 'Bebas') {
             TransaksiBebas::where('kode_transaksi', $request->kode_transaksi)->delete();
             return redirect()->back()->with('success2', 'Anda Berhasil Menghapus Data');
         }
+    }
+
+    public function tagihan(Request $request)
+    {
+        $siswas = Siswa::where('id', $request->id)->first();
+        if (!$siswas) {
+            return redirect()->back();
+        }
+
+        $a = TarifPembayaranBebas::where('siswa_id', $request->id)->get();
+        $b = TarifPembayaranBulanan::where('siswa_id', $request->id)->get();
+        $tagihan = $a->concat($b);
+        $siswa = Siswa::where('id', $request->id)->get();
+        $totalKeseluruhan = $tagihan->pluck('sisa_tagihan')->sum();
+        return view('admin.layout.tagihan', compact('tagihan', 'siswa', 'totalKeseluruhan'));
     }
 
 }

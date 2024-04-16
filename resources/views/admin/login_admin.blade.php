@@ -39,7 +39,7 @@
             style="width:350px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <div class="card-body">
                 <div class="text-center">
-                    <img src="{{ asset('gambar/icon.png') }}" alt="" width="25%">
+                    <img src="{{ asset('gambar/icon.png') }}" alt="" width="25%" loading="lazy">
                     <p style="font-family: 'Bree Serif', serif;" class="mt-2 h4 mb-3">Login Admin</p>
                 </div>
                 <form action="/masuk" method="post">

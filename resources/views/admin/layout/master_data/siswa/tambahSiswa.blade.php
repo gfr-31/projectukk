@@ -238,7 +238,7 @@
                     <div class="card card-primary card-outline">
                         <div class=" m-3">
                             <img src="{{ asset('gambar/user.jpg') }}" id="preview" class="rounded" alt="Cinque Terre"
-                                height="0%" width="100%">
+                                height="0%" width="100%" loading="lazy">
                         </div>
                         <div class="card-body box-profile">
                             <label for="">Unggah Gambar</label>

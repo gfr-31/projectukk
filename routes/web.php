@@ -33,8 +33,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/404', function() {
 //     return view('404');
 // });
-// Route::get('/transaksi', function() {
-//     return view('admin.layout.bukti_pembayaran_bulanan');
+// Route::get('/coba', function() {
+//     return view('admin.layout.tagihan');
 // });
 
 Route::prefix('/')->group(function () {
@@ -64,6 +64,7 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::post('simpan-pembayaran/{tipe}', [PembayaranController::class, 'simpanPembayaran']);
     Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
+    Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
     // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);
     // Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
 

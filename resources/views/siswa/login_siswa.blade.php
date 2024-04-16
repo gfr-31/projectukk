@@ -103,7 +103,7 @@
             <div
                 class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box bg-success">
                 <div class="featured-image mb-3 gambar">
-                    <img src="{{ asset('gambar/icon.png') }}" class="img-fluid rounded-3 " style="width: 150px; ">
+                    <img src="{{ asset('gambar/icon.png') }}" class="img-fluid rounded-3 " style="width: 150px; " loading="lazy">
                 </div>
                 <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">
                     Login Siswa</p>

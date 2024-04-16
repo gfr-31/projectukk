@@ -86,7 +86,7 @@ class TarifPembayaranController extends Controller
     {
         // dd($request->all());    
 
-        $validasi = TarifPembayaranBulanan::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->first();
+        $validasi = TarifPembayaranBulanan::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->where('nama_pembayaran', $request->namaPembayaran)->first();
         // dd($validasi);
         if ($validasi) {
             $kelas = DB::table('kelas')->where('id', $request->kelas)->value('kelas');
@@ -146,7 +146,7 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bulanan_siswa(Request $request)
     {
         // dd($request->all());
-        $validasi = TarifPembayaranBulanan::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->first();
+        $validasi = TarifPembayaranBulanan::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->where('nama_pembayaran', $request->namaPembayaran)->first();
         // dd($validasi);
         if ($validasi){
             $siswa = DB::table('siswas')->where('id', $request->siswa)->value('nama_lengkap');
@@ -428,12 +428,12 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bebas(Request $request)
     {
         // dd($request->all());
-        $validasi = TarifPembayaranBebas::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->first();
+        $validasi = TarifPembayaranBebas::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->where('nama_pembayaran', $request->namaPembayaran)->first();
         // dd($validasi);
         if($validasi)  {
             $kelas = DB::table('kelas')->where('id', $request->kelas)->value('kelas');
             $np = $request->namaPembayaran;
-            // dd($np);
+            // dd($kelas);
             return redirect()->back()->with('dataSama', 'Maaf Pembayaran ' . $np . '  Untuk Kelas ' . $kelas . ' Sudah Ada.');
         }
         // Validasi request jika diperlukan
@@ -465,7 +465,7 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bebas_siswa(Request $request)
     {
         // dd($request->all());
-        $validasi = TarifPembayaranBebas::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->first();
+        $validasi = TarifPembayaranBebas::where('siswa_id', $request->siswa)->where('tahun_ajaran', $request->tj)->where('nama_pembayaran', $request->namaPembayaran)->first();
         // dd($validasi);
         if($validasi){
             $siswa = DB::table('siswas')->where('id', $request->siswa)->value('nama_lengkap');

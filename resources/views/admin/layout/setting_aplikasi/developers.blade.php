@@ -18,7 +18,7 @@
                         <div class="mt-3 mb-4">
                             <a href="{{ asset('gambar/gifran.jpg') }}" data-lightbox="gallery" data-title="Developer 1 | Gifran Fazriliana Hafeez">
                                 <img src="{{ asset('gambar/gifran.jpg') }}" class="rounded-circle img-fluid"
-                                    style="width: 100px;" />
+                                    style="width: 100px;" loading="lazy"/>
                             </a>
                         </div>
                         <h4 class="mb-2">Gifran Fazriliana H.</h4>
@@ -64,7 +64,7 @@
                         <div class="mt-3 mb-4">
                             <a href="{{ asset('gambar/fadly.jpg') }}" data-lightbox="gallery" data-title="Developer 2 | Fadly Bagus Pramudya">
                                 <img src="{{ asset('gambar/fadly.jpg') }}" class="rounded-circle img-fluid"
-                                    style="width: 100px;" />
+                                    style="width: 100px;" loading="lazy"/>
                             </a>
 
                         </div>

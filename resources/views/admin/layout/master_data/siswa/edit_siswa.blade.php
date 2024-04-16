@@ -280,7 +280,7 @@
                             <div class=" m-3">
                                 <a href="{{ asset('post_image/' . $s->foto_siswa) }}" data-lightbox="galery" data-title="Foto Siswa | {{ $s->nama_lengkap }}"> 
                                     <img src="{{ asset('post_image/' . $s->foto_siswa) }}" id="preview" class="rounded"
-                                        alt="Cinque Terre" height="0%" width="100%">
+                                        alt="Cinque Terre" height="0%" width="100%" loading="lazy">
                                 </a>
                             </div>
                             <div class="card-body box-profile">

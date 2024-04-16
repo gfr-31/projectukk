@@ -31,23 +31,21 @@ function enterDibayar(event){
         var dibayar = document.getElementById('dibayar' + nis).value
         var a = parseInt(dibayar.replace(/\D/g, ""));
         var total = sessionStorage.getItem('total' + nis) 
+        // alert(total)
         var b = parseInt(total);
         if (!a) {
             a = '0'
             var kembalian = b-a
-            // alert(kembalian)
-            // alert('abc')
             var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             document.getElementById('kembalian'+nis).value = rp
         }else{
             var kembalian = a-b
-            // alert(kembalian)
-            // alert('123')
             var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             document.getElementById('kembalian'+nis).value = rp
         }
     }
 }
+
 // Kosong
 function kosong() {
     sessionStorage.removeItem("bulan" + nis);
@@ -56,49 +54,47 @@ function kosong() {
 }
 /// Total
 var nis = document.getElementById("nis").value;
-// var idnama = document.getElementById('bebas')
-var idnama = document.getElementById("bulan");
+// alert(nis)
+
 var bulan = parseInt(sessionStorage.getItem("bulan" + nis));
 var bebas = parseInt(sessionStorage.getItem("bebas" + nis));
 // alert(bulan)
 // alert(bebas)
-if (idnama) {
-    // var id = idnama.value.replace(/\D/g, '')
-    if (!bulan && !bebas) {
-        // alert("Kosong")
-    } else if (!bebas) {
-        // alert("Bulan")
-        var total = bulan;
-        if (total !== null) {
-            var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            if (total) {
-                document.getElementById("total" + nis).value = rp;
-            }
-        }
-    } else if (!bulan) {
-        // alert("Bebas")
-        var total = bebas;
-        if (total !== null) {
-            var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            if (total) {
-                document.getElementById("total" + nis).value = rp;
-            }
-        }
-    } else {
-        // alert("Bebas-Bulan")
-        var total = bulan + bebas;
-        if (total !== null) {
-            var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            // alert(coba);
-            if (total) {
-                document.getElementById("total" + nis).value = rp;
-            }
+if (!bulan && !bebas) {
+    // alert("Kosong")
+} else if (!bebas) {
+    // alert("Bulan")
+    var total = bulan;
+    if (total !== null) {
+        var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (total) {
+            document.getElementById("total" + nis).value = rp;
+            // alert('bulan')
         }
     }
-    sessionStorage.setItem('total'+nis, total)
-    // var coba = sessionStorage.getItem('total'+nis)
-    // alert(coba)
+} else if (!bulan) {
+    // alert("Bebas")
+    var total = bebas;
+    if (total !== null) {
+        var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (total) {
+            document.getElementById("total" + nis).value = rp;
+            // alert('bebas')
+        }
+    }
+} else {
+    // alert("Bebas-Bulan")
+    var total = bulan + bebas;
+    if (total !== null) {
+        var rp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        // alert(coba);
+        if (total) {
+            document.getElementById("total" + nis).value = rp;
+            // alert('bulan & bebas')
+        }
+    }
 }
+sessionStorage.setItem('total'+nis, total)
 // Bebas
 function btnbebas(id) {
     var nis = document.getElementById("nis").value;
@@ -494,4 +490,3 @@ $(document).ready(function(){
         $('#' + popoverId).popover('hide'); // Menyembunyikan popover
     });
 });
- 

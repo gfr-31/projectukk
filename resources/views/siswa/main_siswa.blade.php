@@ -94,14 +94,14 @@
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('post_image/' . auth('siswa')->user()->foto_siswa) }}"
-                                class="user-image img-circle " alt="User Image">
+                                class="user-image img-circle " alt="User Image" loading="lazy">
                             <span class="d-none d-md-inline">{{ auth('siswa')->user()->nama_lengkap }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
                             <li class="user-header bg-olive">
                                 <img src="{{ asset('post_image/' . auth('siswa')->user()->foto_siswa) }}"
-                                    class="img-circle " alt="User Image">
+                                    class="img-circle " alt="User Image" loading="lazy">
                                 <p>
                                     {{ auth('siswa')->user()->nama_lengkap }} - Aplikasi Pembayaran
                                     <small>Creating | January. 2024</small>
