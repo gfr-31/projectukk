@@ -52,7 +52,7 @@
                                 <td>{{ $jp->tahun_ajaran }}</td>
                                 <td>
                                     <center>
-                                        <a href="/admin/kirim-tagihan/{{ $jp->tipe }}" class="btn btn-success btn-sm">
+                                        <a href="/admin/kirim-tagihan/{{ $jp->tipe }}/{{ $jp->nama_pembayaran }}" class="btn btn-success btn-sm">
                                             <i class="fa fa-whatsapp"></i> Kirim Notif WhatsApp
                                         </a>
                                     </center>
@@ -69,4 +69,9 @@
     </div>
 
 <script src="{{ asset('js/main/kirim_tagihan/kirim_tagihan.js') }}"></script>
+@if (session()->has('berhasilKirim'))
+    <script type="text/javascript">
+        toastr.success('{{ session('berhasilKirim') }}')
+    </script>
+@endif
 @endsection

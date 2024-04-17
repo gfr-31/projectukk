@@ -7,6 +7,7 @@ use App\Models\TarifPembayaranBulanan;
 use App\Models\TarifPembayaranBebas;
 use App\Models\TransaksiBebas;
 use App\Models\TransaksiBulanan;
+use App\Services\NotifWa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -58,10 +59,15 @@ class PembayaranController extends Controller
     public function simpanPembayaran(Request $request)
     {
         // dd($request->all());
-        return back();
         try {
             if ($request->tipe == "Bulanan") {
                 // dd();
+                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                $pesan = 'Pembayaran ' . $request->np . ' bulan ' . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlah_bayar . '. Berikut bukti pembayarannya : http://127.0.0.1:8000/admin/bukti-pembayaran/Bebas/Pendaftaran%20-%20T.A%202022-2023/3';
+                // dd($pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return back();
+
                 $juli = $request->input('juli' . $request->id);
                 $agustus = $request->input('agustus' . $request->id);
                 $september = $request->input('september' . $request->id);
@@ -82,7 +88,7 @@ class PembayaranController extends Controller
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
                 $d = mt_rand(100, 999);
-                ;
+                
                 $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($b);
                 DB::table('transaksi_bulanan')->insert([
@@ -125,6 +131,12 @@ class PembayaranController extends Controller
                 session()->flash('key', $pesan);
                 return redirect()->back();
             } elseif ($request->tipe == "Bebas") {
+                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                $pesan = 'Pembayaran ' . $request->namaPembayaran . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlahBayar . '. Dengan keterangan : ' . $request->keterangan;
+                // dd($pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return back();
+
                 $tarif = (int) preg_replace('/\D/', '', $request->tarif);
                 $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
                 $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
@@ -160,6 +172,7 @@ class PembayaranController extends Controller
                 session()->flash('key', $pesan);
                 return redirect()->back();
             }
+
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -258,6 +271,7 @@ class PembayaranController extends Controller
         $a = TarifPembayaranBebas::where('siswa_id', $request->id)->get();
         $b = TarifPembayaranBulanan::where('siswa_id', $request->id)->get();
         $tagihan = $a->concat($b);
+        // dd($tagihan);
         $siswa = Siswa::where('id', $request->id)->get();
         $totalKeseluruhan = $tagihan->pluck('sisa_tagihan')->sum();
         return view('admin.layout.tagihan', compact('tagihan', 'siswa', 'totalKeseluruhan'));

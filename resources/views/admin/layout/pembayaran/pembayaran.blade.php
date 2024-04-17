@@ -54,7 +54,8 @@
                                             value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}">
                                     </div>
                                 </div>
-                                <a href="/admin/cetak-tagihan/{{  $siswa->id}}" class="col-12 btn btn-danger btn-sm mb-3" target="_blank">
+                                <a href="/admin/cetak-tagihan/{{ $siswa->id }}" class="col-12 btn btn-danger btn-sm mb-3"
+                                    target="_blank">
                                     <i class=" fa fa-print"></i>
                                     Cetak Semua Tagihan
                                 </a>
@@ -157,6 +158,9 @@
                                             <th style="text-align: left">
                                                 <center>Bayar</center>
                                             </th>
+                                            <th style="text-align: left">
+                                                <center>Aksi</center>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -190,6 +194,13 @@
                                                             data-target="#popupModal{{ $t->id }}">
                                                             <i class=" fa fa-money"></i> Bayar
                                                         </button>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="" class=" btn btn-sm btn-danger">
+                                                            <i class=" fa fa-whatsapp"></i> 
+                                                        </a> 
                                                     </center>
                                                 </td>
                                             </tr>
@@ -500,6 +511,9 @@
                                             <th style="text-align: left">
                                                 <center>Bayar</center>
                                             </th>
+                                            <th style="text-align: left">
+                                                <center>Aksi</center>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <?php $no = 1; ?>
@@ -533,6 +547,13 @@
                                                             onclick="rpBayar({{ $t->id }})" <i
                                                             class="fa fa-money"></i> Bayar
                                                         </button>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="" class=" btn btn-sm btn-danger">
+                                                            <i class=" fa fa-whatsapp"></i>
+                                                        </a>
                                                     </center>
                                                 </td>
                                             </tr>
@@ -773,8 +794,10 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a target="_blank" class="btn btn-sm btn-primary popover-trigger" id="popover-trigger-{{ $loop->index }}" data-toggle="popover" title="Download PDF" >
-                                                        <i class="fa fa-download"></i> 
+                                                    <a target="_blank" class="btn btn-sm btn-primary popover-trigger"
+                                                        id="popover-trigger-{{ $loop->index }}" data-toggle="popover"
+                                                        title="Download PDF">
+                                                        <i class="fa fa-download"></i>
                                                     </a>
                                                     <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                         target="_blank" class=" btn btn-success btn-sm popover-trigger"

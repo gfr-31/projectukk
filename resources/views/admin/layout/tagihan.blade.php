@@ -29,7 +29,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="invoice-inner" style="border: 1px solid rgb(0, 0, 0); border-radius:10px" id="invoice_wrapper1">
+                    <div class="invoice-inner" style="border: 1px solid rgb(0, 0, 0); border-radius:10px"
+                        id="invoice_wrapper1">
                         <div class="invoice-top ">
                             <div class="row">
                                 <div class="col-sm-2">
@@ -84,16 +85,22 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($tagihan as $t)
-                                            <tr>
-                                                {{-- <td></td> --}}
-                                                <td class="text-center">#-{{ $t->id }}</td>
-                                                <td class="text-start">{{ $t->nama_pembayaran }} </td>
-                                                <td class="text-end" >{{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }} </td>
-                                            </tr>
+                                            @if ($t->sisa_tagihan > 0)
+                                                <tr>
+                                                    {{-- <td></td> --}}
+                                                    <td class="text-center">#-{{ $t->id }}</td>
+                                                    <td class="text-start">{{ $t->nama_pembayaran }} </td>
+                                                    <td class="text-end">
+                                                        {{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                         <tr>
                                             <td colspan="2" class="text-end">Total Keseluruhan</td>
-                                            <td class="text-end">{{ 'Rp. ' . number_format((float) $totalKeseluruhan, 0, ',', '.') }}</td>
+                                            <td class="text-end">
+                                                {{ 'Rp. ' . number_format((float) $totalKeseluruhan, 0, ',', '.') }}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

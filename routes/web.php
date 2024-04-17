@@ -70,7 +70,7 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
 
     //Kirim Tagihan WA
     Route::get('kirim-tagihan', [KirimTagihanController::class, 'kirimTagihan']);
-    Route::get('kirim-tagihan/{tipe}', [KirimTagihanController::class, 'kirimNotif']);
+    Route::get('kirim-tagihan/{tipe}/{nama_pembayaran}', [KirimTagihanController::class, 'kirimNotif']);
 
     //Data Pos Keuangan
     Route::get('pos-keuangan', [KeuanganController::class, 'posKeuangan']);
