@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class TagihanSiswaController extends Controller
 {
-    public function Tagihan($id)
+    public function tagihan($id)
     {
         $tpBulanan = TarifPembayaranBulanan::where('siswa_id', $id)->get();
         $tpBebas = TarifPembayaranBebas::where('siswa_id', $id)->get();
