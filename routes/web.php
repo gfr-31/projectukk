@@ -9,8 +9,10 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KirimTagihanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ProfilleSiswaController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TagihanSiswaController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifPembayaranController;
 use Illuminate\Support\Facades\Route;
@@ -152,8 +154,14 @@ Route::prefix('siswa')->middleware('isLoginSiswa')->group(function () {
     //Dashboard siswa
     Route::get('dashboard', [AdminSiswaController::class, 'dashboard']);
 
+    //Profille Siswa
+    Route::get('profille/{id}', [ProfilleSiswaController::class, 'Profille']);
+
+    Route::get('tagihan/{id}', [TagihanSiswaController::class, 'tagihan']);
+
     //Setting Aplikasi Siswa
-    // Route::get('developers', [DevelopersController::class, 'developers_siswa']);
+    Route::get('developers', [SettingController::class, 'developers_siswa']);
+
 });
 
 
