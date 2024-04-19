@@ -53,6 +53,9 @@ Route::prefix('/')->group(function () {
     Route::get('/logout_siswa', [AdminSiswaController::class, 'logout']);
 });
 
+Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
+Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
+
 Route::prefix('admin')->middleware('isLogin')->group(function () {
     //Dashboard
     Route::get('dashboard', [DashboardController::class, 'dashboard']);
@@ -63,9 +66,7 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('pembayaran', [PembayaranController::class, 'transaksi']);
     Route::get('pembayaran-', [PembayaranController::class, 'cariSiswa']);
     Route::post('simpan-pembayaran/{tipe}', [PembayaranController::class, 'simpanPembayaran']);
-    Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
-    Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
     Route::get('kirim-tagihan-wa/{tipe}-{nama_pembayaran}/{id}', [PembayaranController::class, 'kirim_wa']);
     Route::get('kirim-semua-tagihan-wa/{id}', [PembayaranController::class, 'kirim_semua_wa']);
     // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);

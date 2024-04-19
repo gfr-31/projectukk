@@ -379,7 +379,7 @@
             <i class="fa fa-print"></i> Print Invoice
         </a>
         <a id="invoice_download_btn" class="btn btn-download btn-primary">
-            <i class="fa fa-download"></i> Download Invoice
+            <i class="fa fa-download"></i> Download Bukti
         </a>
     </div>
 </body>

@@ -53,7 +53,7 @@
                                                 <div class="  text-center">
                                                     <img src="{{ asset('gambar/user.jpg') }}" id="preview"
                                                         class="rounded mt-3" alt="Cinque Terre" height="0%"
-                                                        width="90%" loading="lazy">
+                                                        width="50%" loading="lazy">
                                                 </div>
                                                 <div class="card-body box-profile">
                                                     <label for="">Unggah Gambar</label>

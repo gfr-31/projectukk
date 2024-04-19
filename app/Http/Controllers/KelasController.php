@@ -13,6 +13,7 @@ class KelasController extends Controller
     {
         $admin = DB::table('users')->get();
         $kelas = DB::table('kelas')->get();
+        // dd($kelas);
         return view('admin.layout.master_data.kelas.kelas', ['admin' => $admin], ['kelas' => $kelas]);
     }
     public function tambah_kelas(Request $request)

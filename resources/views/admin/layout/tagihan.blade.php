@@ -29,7 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="invoice-inner" style="border: 1px solid rgb(0, 0, 0); border-radius:10px"
+                    <div class="invoice-inner" style=""
                         id="invoice_wrapper1">
                         <div class="invoice-top ">
                             <div class="row">
@@ -148,7 +148,7 @@
                             <i class="fa fa-print"></i> Print Invoice
                         </a>
                         <a id="invoice_download_btn1" class="btn btn-lg btn-download btn-theme">
-                            <i cla ss="fa fa-download"></i> Download Invoice
+                            <i cla ss="fa fa-download"></i> Download Tagihan
                         </a>
                     </div>
                 </div>

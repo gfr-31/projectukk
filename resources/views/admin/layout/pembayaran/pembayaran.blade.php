@@ -56,7 +56,7 @@
                                 </div>
                                 <div class=" col-sm-12">
                                     <div class=" row">
-                                        <a href="/admin/cetak-tagihan/{{ $siswa->id }}"
+                                        <a href="/cetak-tagihan/{{ $siswa->id }}"
                                             class="col-6 btn btn-danger btn-sm mb-3" target="_blank">
                                             <i class=" fa fa-print"></i> Cetak Semua
                                         </a>
@@ -799,12 +799,7 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a target="_blank" class="btn btn-sm btn-primary popover-trigger"
-                                                        id="popover-trigger-{{ $loop->index }}" data-toggle="popover"
-                                                        title="Download PDF">
-                                                        <i class="fa fa-download"></i>
-                                                    </a>
-                                                    <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                                    <a href="/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                         target="_blank" class=" btn btn-success btn-sm popover-trigger"
                                                         id="popover-trigger-2-{{ $loop->index }}" data-toggle="popover"
                                                         title="Lihat & Cetak PDF">

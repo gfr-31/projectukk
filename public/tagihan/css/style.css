@@ -1,5 +1,8 @@
 
 /** GLOBAL CLASSES **/
+body{
+    background-color: rgb(240, 240, 240);
+}
 
 .table {
     color: #535353;

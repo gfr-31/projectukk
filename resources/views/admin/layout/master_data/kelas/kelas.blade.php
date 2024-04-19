@@ -139,7 +139,6 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </center>
-
                             </td>
                         </tr>
                     @endforeach

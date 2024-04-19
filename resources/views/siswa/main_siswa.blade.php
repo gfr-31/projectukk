@@ -119,12 +119,6 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li> --}}
             </ul>
         </nav>
 
@@ -136,13 +130,6 @@
             <!-- SidebarSearch Form -->
             <div class="form-inline mt-2">
                 <div class="input-group">
-                    {{-- <input class="form-control form-control-sidebar " type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append ">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div> --}}
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
@@ -169,35 +156,23 @@
                                     </p>
                                 </a>
                             </li>
-                            {{-- Tagihan --}}
                             <li class="nav-item">
-                                <a href="/siswa/tagihan/{{ auth('siswa')->user()->id }}"class="nav-link text-white">
-                            {{-- Tagihan --}}
-                                        <i class="nav-icon fas fa-credit-card"></i>
-                                        <p>
-                                            Tagihan
-                                        </p>
-                                    </a>
-                            </li>
-                            {{-- Tagihan
-                            <li class="nav-item">
-                                <a href="/siswa/dashboard" class="nav-link text-white">
+                                <a href="/siswa/tagihan/{{ auth('siswa')->user()->nis }}"class="nav-link text-white">
+                                    {{-- Tagihan --}}
                                     <i class="nav-icon fas fa-credit-card"></i>
                                     <p>
-                                        Tagihan
+                                        Tagihan & Transaksi
                                     </p>
                                 </a>
-                            </li> --}}
-
+                            </li>
                             {{-- Developer --}}
                             <li class="nav-item">
-
                                 <a href="/siswa/developers" class="nav-link text-white">
-                                        <i class="nav-icon fas fa-users"></i>
-                                        <p>
-                                            Developer
-                                        </p>
-                                    </a>
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Developer
+                                    </p>
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -208,7 +183,7 @@
         <div class="content-wrapper style="background-color: rgb(228, 228, 228)"">
             <div class="content-header">
                 @yield('developers_siswa')
-                @yield('profille')    
+                @yield('profille')
                 @yield('tagihan')
 
             </div>
