@@ -67,29 +67,6 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                {{-- <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> --}}
-
                 @auth('siswa')
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -119,12 +96,6 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li> --}}
             </ul>
         </nav>
 
@@ -132,18 +103,9 @@
             <a href="/siswa/dashboard" class="brand-link">
                 <span class="brand-text font-weight-light">Dashboard</span>
             </a>
-
             <!-- SidebarSearch Form -->
             <div class="form-inline mt-2">
                 <div class="input-group">
-                    {{-- <input class="form-control form-control-sidebar " type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append ">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div> --}}
-
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -160,9 +122,8 @@
                                 </a>
                             </li>
 
-<<<<<<< HEAD
-                             {{-- Profile Siswa --}}
-                             <li class="nav-item">
+                            {{-- Profile Siswa --}}
+                            <li class="nav-item">
                                 <a href="/siswa/profille/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
@@ -171,15 +132,12 @@
                                 </a>
                             </li>
 
-
                             {{-- Tagihan --}}
                             <li class="nav-item">
                                 <a href="/siswa/tagihan/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
-=======
-                            {{-- Tagihan --}}
+                                    {{-- Tagihan --}}
                             <li class="nav-item">
                                 <a href="/admin/pemsis" class="nav-link text-white">
->>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                     <i class="nav-icon fas fa-credit-card"></i>
                                     <p>
                                         Tagihan
@@ -187,11 +145,7 @@
                                 </a>
                             </li>
 
-<<<<<<< HEAD
-                           
-=======
-                            {{-- Profile Siswa --}}
-                            <li class="nav-item">
+                            {{-- Profile Siswa --}} <li class="nav-item">
                                 <a href="/siswa/dashboard" class="nav-link text-white">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
@@ -200,7 +154,6 @@
                                 </a>
                             </li>
 
->>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                             {{-- Tagihan
                             <li class="nav-item">
                                 <a href="/siswa/dashboard" class="nav-link text-white">
@@ -213,16 +166,15 @@
 
                             {{-- Developer --}}
                             <li class="nav-item">
-<<<<<<< HEAD
                                 <a href="/siswa/developers" class="nav-link text-white">
-=======
-                                <a href="#" class="nav-link text-white">
->>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Developer
-                                    </p>
-                                </a>
+
+                                    <a href="#" class="nav-link text-white">
+
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>
+                                            Developer
+                                        </p>
+                                    </a>
                             </li>
                         </ul>
                     </nav>
@@ -233,11 +185,7 @@
         <div class="content-wrapper style="background-color: rgb(228, 228, 228)"">
             <div class="content-header">
                 @yield('developers_siswa')
-<<<<<<< HEAD
-                @yield('profille')
-                @yield('tagihan')
-=======
->>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
+                @yield('profille') @yield('tagihan')
             </div>
         </div>
 
