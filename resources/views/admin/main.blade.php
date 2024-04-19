@@ -139,93 +139,8 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-
-                        {{-- Dashboard --}}
-                        {{-- <li class="nav-item">
-                            <a href="/admin/dashboard" class="nav-link text-white">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li> --}}
-
                         {{-- Pembayaran --}}
-                        <li class="nav-item">
-                            <a href="/admin/pembayaran" class="nav-link text-white">
-                                <i class="nav-icon fas fa-credit-card"></i>
-                                <p>
-                                    Pembayaran
-                                </p>
-                            </a>
-                        </li>
 
-                        {{-- Kirim Tagihan --}}
-                        <li class="nav-item">
-                            <a href="/admin/kirim-tagihan" class="nav-link text-white">
-                                <i class=" nav-icon fas fa fa-whatsapp"></i>
-                                <p>
-                                    Kirim Tagihan
-                                </p>
-                            </a>
-                        </li>
-
-                        {{-- Data Keuangan --}}
-                        <li class="nav-item">
-                            <a href="" class="nav-link text-white ">
-                                <i class="nav-icon fas fa-money"></i>
-                                <p>
-                                    Keuangan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/pos-keuangan" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> POS Keuangan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/jenis-pembayaran" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> Jenis Pembayaran</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        {{-- Data Jurnal Umum --}}
-                        {{-- <li class="nav-item">
-                            <a href="#" class="nav-link text-white ">
-                                <i class="nav-icon fas fa-pencil-square-o"></i>
-                                <p>
-                                    Jurnal Umum
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/pengeluaran" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Data Pengeluaran</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/pemasukan" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Data Pemasukan</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </li> --}}
-                        {{-- Master Data --}}
                         <li class="nav-item">
                             <a href="#" class="nav-link text-white ">
                                 <i class="nav-icon fas fa-users "></i>
@@ -258,41 +173,52 @@
                                     </a>
                                 </li>
                             </ul>
-                            {{-- <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="dashboard" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kelulusan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="dashboard" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kenaikan Kelas</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> --}}
-                            {{-- Data Laporan --}}
+                        </li>
+                        {{-- Data Keuangan --}}
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white ">
-                                <i class="nav-icon fas fa-file-pdf"></i>
+                            <a href="" class="nav-link text-white ">
+                                <i class="nav-icon fas fa-money"></i>
                                 <p>
-                                    Data Laporan
+                                    Keuangan
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="dashboard" class="nav-link text-white ">
+                                    <a href="/admin/pos-keuangan" class="nav-link text-white ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Laporan Keuangan</p>
+                                        <p> POS Keuangan</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/admin/jenis-pembayaran" class="nav-link text-white ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Jenis Pembayaran</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="/admin/pembayaran" class="nav-link text-white">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>
+                                    Pembayaran
+                                </p>
+                            </a>
+                        </li>
+
+                        {{-- Kirim Tagihan --}}
+                        <li class="nav-item">
+                            <a href="/admin/kirim-tagihan" class="nav-link text-white">
+                                <i class=" nav-icon fas fa fa-whatsapp"></i>
+                                <p>
+                                    Kirim Tagihan
+                                </p>
+                            </a>
+                        </li>
+
                         {{-- Data Informasi --}}
                         <li class="nav-item">
                             <a href="/admin/data" class="nav-link text-white ">
@@ -312,29 +238,7 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            {{-- <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="dashboard" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Data Sekolah</p>
-                                    </a>
-                                </li>
-                            </ul>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/bulan" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Data Bulan</p>
-                                    </a>
-                                </li>
-                            </ul> --}}
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/admin/developers" class="nav-link text-white ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Developers</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="/admin/list-user" class="nav-link text-white ">
                                         <i class="far fa-circle nav-icon"></i>
