@@ -11,9 +11,13 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KirimTagihanController;
 use App\Http\Controllers\PembayaranController;
+<<<<<<< HEAD
 use App\Http\Controllers\ProfilleSiswaController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TagihanSiswaController;
+=======
+use App\Http\Controllers\SiswaController;
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifPembayaranController;
 use Illuminate\Support\Facades\Route;
@@ -67,8 +71,11 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
     Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
+<<<<<<< HEAD
     Route::get('kirim-tagihan-wa/{tipe}-{nama_pembayaran}/{id}', [PembayaranController::class, 'kirim_wa']);
     Route::get('kirim-semua-tagihan-wa/{id}', [PembayaranController::class, 'kirim_semua_wa']);
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
     // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);
     // Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
 
@@ -152,6 +159,7 @@ Route::prefix('siswa')->middleware('isLoginSiswa')->group(function () {
 
     //Setting Aplikasi Siswa
     Route::get('developers', [DevelopersController::class, 'developers_siswa']);
+<<<<<<< HEAD
 
     //Profille Siswa
     Route::get('profille/{id}', [ProfilleSiswaController::class, 'Profille']);
@@ -162,6 +170,8 @@ Route::prefix('siswa')->middleware('isLoginSiswa')->group(function () {
     //Bukti Pembayaran Siswa
     Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'buktii']);
     Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan_siswa']);
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 });
 
 

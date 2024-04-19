@@ -54,6 +54,7 @@
                                             value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}">
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div class=" col-sm-12">
                                     <div class=" row">
                                         <a href="/admin/cetak-tagihan/{{ $siswa->id }}"
@@ -66,6 +67,13 @@
                                         </a>
                                     </div>
                                 </div>
+=======
+                                <a href="/admin/cetak-tagihan/{{ $siswa->id }}" class="col-12 btn btn-danger btn-sm mb-3"
+                                    target="_blank">
+                                    <i class=" fa fa-print"></i>
+                                    Cetak Semua Tagihan
+                                </a>
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                             </div>
                         @endif
                     </div>
@@ -166,7 +174,11 @@
                                                 <center>Bayar</center>
                                             </th>
                                             <th style="text-align: left">
+<<<<<<< HEAD
                                                 Aksi
+=======
+                                                <center>Aksi</center>
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                             </th>
                                         </tr>
                                     </thead>
@@ -203,11 +215,20 @@
                                                         </button>
                                                     </center>
                                                 </td>
+<<<<<<< HEAD
                                                 <td style="text-align: start">
                                                     <a href="/admin/kirim-tagihan-wa/{{ $t->tipe }}-{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                         class=" btn btn-sm btn-danger">
                                                         <i class=" fa fa-whatsapp"></i>
                                                     </a>
+=======
+                                                <td>
+                                                    <center>
+                                                        <a href="" class=" btn btn-sm btn-danger">
+                                                            <i class=" fa fa-whatsapp"></i> 
+                                                        </a> 
+                                                    </center>
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -518,7 +539,11 @@
                                                 <center>Bayar</center>
                                             </th>
                                             <th style="text-align: left">
+<<<<<<< HEAD
                                                 Aksi
+=======
+                                                <center>Aksi</center>
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                             </th>
                                         </tr>
                                     </thead>
@@ -555,11 +580,20 @@
                                                         </button>
                                                     </center>
                                                 </td>
+<<<<<<< HEAD
                                                 <td style="text-align: start">
                                                     <a href="/admin/kirim-tagihan-wa/{{ $t->tipe }}-{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                         class=" btn btn-sm btn-danger">
                                                         <i class=" fa fa-whatsapp"></i>
                                                     </a>
+=======
+                                                <td>
+                                                    <center>
+                                                        <a href="" class=" btn btn-sm btn-danger">
+                                                            <i class=" fa fa-whatsapp"></i>
+                                                        </a>
+                                                    </center>
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -952,6 +986,7 @@
             toastr.success('{{ session('success2') }}')
         </script>
     @endif
+<<<<<<< HEAD
     @if (session()->has('bKirimWa'))
         <script type="text/javascript">
             toastr.success('{{ session('bKirimWa') }}')
@@ -962,6 +997,8 @@
             toastr.error('{{ session('gKirimWa') }}')
         </script>
     @endif
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 
 
 @endsection

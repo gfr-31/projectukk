@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\Kelas;
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 use App\Models\Siswa;
 use App\Models\TarifPembayaranBulanan;
 use App\Models\TarifPembayaranBebas;
@@ -62,6 +65,7 @@ class PembayaranController extends Controller
         // dd($request->all());
         try {
             if ($request->tipe == "Bulanan") {
+<<<<<<< HEAD
                 $st = $request->input('sisa_tagihan' . $request->id);
                 if ($st > 0) {
                     $bulan = ucfirst($request->bulan);
@@ -105,6 +109,14 @@ Tanggal Pembayaran : " . date('d-m-Y') . "
                     NotifWa::NotifWa($target, $pesan);
                 }
                 // return back();
+=======
+                // dd();
+                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                $pesan = 'Pembayaran ' . $request->np . ' bulan ' . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlah_bayar . '. Berikut bukti pembayarannya : http://127.0.0.1:8000/admin/bukti-pembayaran/Bebas/Pendaftaran%20-%20T.A%202022-2023/3';
+                // dd($pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return back();
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 
                 $juli = $request->input('juli' . $request->id);
                 $agustus = $request->input('agustus' . $request->id);
@@ -126,7 +138,11 @@ Tanggal Pembayaran : " . date('d-m-Y') . "
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
                 $d = mt_rand(100, 999);
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                 $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($b);
                 DB::table('transaksi_bulanan')->insert([
@@ -169,6 +185,7 @@ Tanggal Pembayaran : " . date('d-m-Y') . "
                 session()->flash('key', $pesan);
                 return redirect()->back();
             } elseif ($request->tipe == "Bebas") {
+<<<<<<< HEAD
                 // dd($request->all());
                 $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
                 $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
@@ -213,6 +230,14 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
                     NotifWa::NotifWa($target, $pesan);
                     // return back();
                 }
+=======
+                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                $pesan = 'Pembayaran ' . $request->namaPembayaran . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlahBayar . '. Dengan keterangan : ' . $request->keterangan;
+                // dd($pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return back();
+
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                 $tarif = (int) preg_replace('/\D/', '', $request->tarif);
                 $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
                 $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
@@ -353,6 +378,7 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
         return view('admin.layout.tagihan', compact('tagihan', 'siswa', 'totalKeseluruhan'));
     }
 
+<<<<<<< HEAD
     public function kirim_wa($tipe, $nama_pembayaran, $id)
     {
 
@@ -520,4 +546,6 @@ Amin SPP
         $totalKeseluruhan = $tagihan->pluck('sisa_tagihan')->sum();
         return view('siswa.layout.bukti_pembayaran', compact('tagihan', 'siswa', 'totalKeseluruhan'));
     }
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
 }
