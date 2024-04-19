@@ -54,11 +54,18 @@
                                             value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}">
                                     </div>
                                 </div>
-                                <a href="/admin/cetak-tagihan/{{ $siswa->id }}" class="col-12 btn btn-danger btn-sm mb-3"
-                                    target="_blank">
-                                    <i class=" fa fa-print"></i>
-                                    Cetak Semua Tagihan
-                                </a>
+                                <div class=" col-sm-12">
+                                    <div class=" row">
+                                        <a href="/admin/cetak-tagihan/{{ $siswa->id }}"
+                                            class="col-6 btn btn-danger btn-sm mb-3" target="_blank">
+                                            <i class=" fa fa-print"></i> Cetak Semua
+                                        </a>
+                                        <a href="/admin/kirim-semua-tagihan-wa/{{ $siswa->id }}"
+                                            class="col-6 btn btn-success btn-sm mb-3">
+                                            <i class=" fa fa-whatsapp"></i> Kirim Semua
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         @endif
                     </div>
@@ -159,7 +166,7 @@
                                                 <center>Bayar</center>
                                             </th>
                                             <th style="text-align: left">
-                                                <center>Aksi</center>
+                                                Aksi
                                             </th>
                                         </tr>
                                     </thead>
@@ -196,12 +203,11 @@
                                                         </button>
                                                     </center>
                                                 </td>
-                                                <td>
-                                                    <center>
-                                                        <a href="" class=" btn btn-sm btn-danger">
-                                                            <i class=" fa fa-whatsapp"></i> 
-                                                        </a> 
-                                                    </center>
+                                                <td style="text-align: start">
+                                                    <a href="/admin/kirim-tagihan-wa/{{ $t->tipe }}-{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                                        class=" btn btn-sm btn-danger">
+                                                        <i class=" fa fa-whatsapp"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -512,7 +518,7 @@
                                                 <center>Bayar</center>
                                             </th>
                                             <th style="text-align: left">
-                                                <center>Aksi</center>
+                                                Aksi
                                             </th>
                                         </tr>
                                     </thead>
@@ -549,12 +555,11 @@
                                                         </button>
                                                     </center>
                                                 </td>
-                                                <td>
-                                                    <center>
-                                                        <a href="" class=" btn btn-sm btn-danger">
-                                                            <i class=" fa fa-whatsapp"></i>
-                                                        </a>
-                                                    </center>
+                                                <td style="text-align: start">
+                                                    <a href="/admin/kirim-tagihan-wa/{{ $t->tipe }}-{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                                        class=" btn btn-sm btn-danger">
+                                                        <i class=" fa fa-whatsapp"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -945,6 +950,21 @@
     @if (session()->has('success2'))
         <script type="text/javascript">
             toastr.success('{{ session('success2') }}')
+        </script>
+    @endif
+    @if (session()->has('bKirimWa'))
+        <script type="text/javascript">
+            toastr.success('{{ session('bKirimWa') }}')
+        </script>
+    @endif
+    @if (session()->has('gKirimWa'))
+        <script type="text/javascript">
+            toastr.error('{{ session('gKirimWa') }}')
+        </script>
+    @endif
+    @if (session()->has('bKirimSemuaW'))
+        <script type="text/javascript">
+            toastr.success('{{ session('bKirimSemuaW') }}')
         </script>
     @endif
 

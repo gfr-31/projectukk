@@ -45,7 +45,7 @@ class KirimTagihanController extends Controller
                     $pesan = '
 *Pemberitahuan Pembayaran '.$nama_pembayaran.'*
 
-    Diberitahukan kepada orang tua/wali dari Ananda/Anandi Siswa dengan detail sebagai berikut : 
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
 
 *Nama : ' . $nama . '*
 *Kelas : ' . $kelas . '*
@@ -89,7 +89,7 @@ Admin SPP
                     $pesan = '
 *Pemberitahuan Pembayaran '.$nama_pembayaran.'*
 
-    Diberitahukan kepada orang tua/wali dari Ananda/Anandi Siswa dengan detail sebagai berikut : 
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
 
 *Nama : ' . $nama . '*
 *Kelas : ' . $kelas . '*

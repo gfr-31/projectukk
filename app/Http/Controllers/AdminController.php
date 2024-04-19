@@ -21,7 +21,7 @@ class AdminController extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect()->intended('admin/dashboard')->with('success', 'Anda Berhasil Login');
+            return redirect()->intended('admin/pembayaran')->with('success', 'Anda Berhasil Login');
         }
         return back()->with('loginError', 'Login Gagal !!!');
         // dd('berhasil login');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\TarifPembayaranBulanan;
 use App\Models\TarifPembayaranBebas;
@@ -16,7 +18,7 @@ class PembayaranController extends Controller
     // Pembayaran
     public function transaksi(Request $request)
     {
-        $admin = DB::table('users')->get();
+        $admin = User::get();
         // $cariSiswa = $request->input('search');
         // $siswa = Siswa::with('kelas')->orWhere('nis', 'LIKE', '%'.$cariSiswa.'%')->get();
         return view('admin.layout.pembayaran.pembayaran', compact('admin'));
@@ -61,12 +63,49 @@ class PembayaranController extends Controller
         // dd($request->all());
         try {
             if ($request->tipe == "Bulanan") {
-                // dd();
-                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
-                $pesan = 'Pembayaran ' . $request->np . ' bulan ' . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlah_bayar . '. Berikut bukti pembayarannya : http://127.0.0.1:8000/admin/bukti-pembayaran/Bebas/Pendaftaran%20-%20T.A%202022-2023/3';
-                // dd($pesan);
-                NotifWa::NotifWa($target, $pesan);
-                return back();
+                $st = $request->input('sisa_tagihan' . $request->id);
+                if ($st > 0) {
+                    $bulan = ucfirst($request->bulan);
+                    $np = $request->np;
+                    $ta = date('Y');
+                    $jb = $request->jumlah_bayar;
+                    $nama = Siswa::where('id', $request->siswa)->pluck('nama_lengkap')->first();
+                    $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                    $pesan = "
+Pembayaran *" . $np . "*, 
+
+Atas nama *" . $nama . "*.
+
+Pada bulan *" . $bulan . " " . $ta . "*, sebesar *" . 'Rp. ' . number_format($jb, 0, ',', '.') . ',' . 0 . "" . 0 . "* berhasil dilakukan,
+Sisa Tagihan " . $np . " yang tersisi adalah sebesar *" . 'Rp. ' . number_format($st, 0, ',', '.') . ',' . 0 . "" . 0 . ".*" .
+                        "
+                    
+Tanggal Pembayaran : " . date('d-m-Y') . "
+                ";
+                    // dd($target, $pesan);
+                    NotifWa::NotifWa($target, $pesan);
+                } else {
+                    $bulan = ucfirst($request->bulan);
+                    $np = $request->np;
+                    $ta = date('Y');
+                    $jb = $request->jumlah_bayar;
+                    $nama = Siswa::where('id', $request->siswa)->pluck('nama_lengkap')->first();
+                    $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                    $pesan = "
+Pembayaran *" . $np . "*, 
+
+Atas nama *" . $nama . "*.
+
+Pada bulan *" . $bulan . " " . $ta . "*, sebesar *" . 'Rp. ' . number_format($jb, 0, ',', '.') . ',' . 0 . "" . 0 . "* berhasil dilakukan dan Sudah *LUNAS*,
+Sisa Tagihan " . $np . " yang tersisi adalah sebesar *" . 'Rp. ' . number_format($st, 0, ',', '.') . ',' . 0 . "" . 0 . ".*" .
+                        "
+                    
+Tanggal Pembayaran : " . date('d-m-Y') . "
+                ";
+                    // dd($target, $pesan);
+                    NotifWa::NotifWa($target, $pesan);
+                }
+                // return back();
 
                 $juli = $request->input('juli' . $request->id);
                 $agustus = $request->input('agustus' . $request->id);
@@ -88,7 +127,7 @@ class PembayaranController extends Controller
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
                 $d = mt_rand(100, 999);
-                
+
                 $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($b);
                 DB::table('transaksi_bulanan')->insert([
@@ -131,12 +170,50 @@ class PembayaranController extends Controller
                 session()->flash('key', $pesan);
                 return redirect()->back();
             } elseif ($request->tipe == "Bebas") {
-                $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
-                $pesan = 'Pembayaran ' . $request->namaPembayaran . $request->bulan . ', telah di bayarkan sejumlah ' . $request->jumlahBayar . '. Dengan keterangan : ' . $request->keterangan;
-                // dd($pesan);
-                NotifWa::NotifWa($target, $pesan);
-                return back();
+                // dd($request->all());
+                $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
+                $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
+                if ($sisaTagihan - $jumlahBayar > 0) {
+                    $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                    $np = $request->namaPembayaran;
+                    $ta = date('d-m-Y');
+                    $jb = $request->jumlahBayar;
 
+                    $st = $sisaTagihan - $jumlahBayar;
+                    $nama = Siswa::where('id', $request->siswa)->pluck('nama_lengkap')->first();
+                    $pesan = "
+Pembayaran *" . $np . "*, 
+
+Atas nama *" . $nama . "*.
+
+Pada tanggal " . $ta . ", sebesar *" . $jb . ',' . 0 . "" . 0 . "* berhasil dilakukan,
+Sisa Tagihan " . $np . " yang tersisi adalah sebesar *" . 'Rp. ' . number_format($st, 0, ',', '.') . ',' . 0 . "" . 0 . "*" .
+                        "
+
+                ";
+                    // dd($target, $pesan);
+                    NotifWa::NotifWa($target, $pesan);
+                    // return back();
+                } else {
+                    $target = Siswa::where('id', $request->siswa)->pluck('no_hp_ortu')->first();
+                    $np = $request->namaPembayaran;
+                    $ta = date('d-m-Y');
+                    $jb = $request->jumlahBayar;
+
+                    $nama = Siswa::where('id', $request->siswa)->pluck('nama_lengkap')->first();
+                    $pesan = "
+Pembayaran *" . $np . "*, 
+
+Atas nama *" . $nama . "*.
+
+Pada tanggal " . $ta . ", sebesar *" . $jb . ',' . 0 . "" . 0 . "* berhasil dilakukan,
+Sisa Tagihan " . $np . " sudah *LUNAS*. " .
+                        "
+                ";
+                    // dd($target, $pesan);
+                    NotifWa::NotifWa($target, $pesan);
+                    // return back();
+                }
                 $tarif = (int) preg_replace('/\D/', '', $request->tarif);
                 $sisaTagihan = (int) preg_replace('/\D/', '', $request->sisaTagihan);
                 $jumlahBayar = (int) preg_replace('/\D/', '', $request->jumlahBayar);
@@ -275,6 +352,132 @@ class PembayaranController extends Controller
         $siswa = Siswa::where('id', $request->id)->get();
         $totalKeseluruhan = $tagihan->pluck('sisa_tagihan')->sum();
         return view('admin.layout.tagihan', compact('tagihan', 'siswa', 'totalKeseluruhan'));
+    }
+
+    public function kirim_wa($tipe, $nama_pembayaran, $id)
+    {
+
+        if ($tipe === 'Bulanan') {
+            // dd($nama_pembayaran);
+            $id_siswa = TarifPembayaranBulanan::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('siswa_id');
+            $nama = Siswa::where('id', $id_siswa)->pluck('nama_lengkap')->first();
+            $id_kelas = Siswa::where('id', $id_siswa)->pluck('kelas_id');
+            $kelas = Kelas::where('id', $id_kelas)->pluck('kelas')->first();
+            $tagihan = TarifPembayaranBulanan::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('sisa_tagihan')->first();
+            $ta = TarifPembayaranBulanan::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('tahun_ajaran')->first();
+            // dd($ta);
+
+            if ($tagihan > 0) {
+                $pesan = '
+*Pemberitahuan Pembayaran ' . $nama_pembayaran . '*
+                
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+                
+*Nama : ' . $nama . '*
+*Kelas : ' . $kelas . '*
+*Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
+*Tagihan  : ' . $nama_pembayaran . '*
+*TA : ' . $ta . '*
+                
+    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+                
+Demikian Terimakasih 
+Salam,
+Admin SPP
+                
+*_Abaikan jika sudah membayar_*';
+                $target = Siswa::where('id', $id_siswa)->pluck('no_hp_ortu')->first();
+                // dd($target, $pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return redirect()->back()->with('bKirimWa', 'Pesan Tagihan Behasil Dikirim');
+            } else {
+                return redirect()->back()->with('gKirimWa', 'Tidak Ada Tagihan');
+            }
+
+        } elseif ($tipe === 'Bebas') {
+            // dd($nama_pembayaran);
+            $id_siswa = TarifPembayaranBebas::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('siswa_id');
+            $nama = Siswa::where('id', $id_siswa)->pluck('nama_lengkap')->first();
+            $id_kelas = Siswa::where('id', $id_siswa)->pluck('kelas_id');
+            $kelas = Kelas::where('id', $id_kelas)->pluck('kelas')->first();
+            $tagihan = TarifPembayaranBebas::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('sisa_tagihan')->first();
+            $ta = TarifPembayaranBebas::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('tahun_ajaran')->first();
+            // dd($tagihan);
+            if ($tagihan > 0) {
+                $pesan = '
+*Pemberitahuan Pembayaran ' . $nama_pembayaran . '*
+
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+
+*Nama : ' . $nama . '*
+*Kelas : ' . $kelas . '*
+*Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
+*Tagihan  : ' . $nama_pembayaran . '*
+*TA : ' . $ta . '*
+
+    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+
+Demikian Terimakasih 
+Salam,
+Admin SPP
+                
+*_Abaikan jika sudah membayar_*';
+                $target = Siswa::where('id', $id_siswa)->pluck('no_hp_ortu')->first();
+
+                // dd($target, $pesan);
+                NotifWa::NotifWa($target, $pesan);
+                return redirect()->back()->with('bKirimWa', 'Pesan Tagihan Behasil Dikirim');
+            } else {
+                return redirect()->back()->with('gKirimWa', 'Tidak Ada Tagihan');
+            }
+        }
+    }
+
+    public function kirim_semua_wa($id)
+    {
+        $nama = Siswa::where('id', $id)->pluck('nama_lengkap')->first();
+        $kelas_id = Siswa::where('id', $id)->pluck('kelas_id')->first();
+        $kelas = Kelas::where('id', $kelas_id)->pluck('kelas')->first();
+        $tagihanBulanan = TarifPembayaranBulanan::where('siswa_id', $id)->get();
+        $tagihanBebas = TarifPembayaranBebas::where('siswa_id', $id)->get();
+        $tagihan = $tagihanBulanan->concat($tagihanBebas);
+        $sisaTagihan = $tagihan->sum('sisa_tagihan');
+        $a = "";
+        foreach ($tagihan as $t) {
+            if($t->sisa_tagihan > 0){
+                $a .= $t->nama_pembayaran . " - T.A " . $t->tahun_ajaran . "\n";
+                $a .= "*Sebesar : " . 'Rp. ' . number_format($t->sisa_tagihan, 0, ',', '.') . ',' . 0 . "" . 0 . "*\n\n";
+            }
+            
+        }
+        // dd($a);
+        $target = Siswa::where('id', $id)->pluck('no_hp_ortu')->first();
+        $pesan = "
+*Pemberitahuan Pembayaran*
+
+Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+
+*Nama : " . $nama . "*
+*Kelas : " . $kelas . "*
+
+*Tagihan  :* 
+
+" . $a . "
+
+*Jumlah Seluruh : " . 'Rp. ' . number_format($sisaTagihan, 0, ',', '.') . ',' . 0 . "" . 0 . "*
+
+Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+
+Demikian Terimakasih 
+Salam,
+Amin SPP
+
+*_Abaikan jika sudah membayar_*
+        ";
+
+        // dd($target, $pesan);
+        NotifWa::NotifWa($target, $pesan);
+        return back()->with('bKirimSemuaW', 'Tagihan Berhasil Dikirim Semua');
     }
 
 }

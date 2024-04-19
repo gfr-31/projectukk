@@ -5,6 +5,7 @@ class NotifWa
 {
     public static function NotifWa($target, $pesan)
     {
+        // dd($target, $pesan);
         // Inisialisasi cURL
         $curl = curl_init();
 

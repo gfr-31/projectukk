@@ -62,11 +62,11 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                @foreach ($admin as $a)
+                @if (isset($admin))
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('gambar/icon.png') }}" class="user-image img-circle " alt="User Image" loading="lazy">
-                            <span class="d-none d-md-inline">{{ $a->name }}</span>
+                            <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
@@ -85,8 +85,7 @@
                             </li>
                         </ul>
                     </li>
-                @endforeach
-
+                @endif
 
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -336,6 +335,12 @@
                                         <p>Developers</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="/admin/list-user" class="nav-link text-white ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User Admin</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -376,7 +381,7 @@
                 @yield('dataInformasi')
                 @yield('tambahInformasi')
                 @yield('editInformasi')
-                @yield('bulan')
+                @yield('userAdmin')
                 @yield('developers')
                 <div>
                 </div>

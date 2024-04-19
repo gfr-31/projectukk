@@ -57,13 +57,6 @@
                 </table>
             </div>
         </div>
-        <form action="/admin/NotifWa" method="post">
-            @csrf
-            <input type="text" name="target" required><br>
-            <textarea name="pesan" id="" cols="30" rows="5"></textarea>
-            <button type="submit">Kirim</button>
-        </form>
-        <a href="/admin/pembayaran/export/pdf" class=" btn btn-success"><i class=" fa fa-print"></i> Cetak</a>
     </div>
 
     @if (session()->has('berhasilPosPembayaran'))

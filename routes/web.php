@@ -2,15 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminSiswaController;
-use App\Http\Controllers\CetakController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
-use App\Http\Controllers\DevelopersController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KirimTagihanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TarifPembayaranController;
@@ -65,6 +64,8 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
     Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
+    Route::get('kirim-tagihan-wa/{tipe}-{nama_pembayaran}/{id}', [PembayaranController::class, 'kirim_wa']);
+    Route::get('kirim-semua-tagihan-wa/{id}', [PembayaranController::class, 'kirim_semua_wa']);
     // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);
     // Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
 
@@ -135,8 +136,13 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::post('NotifWa', [DataController::class, 'NotifWa']);
 
     //Setting Aplikasi
-    Route::get('developers', [DevelopersController::class, 'developers']);
-    Route::get('bulan', [DevelopersController::class, 'bulan']);
+    Route::get('developers', [SettingController::class, 'developers']);
+    Route::prefix('list-user')->group(function (){
+        Route::get('/', [SettingController::class, 'user_admin']);
+        Route::post('tambah-user', [SettingController::class, 'insert']);
+        Route::get('hapus-user/{id}', [SettingController::class, 'delete']);
+        Route::post('edit-user/{id}', [SettingController::class, 'update']);
+    });
     
 });
 
@@ -147,7 +153,7 @@ Route::prefix('siswa')->middleware('isLoginSiswa')->group(function () {
     Route::get('dashboard', [AdminSiswaController::class, 'dashboard']);
 
     //Setting Aplikasi Siswa
-    Route::get('developers', [DevelopersController::class, 'developers_siswa']);
+    // Route::get('developers', [DevelopersController::class, 'developers_siswa']);
 });
 
 
