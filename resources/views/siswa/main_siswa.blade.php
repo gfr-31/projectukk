@@ -160,9 +160,26 @@
                                 </a>
                             </li>
 
+<<<<<<< HEAD
+                             {{-- Profile Siswa --}}
+                             <li class="nav-item">
+                                <a href="/siswa/profille/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Profile
+                                    </p>
+                                </a>
+                            </li>
+
+
+                            {{-- Tagihan --}}
+                            <li class="nav-item">
+                                <a href="/siswa/tagihan/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
+=======
                             {{-- Tagihan --}}
                             <li class="nav-item">
                                 <a href="/admin/pemsis" class="nav-link text-white">
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                     <i class="nav-icon fas fa-credit-card"></i>
                                     <p>
                                         Tagihan
@@ -170,6 +187,9 @@
                                 </a>
                             </li>
 
+<<<<<<< HEAD
+                           
+=======
                             {{-- Profile Siswa --}}
                             <li class="nav-item">
                                 <a href="/siswa/dashboard" class="nav-link text-white">
@@ -180,6 +200,7 @@
                                 </a>
                             </li>
 
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                             {{-- Tagihan
                             <li class="nav-item">
                                 <a href="/siswa/dashboard" class="nav-link text-white">
@@ -192,7 +213,11 @@
 
                             {{-- Developer --}}
                             <li class="nav-item">
+<<<<<<< HEAD
+                                <a href="/siswa/developers" class="nav-link text-white">
+=======
                                 <a href="#" class="nav-link text-white">
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         Developer
@@ -208,6 +233,11 @@
         <div class="content-wrapper style="background-color: rgb(228, 228, 228)"">
             <div class="content-header">
                 @yield('developers_siswa')
+<<<<<<< HEAD
+                @yield('profille')
+                @yield('tagihan')
+=======
+>>>>>>> e4c92f785b194744eda4e7a05509a557e8fc9220
             </div>
         </div>
 
