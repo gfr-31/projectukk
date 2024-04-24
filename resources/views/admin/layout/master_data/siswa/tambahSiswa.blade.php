@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label>Nama Lengkap</label>
                                             <input type="text" name="nama" class="form-control" id=""
-                                                placeholder="Nama Lengkap" required>
+                                                placeholder="Nama Lengkap" required value="{{ old('nama') }}">
                                         </div>
 
                                         {{-- Jenis Kelamin --}}
@@ -65,13 +65,13 @@
                                             <label for="jk">Jenis Kelamin</label>
                                             <div class="form-group clearfix ml-1">
                                                 <div class="icheck-primary d-inline mr-5">
-                                                    <input type="radio" id="radioPrimary1" name="jk" value="L">
+                                                    <input type="radio" id="radioPrimary1" name="jk" value="L" {{ old('jk') == 'L' ? 'checked' : '' }}>
                                                     <label for="radioPrimary1">
                                                         <i class=" fas fa-male"></i> Laki - Laki
                                                     </label>
                                                 </div>
                                                 <div class="icheck-primary d-inline">
-                                                    <input type="radio" id="radioPrimary2" name="jk" value="P">
+                                                    <input type="radio" id="radioPrimary2" name="jk" value="P" {{ old('jk') == 'P' ? 'checked' : '' }}>
                                                     <label for="radioPrimary2">
                                                         <i class=" fas fa-female"></i> Perempuan
                                                     </label>
@@ -85,7 +85,7 @@
                                                 <div class="form-group">
                                                     <label>Tempat Lahir</label>
                                                     <input type="text" name="tempat_lahir" class="form-control"
-                                                        id="" placeholder="Tempat Lahir" required>
+                                                        id="" placeholder="Tempat Lahir" value="{{ old('tempat_lahir') }}" required>
                                                 </div>
                                             </div>
                                             <div class=" col-sm-4">
@@ -99,7 +99,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="date" name="tanggal_lahir"
-                                                            class="form-control float-right" id="reservation" required>
+                                                            class="form-control float-right" id="reservation" value="{{ old('tanggal_lahir') }}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,7 +115,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" name="no_hp_siswa" class="form-control float-right"
-                                                    id="reservation" required placeholder="No Handphone">
+                                                    id="reservation" required placeholder="No Handphone" value="{{ old('no_hp_siswa') }}">
                                             </div>
                                         </div>
 
@@ -128,7 +128,7 @@
                                                         <i class=" fas fa-home"></i>
                                                     </span>
                                                 </div>
-                                                <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" name="" required></textarea>
+                                                <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" required>{{ old('alamat') }}</textarea>
                                             </div>
                                         </div>
 
@@ -138,7 +138,7 @@
                                                 <div class="form-group">
                                                     <label>Nama Lengkap Ayah</label>
                                                     <input type="text" name="nama_ayah" class="form-control"
-                                                        id="" placeholder="Nama Lengkap Ayah" required>
+                                                        id="" placeholder="Nama Lengkap Ayah" value="{{ old('nama_ayah') }}" required>
                                                 </div>
                                             </div>
                                             <div class=" col-sm-6">
@@ -146,7 +146,7 @@
                                                 <div class="form-group">
                                                     <label>Nama Lengkap</label>
                                                     <input type="text" name="nama_ibu" class="form-control"
-                                                        id="" placeholder="Nama Lengkap Ibu" required>
+                                                        id="" placeholder="Nama Lengkap Ibu" value="{{ old('nama_ibu') }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +161,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" name="no_hp_ortu" class="form-control float-right"
-                                                    id="reservation" required placeholder="No Handphone">
+                                                    id="reservation" required placeholder="No Handphone" value="{{ old('no_hp_ortu') }}">
                                             </div>
                                         </div>
 
@@ -181,13 +181,13 @@
                                                     </span>
                                                 </div>
                                                 <input name="nis" type="text" class="form-control float-right"
-                                                    id="reservation" required placeholder="NIS">
+                                                    id="reservation" required placeholder="NIS" value="{{ old('nis') }}">
                                             </div>
                                         </div>
 
                                         {{-- NISN --}}
                                         <div class="form-group">
-                                            <label>NIS</label>
+                                            <label>NISN</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
@@ -195,7 +195,7 @@
                                                     </span>
                                                 </div>
                                                 <input name="nisn" type="text" class="form-control float-right"
-                                                    id="reservation" required placeholder="NISN">
+                                                    id="reservation" required placeholder="NISN" value="{{ old('nisn') }}">
                                             </div>
                                         </div>
 
@@ -212,7 +212,7 @@
                                                     aria-label="Default select example">
                                                     <option value="" selected>-- Kelas --</option>
                                                     @foreach ($kelas as $k)
-                                                        <option value="{{ $k->id }}">{{ $k->kelas }}</option>
+                                                        <option value="{{ $k->id }}" {{ old('kelas_id') == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -264,4 +264,69 @@
             });
         </script>
     @endif
+    @error('nama')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('jk')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('tempat_lahir')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('tanggal_lahir')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('no_hp_siswa')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('alamat')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('nama_ayah')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('nama_ibu')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('no_hp_ortu')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('nis')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('nisn')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('kelas_id')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('fotos')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
 @endsection

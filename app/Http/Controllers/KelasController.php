@@ -22,9 +22,14 @@ class KelasController extends Controller
         $kelas = $request->kelas;
 
         for ($i = 0; $i < count($kelas); $i++) {
+            $this->validate($request, [
+                'kelas[$i]' => 'required',
+            ], [
+                'kelas[$i].required' => 'Kelas harus diisi lengkap.',
+            ]);
             $datasave = [
                 'kelas' => $kelas[$i],
-                'created_at'=> now(),
+                'created_at' => now(),
             ];
             // dd($datasave);
             DB::table('kelas')->insert($datasave);

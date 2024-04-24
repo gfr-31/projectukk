@@ -22,6 +22,13 @@ class KeuanganController extends Controller
         $keterangan = $request->keterangan;
 
         for ($i = 0; $i < count($pos); $i++) {
+            $this->validate($request, [
+                'pos[$i]' => 'required',
+                'keterangan[$i]' => 'required',
+            ], [
+                'pos[$i].required' => 'POS harus diisi lengkap.',
+                'keterangan[$i].required' => 'Keterangan harus diisi lengkap.',
+            ]);
             $datasave = [
                 'pos' => $pos[$i],
                 'keterangan' => $keterangan[$i],
@@ -67,6 +74,15 @@ class KeuanganController extends Controller
     public function insertJenisPembayaran(Request $request)
     {
         // dd($request->tahun_ajaran);
+        $this->validate($request, [
+            'pos' => 'required',
+            'tipe' => 'required',
+            'tahun_ajaran' => 'required',
+        ],[
+            'pos.required' => 'POS harus diisi lengkap.',
+            'tipe.required' => 'Tipe harus diisi lengkap.',
+            'tahun_ajaran.required' => 'Tahun Ajaran harus diisi lengkap.',
+        ]);
         if ($request->Filled('tipe', 'tahun_ajaran', 'pos')) {
             DB::table('jenis_pembayaran')->insert([
                 'pos' => $request->pos,

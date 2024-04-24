@@ -84,7 +84,7 @@
                                             <div class=" col-8">
                                                 <div class="form-select" style="width: 200px">
                                                     <select class="form-control " name="kelas"
-                                                        aria-label="Default select example">
+                                                        aria-label="Default select example" required>
                                                         <option value="" selected>-- Kelas --</option>
                                                         @foreach ($kelas as $k)
                                                             <option value="{{ $k->id }}">{{ $k->kelas }}
@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div class=" col-7">
                                                     <input class="form-control" type="text" name=""
-                                                        id="tarif_bulanan">
+                                                        id="tarif_bulanan" required>
                                                 </div>
                                             </div>
                                             <div class=" row mt-2">
@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class=" col-7">
                                                     <input class="form-control" type="text" name="totalTagihan"
-                                                        id="totalTagihan" readonly>
+                                                        id="totalTagihan" value="{{ old('totalTagihan') }}" readonly>
                                                 </div>
                                             </div>
 
@@ -149,7 +149,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="juli"
-                                                id="tagihan1">
+                                                id="tagihan1" value="{{ old('juli') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="agustus"
-                                                id="tagihan2">
+                                                id="tagihan2" value="{{ old('agustus') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="september"
-                                                id="tagihan3">
+                                                id="tagihan3" value="{{ old('september') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="oktober"
-                                                id="tagihan4">
+                                                id="tagihan4" value="{{ old('oktober') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="november"
-                                                id="tagihan5">
+                                                id="tagihan5" value="{{ old('november') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="desember"
-                                                id="tagihan6">
+                                                id="tagihan6" value="{{ old('desember') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="january"
-                                                id="tagihan7">
+                                                id="tagihan7" value="{{ old('january') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="februari"
-                                                id="tagihan8">
+                                                id="tagihan8" value="{{ old('februari') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="maret"
-                                                id="tagihan9">
+                                                id="tagihan9" value="{{ old('maret') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="april"
-                                                id="tagihan10">
+                                                id="tagihan10" value="{{ old('april') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -309,7 +309,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="mei"
-                                                id="tagihan11">
+                                                id="tagihan11" value="{{ old('mei') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -325,7 +325,7 @@
                                         </div>
                                         <div class=" col-9">
                                             <input class="form-control form-control-sm" type="text" name="juni"
-                                                id="tagihan12">
+                                                id="tagihan12" value="{{ old('juni') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -367,4 +367,89 @@
             });
         </script>
     @endif
+    @error('pos')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('namaPembayaran')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('tj')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('tipe')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('kelas')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('totalTagihan')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('juli')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('agustus')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('september')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('oktober')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('november')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('desember')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('january')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('februari')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('maret')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('april')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('mei')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
 @endsection

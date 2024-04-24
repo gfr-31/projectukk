@@ -12,7 +12,7 @@ class TahunAjaranController extends Controller
     public function tahun_ajaran()
     {
         $admin = DB::table('users')->get();
-        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('created_at','desc')->get();
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('created_at', 'desc')->get();
         return view('admin.layout.master_data.tahun_ajaran.tahun_ajaran', ['admin' => $admin], ['tahun_ajaran' => $tahun_ajaran]);
     }
     public function tambah_tahun_ajaran()
@@ -23,7 +23,17 @@ class TahunAjaranController extends Controller
     public function insert_tahun_ajaran(Request $request)
     {
         // dd($request->customRadio);
-        
+
+        $this->validate($request, [
+            'tj1' => 'required',
+            'tj2' => 'required',
+            'customRadio' => 'required',
+        ], [
+            'tj1.required' => 'Tahun ajaran harus diisi lengkap.',
+            'tj2.required' => 'Tahun ajaran harus diisi lengkap.',
+            'customRadio.required' => 'Pilih salah satu opsi pada keterangan.',
+        ]);
+
         // Mulai transaksi database
         DB::beginTransaction();
         try {
@@ -53,8 +63,15 @@ class TahunAjaranController extends Controller
     }
     public function updateTh(Request $request)
     {
+        $this->validate($request, [
+            'tj1' => 'required',
+            'customRadio' => 'required',
+        ], [
+            'tj1.required' => 'Tahun ajaran harus diisi lengkap.',
+            'customRadio.required' => 'Pilih salah satu opsi pada keterangan.',
+        ]);
         DB::beginTransaction();
-        try{
+        try {
             DB::table('tahun_ajaran')->update(['keterangan' => 'Tidak Aktif']);
             DB::table('tahun_ajaran')->where('id', $request->id)->update([
                 'tahun_ajaran' => $request->tj1,
@@ -62,12 +79,11 @@ class TahunAjaranController extends Controller
                 'updated_at' => now()
             ]);
             DB::commit();
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
         }
         // dd($request->all());
-        
+
         return redirect('/admin/tahun-ajaran')->with('berhasilUpdateTh', 'Data Berhasil Diperbaharui');
     }
     public function hapus_tahun_ajaran($id)

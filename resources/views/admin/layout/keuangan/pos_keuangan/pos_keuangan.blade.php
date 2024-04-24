@@ -39,14 +39,14 @@
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">POS</label>
                                         <input type="text" class="form-control" id="recipient-name" id="input2"
-                                            name="pos[]" placeholder="Nama POS" required>
+                                            name="pos[]" placeholder="Nama POS" >
                                     </div>
                                 </div>
                                 <div class=" col-8">
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Keterangan</label>
                                         <input type="text" class="form-control" id="recipient-name" id="input2"
-                                            name="keterangan[]" placeholder="Keterangan" required>
+                                            name="keterangan[]" placeholder="Keterangan" >
                                     </div>
                                 </div>
                                 <div class=" col-3">
@@ -181,4 +181,14 @@
             toastr.success('{{ session('berhasilUpdatePos') }}')
         </script>
     @endif
+    @error('pos[$i]')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
+    @error('keterangan[$i]')
+    <script type="text/javascript">
+        toastr.error('{{ $message }}')
+    </script>
+    @enderror
 @endsection

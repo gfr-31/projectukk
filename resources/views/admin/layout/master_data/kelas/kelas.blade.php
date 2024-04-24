@@ -106,7 +106,9 @@
                     <tr>
                         <th style="width: 10px">No</th>
                         <th>Nama Kelas</th>
-                        <th><center>ID Kelas</center></th>
+                        <th>
+                            <center>ID Kelas</center>
+                        </th>
                         <th>
                             <center>
                                 Aksi
@@ -120,7 +122,9 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>{{ $k->kelas }}</td>
-                            <td><center>{{ $k->id }}</center></td>
+                            <td>
+                                <center>{{ $k->id }}</center>
+                            </td>
                             <td>
                                 <center>
                                     <a href="{{ $k->id }}" data-toggle="modal"
@@ -180,7 +184,11 @@
     </script>
 
     <script src="{{ asset('js/main/master_data/kelas/kelas.js') }}"></script>
-
+    @error('kelas[$i]')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
     @if (session()->has('berhasilKelas'))
         <script type="text/javascript">
             toastr.success('{{ session('berhasilKelas') }}')

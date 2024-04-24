@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminSiswaController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KeuanganController;
@@ -57,11 +56,6 @@ Route::get('cetak-tagihan/{id}', [PembayaranController::class, 'tagihan']);
 Route::get('bukti-pembayaran/{tipe}/{nama_pembayaran}/{id}', [PembayaranController::class, 'bukti']);
 
 Route::prefix('admin')->middleware('isLogin')->group(function () {
-    //Dashboard
-    Route::get('dashboard', [DashboardController::class, 'dashboard']);
-    Route::redirect('dashboard', 'pembayaran', 301);
-    // Angka 301 adalah kode status HTTP yang menunjukkan bahwa suatu halaman telah dipindahkan secara permanen ke lokasi baru
-
     //Pembayaran
     Route::get('pembayaran', [PembayaranController::class, 'transaksi']);
     Route::get('pembayaran-', [PembayaranController::class, 'cariSiswa']);
@@ -69,8 +63,6 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
     Route::get('kirim-tagihan-wa/{tipe}-{nama_pembayaran}/{id}', [PembayaranController::class, 'kirim_wa']);
     Route::get('kirim-semua-tagihan-wa/{id}', [PembayaranController::class, 'kirim_semua_wa']);
-    // Route::get('bukti-pembayaran-{id}/download', [PembayaranController::class, 'd_bukti']);
-    // Route::get('pembayaran/export/pdf', [CetakController::class, 'viewPdf']);
 
     //Kirim Tagihan WA
     Route::get('kirim-tagihan', [KirimTagihanController::class, 'kirimTagihan']);

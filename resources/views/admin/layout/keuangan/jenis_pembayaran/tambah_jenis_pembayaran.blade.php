@@ -27,7 +27,7 @@
                                 aria-label="Default select example">
                                 <option value="" selected>-- Pilih POS --</option>
                                 @foreach ($pos as $p)
-                                    <option value="{{ $p->pos }}">{{ $p->pos }}</option>
+                                    <option value="{{ $p->pos }}" {{ old('pos') == $p->pos ? 'selected' : '' }}>{{ $p->pos }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -38,7 +38,7 @@
                             <select name="tahun_ajaran" id="" class=" form-control float-right">
                                 <option value="" selected>-- Pilih Tahun Ajaran --</option>
                                 @foreach ($tahunAjaran as $ta)
-                                    <option value="{{ $ta->tahun_ajaran }}">{{ $ta->tahun_ajaran }}</option>
+                                    <option value="{{ $ta->tahun_ajaran }}" {{ old('tahun_ajaran') == $ta->tahun_ajaran ? 'selected' : '' }}>{{ $ta->tahun_ajaran }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,8 +48,8 @@
                             <label for="">Tipe</label>
                             <select name="tipe" id="" class=" form-control float-right">
                                 <option value="" selected>-- Pilih Tipe --</option>
-                                <option value="Bebas">Bebas</option>
-                                <option value="Bulanan">Bulanan</option>
+                                <option value="Bebas" {{ old('tipe') == 'Bebas'? 'selected' : '' }}>Bebas</option>
+                                <option value="Bulanan" {{ old('tipe') == 'Bulanan'? 'selected' : '' }}>Bulanan</option>
                             </select>
                         </div>
 
@@ -62,8 +62,7 @@
                                 </button>
                             </div>
                             <div class=" col-sm-12 mt-1">
-                                <a href="/admin/jenis-pembayaran" class=" btn btn-danger btn-sm"
-                                    style="width: 100%">
+                                <a href="/admin/jenis-pembayaran" class=" btn btn-danger btn-sm" style="width: 100%">
                                     <i class=" fa fa-reply"></i> Kembali
                                 </a>
                             </div>
@@ -73,4 +72,19 @@
             </form>
         </div>
     </div>
+    @error('pos')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('tahun_ajaran')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('tipe')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
 @endsection

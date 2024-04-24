@@ -105,6 +105,21 @@
             @endforeach
         </div>
     </div>
+    @error('tj1')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('tj2')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
+    @error('customRadio')
+        <script type="text/javascript">
+            toastr.error("{{ $message }}")
+        </script>
+    @enderror
 @endsection
 <script>
     document.getElementById('tahun_ajaran').click();

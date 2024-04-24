@@ -59,37 +59,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/siswa/dashboard" class="nav-link">Home</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li> --}}
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                {{-- <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> --}}
-
                 @auth('siswa')
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -99,11 +71,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
-                            <li class="user-header bg-olive">
+                            <li class="user-header bg-olive ">
                                 <img src="{{ asset('post_image/' . auth('siswa')->user()->foto_siswa) }}"
-                                    class="img-circle " alt="User Image" loading="lazy">
+                                    class="img-circle" alt="User Image" loading="lazy">
                                 <p>
-                                    {{ auth('siswa')->user()->nama_lengkap }} - Aplikasi Pembayaran
+                                    {{ auth('siswa')->user()->nama_lengkap }} <br> 
+                                    <small>Aplikasi Pembayaran</small>
                                     <small>Creating | January. 2024</small>
                                 </p>
                             </li>
@@ -147,21 +120,21 @@
                                 </a>
                             </li>
 
-                            {{-- Profile Siswa --}}
-                            <li class="nav-item">
-                                <a href="/siswa/profille/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>
-                                        Profile
-                                    </p>
-                                </a>
-                            </li>
                             <li class="nav-item">
                                 <a href="/siswa/tagihan/{{ auth('siswa')->user()->nis }}"class="nav-link text-white">
                                     {{-- Tagihan --}}
                                     <i class="nav-icon fas fa-credit-card"></i>
                                     <p>
                                         Tagihan & Transaksi
+                                    </p>
+                                </a>
+                            </li>
+                            {{-- Profile Siswa --}}
+                            <li class="nav-item">
+                                <a href="/siswa/profille/{{ auth('siswa')->user()->id }}" class="nav-link text-white">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Profile
                                     </p>
                                 </a>
                             </li>
@@ -180,8 +153,9 @@
             </div>
         </aside>
 
-        <div class="content-wrapper style="background-color: rgb(228, 228, 228)"">
+        <div class="content-wrapper style="background-color: rgb(228, 228, 228)">
             <div class="content-header">
+                @yield('dashboard_siswa')
                 @yield('developers_siswa')
                 @yield('profille')
                 @yield('tagihan')

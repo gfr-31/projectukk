@@ -85,6 +85,45 @@ class TarifPembayaranController extends Controller
     public function insert_ttp_bulanan(Request $request)
     {
         // dd($request->all());    
+        $this->validate($request, [
+            'pos' => 'required',
+            'namaPembayaran' => 'required',
+            'tj' => 'required',
+            'tipe' => 'required',
+            'kelas' => 'required',
+            'totalTagihan' => 'required',
+            'juli' => 'required',
+            'agustus' => 'required',
+            'september' => 'required',
+            'oktober' => 'required',
+            'november' => 'required',
+            'desember' => 'required',
+            'january' => 'required',
+            'februari' => 'required',
+            'maret' => 'required',
+            'april' => 'required',
+            'mei' => 'required',
+            'juni' => 'required',
+        ],[
+            'pos.required' => 'POS harus diisi lengkap.',
+            'namaPembayaran.required' => 'Nama Pembayaran harus diisi lengkap.',
+            'tj.required' => 'Tahun Ajaran harus diisi lengkap.',
+            'tipe.required' => 'Tipe harus diisi lengkap.',
+            'kelas.required' => 'Kelas harus diisi lengkap.',
+            'totalTagihan.required' => 'Total Tagihan harus diisi lengkap.',
+            'juli.required' => 'Juli harus diisi lengkap.',
+            'agustus.required' => 'Agustus harus diisi lengkap.',
+            'september.required' => 'September harus diisi lengkap.',
+            'oktober.required' => 'Oktober harus diisi lengkap.',
+            'november.required' => 'November harus diisi lengkap.',
+            'desember.required' => 'Desember harus diisi lengkap.',
+            'january.required' => 'Januari harus diisi lengkap.',
+            'februari.required' => 'Februari harus diisi lengkap.',
+            'maret.required' => 'Maret harus diisi lengkap.',
+            'april.required' => 'April harus diisi lengkap.',
+            'mei.required' => 'Mei harus diisi lengkap.',
+            'juni.required' => 'Juni harus diisi lengkap.',
+        ]);
 
         $validasi = TarifPembayaranBulanan::where('kelas_id', $request->kelas)->where('tahun_ajaran', $request->tj)->where('nama_pembayaran', $request->namaPembayaran)->first();
         // dd($validasi);
