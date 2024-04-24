@@ -30,7 +30,7 @@
                                             <i class=" fas fa-user"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->nama_lengkap }}">
                                 </div>
                             </div>
@@ -41,13 +41,13 @@
                                 <label for="jk" class="p">Jenis Kelamin</label>
                                 <div class="form-group clearfix ml-1">
                                     <div class="icheck-primary d-inline mr-5">
-                                        <input type="radio" id="radioPrimary1" checked disabled='disabled'>
+                                        <input readonly type="radio" id="radioPrimary1" checked disabled='disabled'>
                                         <label for="radioPrimary1">
                                             <i class=" fas fa-male"></i> Laki - Laki
                                         </label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                        <input type="radio" id="radioPrimary2" disabled='disabled'>
+                                        <input readonly type="radio" id="radioPrimary2" disabled='disabled'>
                                         <label for="radioPrimary2">
                                             <i class=" fas fa-female"></i> Perempuan
                                         </label>
@@ -60,13 +60,13 @@
                                 <label for="jk" class="  p">Jenis Kelamin</label>
                                 <div class="form-group clearfix ml-1">
                                     <div class="icheck-primary d-inline mr-5">
-                                        <input type="radio" id="radioPrimary1" disabled='disabled'>
+                                        <input readonly type="radio" id="radioPrimary1" disabled='disabled'>
                                         <label for="radioPrimary1">
                                             <i class=" fas fa-male"></i> Laki - Laki
                                         </label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                        <input type="radio" id="radioPrimary2" checked disabled='disabled'>
+                                        <input readonly type="radio" id="radioPrimary2" checked disabled='disabled'>
                                         <label for="radioPrimary2">
                                             <i class=" fas fa-female"></i> Perempuan
                                         </label>
@@ -83,7 +83,7 @@
                                             <i class=" fas fa-hospital-o"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->tempat_lahir }}">
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                             <i class=" fas fa-calendar"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->tanggal_lahir }}">
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                             <i class=" fas fa-phone"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->no_hp }}">
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                             <i class=" fas fa-home"></i>
                                         </span>
                                     </div>
-                                    <textarea name="alamat" class="form-control" rows="3" value="">{{ $p->alamat }}</textarea>
+                                    <textarea name="alamat" class="form-control bg-transparent" rows="3" value="" readonly>{{ $p->alamat }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -132,7 +132,7 @@
                                             <i class=" fas fa-male"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->nama_ayah }}">
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                             <i class=" fas fa-female"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->nama_ibu }}">
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                             <i class=" fas fa-phone"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right" id="reservation"
+                                    <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                         value="{{ $p->no_hp_ortu }}">
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                                         <strong>NIS</strong>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control float-right" id="reservation"
+                                <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                     value="{{ $p->nis }}">
                             </div>
                         </div>
@@ -188,7 +188,7 @@
                                         <strong>NISN</strong>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control float-right" id="reservation"
+                                <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                     value="{{ $p->nisn }}">
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                                         <i class=" fas fa-school"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control float-right" id="reservation"
+                                <input readonly type="text" class="form-control float-right bg-transparent" id="reservation"
                                     value="{{ $p->kelas->kelas }}">
                             </div>
                         </div>
