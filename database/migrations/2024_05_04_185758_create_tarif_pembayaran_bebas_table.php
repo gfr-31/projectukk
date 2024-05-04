@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('nama_pembayaran');
             $table->string('tahun_ajaran');
             $table->enum('tipe', ['Bulanan','Bebas']);
-            $table->string('tarif');
+            $table->integer('tarif');
+            $table->integer('sisa_tagihan')->nullable();
+            $table->integer('jumlah_bayar')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

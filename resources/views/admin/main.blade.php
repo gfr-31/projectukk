@@ -81,7 +81,7 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer text-center">
-                                <a href="/logout" class="btn btn-default btn-flat ">Sign out</a>
+                                <a href="/logout" class="btn btn-default btn-flat ">Logout</a>
                             </li>
                         </ul>
                     </li>

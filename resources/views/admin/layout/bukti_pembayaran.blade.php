@@ -127,7 +127,7 @@
                                         </h5>
                                     </th>
                                     <th style="width: 40%; vertical-align:middle " class="">
-                                        <h5 style="margin: 0; padding-top:2px; padding-bottom:2px"><strong>Ketarangan
+                                        <h5 style="margin: 0; padding-top:2px; padding-bottom:2px"><strong>Keterangan
                                                 Pembayaran</strong></h5>
                                     </th>
                                     <th style="width: 30%;  vertical-align:middle " class=" ">
@@ -147,7 +147,7 @@
                                     <tr>
                                         <td style="text-align: center">1</td>
                                         <td>{{ $t->nama_pembayaran }}</td>
-                                        <td>{{ $t->bulan }}</td>
+                                        <td>{{ ucfirst($t->bulan) }}</td>
                                         <td style="text-align: end">
                                             {{ 'Rp. ' . number_format((float) $t->jumlah_bayar, 0, ',', '.') . ',00' }}
                                         </td>

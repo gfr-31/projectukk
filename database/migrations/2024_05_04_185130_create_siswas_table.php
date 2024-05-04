@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->integer('nis');
+            $table->string('password')->nullable();
             $table->integer('nisn');
             $table->foreignId('kelas_id');
-            // $table->string('kelas');
             $table->string('nama_lengkap');
             $table->enum('jk', ['L','P']);
             $table->text('tempat_lahir');

@@ -101,15 +101,15 @@
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
             <!--------------------------- Left Box ----------------------------->
             <div
-                class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box bg-success">
-                <div class="featured-image mb-3 gambar">
+                class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box bg-success py-5">
+                <div class="featured-image mb-2 gambar">
                     <img src="{{ asset('gambar/icon.png') }}" class="img-fluid rounded-3 " style="width: 150px; " loading="lazy">
                 </div>
-                <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">
+                <p class="text-white fs-2" style=" font-weight: 600;">
                     Login Siswa</p>
                 <small class="text-white text-wrap text-center"
-                    style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Ini Adalah Aplikasi Pembayaran
-                    Siswa MTS MH </small>
+                    style="width: 17rem;">Ini Adalah Aplikasi Pembayaran
+                    Siswa <br> MTS Mathla Ul Huda </small>
             </div>
             <!-------------------- ------ Right Box ---------------------------->
             <div class="col-md-6 right-box">

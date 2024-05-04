@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('jenis_pembayaran', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('pos_id');
             $table->string('pos');
             $table->string('nama_pembayaran');
             $table->string('tipe');
             $table->string('tahun_ajaran');
-            // $table->foreignId('tahun_ajaran_id');
-            $table->string('tarif_pembayaran');
             $table->timestamps();
         });
     }

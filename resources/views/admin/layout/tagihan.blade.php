@@ -51,15 +51,14 @@
                         </div>
                         <div class="invoice-info">
                             <div class="row">
-                                <div class="col-sm-6 ">
+                                {{-- <div class="col-sm-6 ">
                                     <div class="invoice-number">
                                         <h4 class="inv-title-1">Tagihan</h4>
-                                        <p class="mb-1">Nomor Tagihan <span>#45613</span></p>
                                         <p class="mb-0">Tanggal Tagihan <span>21 Sep 2021</span></p>
                                     </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                    <div class="invoice-number text-end">
+                                </div> --}}
+                                <div class="col-sm-12 ">
+                                    <div class="invoice-number text-start">
                                         <h4 class="inv-title-1">Tagihan Kepada</h4>
                                         @foreach ($siswa as $s)
                                             <p class="invo-addr-1">
@@ -106,7 +105,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="invoice-informeshon">
+                        {{-- <div class="invoice-informeshon">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="payment-info mb-30">
@@ -126,9 +125,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="invoice-contact clearfix">
+                        <div class="invoice-contact bg-gray-100 clearfix">
                             <div class="row g-0">
                                 <div class="col-lg-12 col-md-11 col-sm-12 ">
                                     <div class="contact-info">

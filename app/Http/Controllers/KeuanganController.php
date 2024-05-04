@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisPembayaran;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Pos;
 
 class KeuanganController extends Controller
 {
@@ -19,22 +20,29 @@ class KeuanganController extends Controller
     {
         // dd($request->all());
         $pos = $request->pos;
-        $keterangan = $request->keterangan;
 
-        for ($i = 0; $i < count($pos); $i++) {
-            $this->validate($request, [
-                'pos[$i]' => 'required',
-                'keterangan[$i]' => 'required',
-            ], [
-                'pos[$i].required' => 'POS harus diisi lengkap.',
-                'keterangan[$i].required' => 'Keterangan harus diisi lengkap.',
-            ]);
-            $datasave = [
-                'pos' => $pos[$i],
-                'keterangan' => $keterangan[$i],
-                'created_at' => now()
-            ];
-            DB::table('pos')->insert($datasave);
+        $this->validate($request, [
+            'pos.*' => 'required|regex:/^[\pL\s]+$/u',
+            'keterangan.*' => 'required|regex:/^[\pL\s]+$/u',
+        ], [
+            'pos.*.required' => 'POS harus diisi lengkap.',
+            'keterangan.*.required' => 'Keterangan harus diisi lengkap.',
+            'pos.*.regex' => 'POS harus diisi dengan Huruf.',
+            'keterangan.*.regex' => 'Keterangan harus diisi dengan Huruf.',
+        ]);
+
+        foreach ($pos as $key => $p) {
+            $a = Pos::where('pos', $p)->exists();
+            if (!$a) {
+                $datasave = [
+                    'pos' => $p,
+                    'keterangan' => $request->keterangan[$key],
+                    'created_at' => now()
+                ];
+                Pos::create($datasave);
+            } else {
+                return back()->with('gagalPos', 'Data POS Sudah Ada');
+            }
         }
         return redirect('/admin/pos-keuangan')->with('berhasilPos', 'Data Berhasil Ditambahkan');
     }
@@ -74,15 +82,15 @@ class KeuanganController extends Controller
     public function insertJenisPembayaran(Request $request)
     {
         // dd($request->tahun_ajaran);
-        $this->validate($request, [
-            'pos' => 'required',
-            'tipe' => 'required',
-            'tahun_ajaran' => 'required',
-        ],[
-            'pos.required' => 'POS harus diisi lengkap.',
-            'tipe.required' => 'Tipe harus diisi lengkap.',
-            'tahun_ajaran.required' => 'Tahun Ajaran harus diisi lengkap.',
-        ]);
+        // $this->validate($request, [
+        //     'pos' => 'required',
+        //     'tipe' => 'required',
+        //     'tahun_ajaran' => 'required',
+        // ],[
+        //     'pos.required' => 'POS harus diisi lengkap.',
+        //     'tipe.required' => 'Tipe harus diisi lengkap.',
+        //     'tahun_ajaran.required' => 'Tahun Ajaran harus diisi lengkap.',
+        // ]);
         if ($request->Filled('tipe', 'tahun_ajaran', 'pos')) {
             DB::table('jenis_pembayaran')->insert([
                 'pos' => $request->pos,

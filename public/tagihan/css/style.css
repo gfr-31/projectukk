@@ -355,6 +355,7 @@ tbody, td, tfoot, th, thead, tr {
 
 .invoice-7 .invoice-contact {
     padding: 30px 100px;
+    background: #f7f7f7;
     z-index: -1;
 }
 

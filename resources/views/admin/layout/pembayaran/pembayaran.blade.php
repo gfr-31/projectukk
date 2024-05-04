@@ -680,10 +680,10 @@
                 </div>
 
                 <div class=" col-4">
-                    <div class=" card card-olive card-outline">
+                    <div class=" card card-primary card-outline">
                         <div class=" mx-3 mt-2 ">
                             <div class="text-center mb-1">
-                                <label style="font-size: 16px;">Pembayaran</label>
+                                <label style="font-size: 16px;">Kalkulator</label>
                                 <button class="btn btn-primary btn-sm " style="float: right" onclick="kosong()">
                                     <i class=" fa fa-refresh"></i>
                                 </button>
@@ -764,6 +764,7 @@
                                         <th>No </th>
                                         <th style="text-align: left">Kode Transaksi</th>
                                         <th style="text-align: left">Pembayaran</th>
+                                        <th style="text-align: left">Bulan</th>
                                         <th style="text-align: left">
                                             <center>Tagihan</center>
                                         </th>
@@ -785,6 +786,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td style="text-align: left">{{ $t->kode_transaksi }}</td>
                                             <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
+                                            <td style="text-align: left">{{ ucfirst($t->bulan) }}</td>
                                             <td style="text-align: left">
                                                 <center>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
                                                 </center>

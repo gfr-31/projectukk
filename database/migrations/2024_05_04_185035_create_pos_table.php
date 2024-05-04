@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('pos', function (Blueprint $table) {
             $table->id();
             $table->string('pos');
-            $table->string('tipe');
             $table->string('keterangan');
             $table->timestamps();
         });

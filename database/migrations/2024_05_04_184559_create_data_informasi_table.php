@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jurnal_umum', function (Blueprint $table) {
+        Schema::create('data_informasi', function (Blueprint $table) {
             $table->id();
-            $table->string('pemasukan');
-            $table->string('pengeluaran');
+            $table->string('judul');
+            $table->string('deskripsi');
+            $table->date('tanggal');
+            $table->date('tg_update')->nullable();
+            $table->string('gambar');
+            $table->enum('status',['Draft','Terbit']);
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jurnal_umum');
+        Schema::dropIfExists('data_informasi');
     }
 };

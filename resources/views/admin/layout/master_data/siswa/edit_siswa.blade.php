@@ -60,7 +60,11 @@
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
                                                 <input type="text" name="nama" class="form-control" id=""
-                                                    placeholder="Nama Lengkap" required" value="{{ $s->nama_lengkap }}">
+                                                    placeholder="Nama Lengkap"" value="{{ $s->nama_lengkap }}">
+                                                @error('nama')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             @if ($s->jk == 'L')
@@ -113,8 +117,12 @@
                                                     <div class="form-group">
                                                         <label>Tempat Lahir</label>
                                                         <input type="text" name="tempat_lahir" class="form-control"
-                                                            id="" placeholder="Tempat Lahir" required
+                                                            id="" placeholder="Tempat Lahir"
                                                             value="{{ $s->tempat_lahir }}">
+                                                        @error('tempat_lahir')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class=" col-sm-4">
@@ -128,9 +136,13 @@
                                                                 </span>
                                                             </div>
                                                             <input type="date" name="tanggal_lahir"
-                                                                class="form-control float-right" id="reservation" required
+                                                                class="form-control float-right" id="reservation"
                                                                 value="{{ $s->tanggal_lahir }}">
                                                         </div>
+                                                        @error('tanggal_lahir')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,9 +157,14 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" name="no_hp_siswa"
-                                                        class="form-control float-right" id="reservation" required
+                                                        class="form-control float-right" id="reservation"
                                                         placeholder="No Handphone" value="{{ $s->no_hp }}">
+
                                                 </div>
+                                                @error('no_hp_siswa')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             {{-- Alamat Lenkap --}}
@@ -159,9 +176,13 @@
                                                             <i class=" fas fa-home"></i>
                                                         </span>
                                                     </div>
-                                                    <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" name="" required
+                                                    <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" name=""
                                                         value="">{{ $s->alamat }}</textarea>
                                                 </div>
+                                                @error('alamat')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             <div class="row">
@@ -170,8 +191,12 @@
                                                     <div class="form-group">
                                                         <label>Nama Lengkap Ayah</label>
                                                         <input type="text" name="nama_ayah" class="form-control"
-                                                            id="" placeholder="Nama Lengkap Ayah" required
+                                                            id="" placeholder="Nama Lengkap Ayah"
                                                             value="{{ $s->nama_ayah }}">
+                                                        @error('nama_ayah')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class=" col-sm-6">
@@ -179,8 +204,12 @@
                                                     <div class="form-group">
                                                         <label>Nama Lengkap</label>
                                                         <input type="text" name="nama_ibu" class="form-control"
-                                                            id="" placeholder="Nama Lengkap Ibu" required
+                                                            id="" placeholder="Nama Lengkap Ibu"
                                                             value="{{ $s->nama_ibu }}">
+                                                        @error('nama_ibu')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,13 +224,18 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" name="no_hp_ortu"
-                                                        class="form-control float-right" id="reservation" required
+                                                        class="form-control float-right" id="reservation"
                                                         placeholder="No Handphone" value="{{ $s->no_hp_ortu }}">
                                                 </div>
+                                                @error('no_hp_ortu')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
-                                            <a class="btn btn-primary btn-sm" onclick="stepper.next()">
-                                                Lanjut <i class=" fas fa-arrow-circle-right"></i>
+                                            <a class="btn btn-primary btn-sm" onclick="return validateForm()"
+                                                id="btnLanjut" disabled>
+                                                Lanjut <i class="fas fa-arrow-circle-right"></i>
                                             </a>
                                         </div>
                                         <div id="information-part" class="content active dstepper-block" role="tabpanel"
@@ -216,9 +250,13 @@
                                                         </span>
                                                     </div>
                                                     <input name="nis" type="text" class="form-control float-right"
-                                                        id="reservation" required placeholder="NIS"
+                                                        id="reservation" placeholder="NIS"
                                                         value="{{ $s->nis }}">
                                                 </div>
+                                                @error('nis')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             {{-- NISN --}}
@@ -231,9 +269,13 @@
                                                         </span>
                                                     </div>
                                                     <input name="nisn" type="text" class="form-control float-right"
-                                                        id="reservation" required placeholder="NISN"
+                                                        id="reservation" placeholder="NISN"
                                                         value="{{ $s->nisn }}">
                                                 </div>
+                                                @error('nisn')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             {{-- Kelas --}}
@@ -247,9 +289,15 @@
                                                     </div>
                                                     <select class="form-control float-right " name="kelas_id"
                                                         aria-label="Default select example">
-                                                        <option value="{{ $s->kelas->id }}" selected>
-                                                            {{ $s->kelas->kelas }}
-                                                        </option>
+                                                        @if ($s && $s->kelas)
+                                                            <option value="{{ $s->kelas->id }}" selected>
+                                                                {{ $s->kelas->kelas }}
+                                                            </option>
+                                                        @else
+                                                            <option selected>
+
+                                                            </option>
+                                                        @endif
                                                         @foreach ($kelas as $k)
                                                             <option value="{{ $k->id }}">
                                                                 {{ $k->kelas }}
@@ -257,6 +305,10 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                @error('kelas_id')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
 
                                             <a class="btn btn-primary btn-sm" onclick="stepper.previous()"><i
@@ -277,10 +329,12 @@
                     </div>
                     <div class=" col-md-3">
                         <div class="card card-primary card-outline">
-                            <div class=" m-3">
-                                <a href="{{ asset('post_image/' . $s->foto_siswa) }}" data-lightbox="galery" data-title="Foto Siswa | {{ $s->nama_lengkap }}"> 
-                                    <img src="{{ asset('post_image/' . $s->foto_siswa) }}" id="preview" class="rounded"
-                                        alt="Cinque Terre" height="0%" width="100%" loading="lazy">
+                            <div class=" mx-3 mt-3">
+                                <a href="{{ asset('post_image/' . $s->foto_siswa) }}" data-lightbox="galery"
+                                    data-title="Foto Siswa | {{ $s->nama_lengkap }}">
+                                    <img src="{{ asset('post_image/' . $s->foto_siswa) }}" id="preview"
+                                        class="rounded" alt="Cinque Terre" height="0%" width="100%"
+                                        loading="lazy">
                                 </a>
                             </div>
                             <div class="card-body box-profile">
@@ -291,6 +345,10 @@
                                     <label class="custom-file-label"
                                         for="foto">{{ substr($s->foto_siswa, 20) }}</label>
                                 </div>
+                                @error('fotos')
+                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                        {{ $message }} </small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -298,6 +356,10 @@
             </form>
         @endforeach
     </div>
-
+    @if ($errors->any())
+        <script type="text/javascript">
+            toastr.error('Data Masih Ada Yang Salah')
+        </script>
+    @endif
     <script src="{{ asset('js/main/master_data/siswa/edit_siswa.js') }}"></script>
 @endsection

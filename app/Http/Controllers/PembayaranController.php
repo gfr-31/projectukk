@@ -371,7 +371,7 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
                 $pesan = '
 *Pemberitahuan Pembayaran ' . $nama_pembayaran . '*
                 
-    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa/Siswi dengan detail sebagai berikut : 
                 
 *Nama : ' . $nama . '*
 *Kelas : ' . $kelas . '*
@@ -379,7 +379,7 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
 *Tagihan  : ' . $nama_pembayaran . '*
 *TA : ' . $ta . '*
                 
-    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Administrasi untuk melakukan pembayaran dengan membawa kartu SPP atau kartu Bayaran
                 
 Demikian Terimakasih 
 Salam,
@@ -407,7 +407,7 @@ Admin SPP
                 $pesan = '
 *Pemberitahuan Pembayaran ' . $nama_pembayaran . '*
 
-    Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa/Siswi dengan detail sebagai berikut : 
 
 *Nama : ' . $nama . '*
 *Kelas : ' . $kelas . '*
@@ -415,7 +415,7 @@ Admin SPP
 *Tagihan  : ' . $nama_pembayaran . '*
 *TA : ' . $ta . '*
 
-    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Administrasi untuk melakukan pembayaran dengan membawa kartu SPP atau kartu Bayaran
 
 Demikian Terimakasih 
 Salam,
@@ -455,7 +455,7 @@ Admin SPP
         $pesan = "
 *Pemberitahuan Pembayaran*
 
-Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai berikut : 
+    Diberitahukan kepada orang tua/wali dari Ananda Siswa/Siswi dengan detail sebagai berikut : 
 
 *Nama : " . $nama . "*
 *Kelas : " . $kelas . "*
@@ -466,11 +466,11 @@ Diberitahukan kepada orang tua/wali dari Ananda Siswa dengan detail sebagai beri
 
 *Jumlah Seluruh : " . 'Rp. ' . number_format($sisaTagihan, 0, ',', '.') . ',' . 0 . "" . 0 . "*
 
-Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
+    Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Administrasi untuk melakukan pembayaran dengan membawa kartu SPP atau kartu Bayaran
 
 Demikian Terimakasih 
 Salam,
-Amin SPP
+Admin SPP
 
 *_Abaikan jika sudah membayar_*
         ";

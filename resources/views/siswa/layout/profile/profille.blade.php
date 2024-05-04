@@ -41,13 +41,13 @@
                                 <label for="jk" class="p">Jenis Kelamin</label>
                                 <div class="form-group clearfix ml-1">
                                     <div class="icheck-primary d-inline mr-5">
-                                        <input readonly type="radio" id="radioPrimary1" checked disabled='disabled'>
+                                        <input class="bg-transparent" type="radio" id="radioPrimary1" checked disabled='true'>
                                         <label for="radioPrimary1">
                                             <i class=" fas fa-male"></i> Laki - Laki
                                         </label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                        <input readonly type="radio" id="radioPrimary2" disabled='disabled'>
+                                        <input class="bg-transparent" type="radio" id="radioPrimary2" disabled='true'>
                                         <label for="radioPrimary2">
                                             <i class=" fas fa-female"></i> Perempuan
                                         </label>
@@ -60,13 +60,13 @@
                                 <label for="jk" class="  p">Jenis Kelamin</label>
                                 <div class="form-group clearfix ml-1">
                                     <div class="icheck-primary d-inline mr-5">
-                                        <input readonly type="radio" id="radioPrimary1" disabled='disabled'>
+                                        <input class="bg-transparent" type="radio" id="radioPrimary1" disabled='true'>
                                         <label for="radioPrimary1">
                                             <i class=" fas fa-male"></i> Laki - Laki
                                         </label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                        <input readonly type="radio" id="radioPrimary2" checked disabled='disabled'>
+                                        <input class="bg-transparent" type="radio" id="radioPrimary2" checked disabled='true'>
                                         <label for="radioPrimary2">
                                             <i class=" fas fa-female"></i> Perempuan
                                         </label>
@@ -205,8 +205,8 @@
                             </div>
                         </div>
                         <div class=" mt-4 text-center">
-                            <button class="btn btn-danger profile-button" type="button">
-                                LOGOUT
+                            <button class="btn btn-danger profile-button btn-sm" type="button">
+                                Logout
                             </button>
                         </div>
                     </div>

@@ -31,7 +31,6 @@
                         <div class="card-body p-0">
                             <div class="bs-stepper linear">
                                 <div class="bs-stepper-header" role="tablist">
-
                                     <div class="step" data-target="#logins-part">
                                         <button type="button" class="step-trigger" role="tab"
                                             aria-controls="logins-part" id="logins-part-trigger" aria-selected="false"
@@ -57,7 +56,11 @@
                                         <div class="form-group">
                                             <label>Nama Lengkap</label>
                                             <input type="text" name="nama" class="form-control" id=""
-                                                placeholder="Nama Lengkap" required value="{{ old('nama') }}">
+                                                placeholder="Nama Lengkap" value="{{ old('nama') }}">
+                                            @error('nama')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
 
                                         {{-- Jenis Kelamin --}}
@@ -65,30 +68,37 @@
                                             <label for="jk">Jenis Kelamin</label>
                                             <div class="form-group clearfix ml-1">
                                                 <div class="icheck-primary d-inline mr-5">
-                                                    <input type="radio" id="radioPrimary1" name="jk" value="L" {{ old('jk') == 'L' ? 'checked' : '' }}>
+                                                    <input type="radio" id="radioPrimary1" name="jk" value="L"
+                                                        {{ old('jk') == 'L' ? 'checked' : '' }}>
                                                     <label for="radioPrimary1">
                                                         <i class=" fas fa-male"></i> Laki - Laki
                                                     </label>
                                                 </div>
                                                 <div class="icheck-primary d-inline">
-                                                    <input type="radio" id="radioPrimary2" name="jk" value="P" {{ old('jk') == 'P' ? 'checked' : '' }}>
+                                                    <input type="radio" id="radioPrimary2" name="jk" value="P"
+                                                        {{ old('jk') == 'P' ? 'checked' : '' }}>
                                                     <label for="radioPrimary2">
                                                         <i class=" fas fa-female"></i> Perempuan
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
-                                            <div class=" col-sm-4">
+                                            <div class=" col-sm-5">
                                                 {{-- Tempat Lahir --}}
                                                 <div class="form-group">
                                                     <label>Tempat Lahir</label>
                                                     <input type="text" name="tempat_lahir" class="form-control"
-                                                        id="" placeholder="Tempat Lahir" value="{{ old('tempat_lahir') }}" required>
+                                                        id="" placeholder="Tempat Lahir"
+                                                        value="{{ old('tempat_lahir') }}" required>
+                                                    @error('tempat_lahir')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class=" col-sm-4">
+                                            <div class=" col-sm-5">
                                                 <div class="form-group">
                                                     {{-- Tanggal Lahir --}}
                                                     <label>Tanggal Lahir</label>
@@ -99,8 +109,13 @@
                                                             </span>
                                                         </div>
                                                         <input type="date" name="tanggal_lahir"
-                                                            class="form-control float-right" id="reservation" value="{{ old('tanggal_lahir') }}" required>
+                                                            class="form-control float-right" id="reservation"
+                                                            value="{{ old('tanggal_lahir') }}" required>
                                                     </div>
+                                                    @error('tanggal_lahir')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -115,8 +130,13 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" name="no_hp_siswa" class="form-control float-right"
-                                                    id="reservation" required placeholder="No Handphone" value="{{ old('no_hp_siswa') }}">
+                                                    id="reservation" placeholder="Ex. 08123456789"
+                                                    value="{{ old('no_hp_siswa') }}">
                                             </div>
+                                            @error('no_hp_siswa')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
 
                                         {{-- Alamat Lenkap --}}
@@ -130,23 +150,36 @@
                                                 </div>
                                                 <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" required>{{ old('alamat') }}</textarea>
                                             </div>
+                                            @error('alamat')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
-
                                         <div class="row">
                                             <div class=" col-sm-6">
                                                 {{-- Nama Lengkap Ayah --}}
                                                 <div class="form-group">
                                                     <label>Nama Lengkap Ayah</label>
                                                     <input type="text" name="nama_ayah" class="form-control"
-                                                        id="" placeholder="Nama Lengkap Ayah" value="{{ old('nama_ayah') }}" required>
+                                                        id="" placeholder="Nama Lengkap Ayah"
+                                                        value="{{ old('nama_ayah') }}" required>
+                                                    @error('nama_ayah')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class=" col-sm-6">
                                                 {{-- Nama Lengkap Ibu --}}
                                                 <div class="form-group">
-                                                    <label>Nama Lengkap</label>
+                                                    <label>Nama Lengkap Ibu</label>
                                                     <input type="text" name="nama_ibu" class="form-control"
-                                                        id="" placeholder="Nama Lengkap Ibu" value="{{ old('nama_ibu') }}" required>
+                                                        id="" placeholder="Nama Lengkap Ibu"
+                                                        value="{{ old('nama_ibu') }}" required>
+                                                    @error('nama_ibu')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -161,12 +194,17 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" name="no_hp_ortu" class="form-control float-right"
-                                                    id="reservation" required placeholder="No Handphone" value="{{ old('no_hp_ortu') }}">
+                                                    id="reservation" placeholder="Ex. 08123456789"
+                                                    value="{{ old('no_hp_ortu') }}">
                                             </div>
+                                            @error('no_hp_ortu')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
-
-                                        <a class="btn btn-primary btn-sm" onclick="stepper.next()">
-                                            Lanjut <i class=" fas fa-arrow-circle-right"></i>
+                                        <a class="btn btn-primary btn-sm" onclick="return validateForm()" id="btnLanjut"
+                                            disabled>
+                                            Lanjut <i class="fas fa-arrow-circle-right"></i>
                                         </a>
                                     </div>
                                     <div id="information-part" class="content active dstepper-block" role="tabpanel"
@@ -181,8 +219,12 @@
                                                     </span>
                                                 </div>
                                                 <input name="nis" type="text" class="form-control float-right"
-                                                    id="reservation" required placeholder="NIS" value="{{ old('nis') }}">
+                                                    id="reservation" placeholder="NIS" value="{{ old('nis') }}">
                                             </div>
+                                            @error('nis')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
 
                                         {{-- NISN --}}
@@ -195,8 +237,12 @@
                                                     </span>
                                                 </div>
                                                 <input name="nisn" type="text" class="form-control float-right"
-                                                    id="reservation" required placeholder="NISN" value="{{ old('nisn') }}">
+                                                    id="reservation" placeholder="NISN" value="{{ old('nisn') }}">
                                             </div>
+                                            @error('nisn')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                         </div>
 
                                         {{-- Kelas --}}
@@ -212,9 +258,15 @@
                                                     aria-label="Default select example">
                                                     <option value="" selected>-- Kelas --</option>
                                                     @foreach ($kelas as $k)
-                                                        <option value="{{ $k->id }}" {{ old('kelas_id') == $k->id ? 'selected' : '' }}>{{ $k->kelas }}</option>
+                                                        <option value="{{ $k->id }}"
+                                                            {{ old('kelas_id') == $k->id ? 'selected' : '' }}>
+                                                            {{ $k->kelas }}</option>
                                                     @endforeach
                                                 </select>
+                                                {{-- @error('kelas_id')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror --}}
                                             </div>
                                         </div>
 
@@ -246,6 +298,10 @@
                                 <input type="file" class="custom-file-input" id="foto" name="fotos"
                                     accept="image/*">
                                 <label class="custom-file-label" for="foto">Masukan Gambar</label>
+                                @error('fotos')
+                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                        {{ $message }} </small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -256,6 +312,14 @@
 
     <script src="{{ asset('js/main/master_data/siswa/tambahSiswa.js') }}"></script>
     @yield('toastr')
+    @if ($errors->any())
+    <script type="text/javascript">
+        toastr.error('Ada Data Yang Belum Diisi Atau Salah', "", {
+            "closeButton": true,
+            "timeOut": 2500,
+        });
+    </script>
+    @endif
     @if (session()->has('gagalInput'))
         <script type="text/javascript">
             toastr.error('{{ session('gagalInput') }}', "", {
@@ -264,69 +328,4 @@
             });
         </script>
     @endif
-    @error('nama')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('jk')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('tempat_lahir')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('tanggal_lahir')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('no_hp_siswa')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('alamat')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('nama_ayah')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('nama_ibu')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('no_hp_ortu')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('nis')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('nisn')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('kelas_id')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
-    @error('fotos')
-        <script type="text/javascript">
-            toastr.error("{{ $message }}")
-        </script>
-    @enderror
 @endsection

@@ -39,19 +39,19 @@
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">POS</label>
                                         <input type="text" class="form-control" id="recipient-name" id="input2"
-                                            name="pos[]" placeholder="Nama POS" >
+                                            name="pos[]" placeholder="Nama POS">
                                     </div>
                                 </div>
                                 <div class=" col-8">
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Keterangan</label>
                                         <input type="text" class="form-control" id="recipient-name" id="input2"
-                                            name="keterangan[]" placeholder="Keterangan" >
+                                            name="keterangan[]" placeholder="Keterangan">
                                     </div>
                                 </div>
                                 <div class=" col-3">
                                     <div class=" form-group">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                         <tr>
                             <th style="width: 10px">No</th>
                             <th>Nama Pos</th>
-                            <th>Keterangan</th> 
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -165,7 +165,19 @@
     </div>
 
     <script src="{{ asset('js/main/keuangan/pos_keuangan/pos_keuangan.js') }}"></script>
-
+    @if ($errors->any())
+        <script type="text/javascript">
+            toastr.error(`
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach`)
+        </script>
+    @endif
+    @if (session()->has('gagalPos'))
+        <script type="text/javascript">
+            toastr.error('{{ session('gagalPos') }}')
+        </script>
+    @endif
     @if (session()->has('berhasilPos'))
         <script type="text/javascript">
             toastr.success('{{ session('berhasilPos') }}')
@@ -182,13 +194,13 @@
         </script>
     @endif
     @error('pos[$i]')
-    <script type="text/javascript">
-        toastr.error('{{ $message }}')
-    </script>
+        <script type="text/javascript">
+            toastr.error('{{ $message }}')
+        </script>
     @enderror
     @error('keterangan[$i]')
-    <script type="text/javascript">
-        toastr.error('{{ $message }}')
-    </script>
+        <script type="text/javascript">
+            toastr.error('{{ $message }}')
+        </script>
     @enderror
 @endsection

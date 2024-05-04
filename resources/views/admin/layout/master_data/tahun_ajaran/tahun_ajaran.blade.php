@@ -74,22 +74,23 @@
                 </table>
             </div>
         </div>
+    </div>
 
-        <script src="{{ asset('js/main/master_data/tahun_ajaran/tahun_ajaran.js') }}"></script>
+    <script src="{{ asset('js/main/master_data/tahun_ajaran/tahun_ajaran.js') }}"></script>
 
-        @if (session()->has('berhasil'))
-            <script type="text/javascript">
-                toastr.success('{{ session('berhasil') }}')
-            </script>
-        @endif
-        @if (session()->has('berhasilHapus'))
-            <script type="text/javascript">
-                toastr.success('{{ session('berhasilHapus') }}')
-            </script>
-        @endif
-        @if (session()->has('berhasilUpdateTh'))
-            <script type="text/javascript">
-                toastr.success('{{ session('berhasilUpdateTh') }}')
-            </script>
-        @endif
-    @endsection
+    @if (session()->has('berhasil'))
+        <script type="text/javascript">
+            toastr.success('{{ session('berhasil') }}')
+        </script>
+    @endif
+    @if (session()->has('berhasilHapus'))
+        <script type="text/javascript">
+            toastr.success('{{ session('berhasilHapus') }}')
+        </script>
+    @endif
+    @if (session()->has('berhasilUpdateTh'))
+        <script type="text/javascript">
+            toastr.success('{{ session('berhasilUpdateTh') }}')
+        </script>
+    @endif
+@endsection

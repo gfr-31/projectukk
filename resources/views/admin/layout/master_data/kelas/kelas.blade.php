@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Kelas</label>
                                 <input type="text" class="form-control" id="recipient-name" id="input2" name="kelas[]"
-                                    placeholder="X(A)" required>
+                                    placeholder="Ex. 7-A" required>
                             </div>
                             <!-- Area untuk menambahkan dan menghapus inputan -->
                             <div id="dynamicInputs"></div <div>
@@ -184,14 +184,22 @@
     </script>
 
     <script src="{{ asset('js/main/master_data/kelas/kelas.js') }}"></script>
-    @error('kelas[$i]')
+    @if ($errors->any())
         <script type="text/javascript">
-            toastr.error("{{ $message }}")
+            toastr.success(`
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach`)
         </script>
-    @enderror
+    @endif
     @if (session()->has('berhasilKelas'))
         <script type="text/javascript">
             toastr.success('{{ session('berhasilKelas') }}')
+        </script>
+    @endif
+    @if (session()->has('gagalKelas'))
+        <script type="text/javascript">
+            toastr.error('{{ session('gagalKelas') }}')
         </script>
     @endif
     @if (session()->has('berhasilHapusKelas'))

@@ -38,10 +38,15 @@
                         <tr>
                             <th style="width: 10px">No</th>
                             <th>Nis</th>
-                            <th>Nama</th>
-                            <th>Kelas</th>
-                            <th>Nama Ibu Kandung</th>
-                            {{-- <th>Status</th> --}}
+                            <th>
+                                <center>Nama</center>
+                            </th>
+                            <th>
+                                <center>Kelas</center>
+                            </th>
+                            <th>
+                                <center>Nama Ibu Kandung</center>
+                            </th>
                             <th>
                                 <center>
                                     Aksi
@@ -55,9 +60,23 @@
                             <tr>
                                 <td>{{ ++$no }}</td>
                                 <td>{{ $s->nis }}</td>
-                                <td>{{ $s->nama_lengkap }}</td>
-                                <td>{{ $s->kelas->kelas }}</td>
-                                <td>{{ $s->nama_ibu }}</td>
+                                <td>
+                                    <center>{{ $s->nama_lengkap }}</center>
+                                </td>
+                                @if ($s && $s->kelas)
+                                    <td>
+                                        <center>{{ $s->kelas->kelas }}</center>
+                                    </td>
+                                @else
+                                    <td>
+                                        <center>
+                                            <div class="btn-sm btn-danger"> <strong>Kelas Tidak Ada</strong> </div>
+                                        </center>
+                                    </td>
+                                @endif
+                                <td>
+                                    <center>{{ $s->nama_ibu }}</center>
+                                </td>
                                 {{-- <td>{{ $s-> }}</td> --}}
                                 <td>
                                     <center>

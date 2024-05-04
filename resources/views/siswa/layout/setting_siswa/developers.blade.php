@@ -16,13 +16,15 @@
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body text-center">
                         <div class="mt-3 mb-4">
-                            <a href="{{ asset('gambar/gifran.jpg') }}" data-lightbox="gallery" data-title="Developer 1 | Gifran Fazriliana Hafeez">
+                            <a href="{{ asset('gambar/gifran.jpg') }}" data-lightbox="gallery"
+                                data-title="Developer 1 | Gifran Fazriliana Hafeez">
                                 <img src="{{ asset('gambar/gifran.jpg') }}" class="rounded-circle img-fluid"
                                     style="width: 100px;" />
                             </a>
                         </div>
                         <h4 class="mb-2">Gifran Fazriliana H.</h4>
-                        <p class="text-muted mb-4">@Developer <span class="mx-2">|</span> <a href="">Pelajar SMK
+                        <p class="text-muted mb-4">@Developer <span class="mx-2">|</span> <a href="">Pelajar
+                                SMK
                                 BPM</a></p>
                         <div class="mb-4 pb-2">
                             <a href="https://www.instagram.com/direct/t/114259836638930"
@@ -58,18 +60,20 @@
             </div>
 
             {{-- Fadly --}}
-            <div class="col-md-6 mt-1 col-xl-4">
+            <div class="col-md-12 mt-1 col-xl-4">
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body text-center">
                         <div class="mt-3 mb-4">
-                            <a href="{{ asset('gambar/fadly.jpg') }}" data-lightbox="gallery" data-title="Developer 2 | Fadly Bagus Pramudya">
+                            <a href="{{ asset('gambar/fadly.jpg') }}" data-lightbox="gallery"
+                                data-title="Developer 2 | Fadly Bagus Pramudya">
                                 <img src="{{ asset('gambar/fadly.jpg') }}" class="rounded-circle img-fluid"
                                     style="width: 100px;" />
                             </a>
 
                         </div>
                         <h4 class="mb-2">Fadly Bagus Pramudya</h4>
-                        <p class="text-muted mb-4">@Developer <span class="mx-2">|</span> <a href=" ">Pelajar SMK
+                        <p class="text-muted mb-4">@Developer <span class="mx-2">|</span> <a href=" ">Pelajar
+                                SMK
                                 BPM</a></p>
                         <div class="mb-4 pb-2">
                             <a href="https://www.instagram.com/direct/t/111150226947325"

@@ -3,23 +3,23 @@
     <div class=" card card-olive card-outline">
         <div class=" text-center">
             <label class=" mt-2 " for="" style="font-size: 20px">Tagihan Pembayaran</label>
-            <ul class=" nav">
-                <li class=" nav-item">
-                    <a href="" id="bulanan_link">
+            <ul class="nav mb-1">
+                <li class="nav-item">
+                    <a href="#" id="bulanan_link">
                         <p class="ml-3 mt-2 h6"><strong>Bulanan</strong></p>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="" id="bebas_link">
+                <li class="nav-item">
+                    <a href="#" id="bebas_link">
                         <p class="ml-3 mt-2 h6"><strong>Bebas</strong></p>
                     </a>
                 </li>
                 <li class="nav-item ml-auto">
                     <a href="/cetak-tagihan/{{ auth('siswa')->user()->id }}" class="btn btn-danger btn-sm mr-2" target="_blank">
-                        <i class="fa fa-print"></i> Cetak Semua
+                        <i class="fa fa-print"></i> 
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mr-1">
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" id="searchInput" class="form-control float-right" placeholder="Search">
@@ -31,25 +31,30 @@
                         </div>
                     </div>
                 </li>
-                
-            </ul>
+            </ul>            
 
-            <div id="bulanan" class=" table-responsive" style="height: 190px">
-                <table class=" table table-sm table-striped ">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th style="text-align: left">Nama Pembayaran</th>
-                            <th style="text-align: left">
-                                <center>Tagihan</center>
-                            </th>
-                            <th style="text-align: left">
-                                <center>Sisa Tagihan</center>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 0; ?>
+            <div id="bulanan" class="table-responsive custom-table-responsive" style="height: 250px">
+                <table class="table custom-table">
+                    @if ($tpBulanan->isEmpty())
+                        <thead>
+                            <tr>
+                                <th>Data Transaksi Tidak Ada</th>
+                            </tr>
+                        </thead>
+                    @else
+                        <thead>
+                            <tr>
+                                <th>No </th>
+                                <th style="text-align: left">Nama Pembayaran</th>
+                                <th style="text-align: left">
+                                    <center>Tagihan</center>
+                                </th>
+                                <th style="text-align: left">
+                                    <center>Sisa Tagihan</center>
+                                </th>
+                            </tr>
+                        </thead>
+                        <?php $no = 1; ?>
                         @foreach ($tpBulanan as $t)
                             <tr>
                                 <td>{{ ++$no }}</td>
@@ -74,18 +79,18 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
+                    @endif
                 </table>
             </div>
 
-            <div id="bebas" class=" table-responsive" style="height: 190px">
-                <table class="table table-sm table-striped">
+            <div id="bebas" class="table-responsive custom-table-responsive" style="height: 250px">
+                <table class="table custom-table">
                     <thead>
                         <tr>
-                            <th>No. </th>
+                            <th>No </th>
                             <th style="text-align: left">Nama Pembayaran</th>
                             <th style="text-align: left">
-                                <center>Total Tagihan</center>
+                                <center>Tagihan</center>
                             </th>
                             <th style="text-align: left">
                                 <center>Sisa Tagihan</center>
@@ -123,11 +128,9 @@
         </div>
     </div>
 
-
-
     <div class=" card card-olive card-outline">
         <div class="text-center">
-            <label style="font-size: 20px">Transaksi Pembayaran</label>
+            <label style="font-size: 20px" class=" mt-2">Transaksi Pembayaran</label>
             <ul class=" nav">
                 <li class=" nav-item">
                     <a href="" id="bulanan_link2">
@@ -154,8 +157,8 @@
                 </li>
             </ul>
 
-            <div id="bulanan2" class=" table-responsive" style="height: 250px">
-                <table class="table table-sm">
+            <div id="bulanan2" class="table-responsive custom-table-responsive" style="height: 250px">
+                <table class="table custom-table">
                     @if ($t_bulanan->isEmpty())
                         <thead>
                             <tr>
@@ -167,6 +170,7 @@
                             <tr>
                                 <th>No </th>
                                 <th style="text-align: left">Kode Transaksi</th>
+                                <th style="text-align: left">Bulan</th>
                                 <th style="text-align: left">
                                     <center>Tagihan</center>
                                 </th>
@@ -181,9 +185,10 @@
                         <?php $no = 1; ?>
                         @foreach ($t_bulanan as $t)
                             <tbody>
-                                <tr>
+                                <tr scope="row">
                                     <td>{{ $no++ }}</td>
                                     <td style="text-align: left">{{ $t->kode_transaksi }}</td>
+                                    <td style="text-align: left">{{ ucfirst($t->bulan) }}</td>
                                     <td style="text-align: left">
                                         <center>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
                                         </center>
@@ -204,14 +209,17 @@
                                         </center>
                                     </td>
                                 </tr>
+                                <tr class="spacer">
+                                    <td colspan="100"></td>
+                                </tr>
                             </tbody>
                         @endforeach
                     @endif
                 </table>
             </div>
 
-            <div id="bebas2" class=" table-responsive" style="height: 250px">
-                <table class="table table-sm ">
+            <div id="bebas2" class="table-responsive custom-table-responsive" style="height: 250px">
+                <table class="table custom-table">
                     @if ($t_bebas->isEmpty())
                         <thead>
                             <tr>
@@ -223,6 +231,7 @@
                             <tr>
                                 <th>No </th>
                                 <th style="text-align: left">Kode Transaksi</th>
+                                <th style="text-align: left">Keterangan</th>
                                 <th style="text-align: left">
                                     <center>Tagihan</center>
                                 </th>
@@ -237,9 +246,10 @@
                         <?php $no = 1; ?>
                         @foreach ($t_bebas as $t)
                             <tbody>
-                                <tr>
+                                <tr scope="row">
                                     <td>{{ $no++ }}</td>
                                     <td style="text-align: left">{{ $t->kode_transaksi }}</td>
+                                    <td style="text-align: left">{{ $t->keterangan }}</td>
                                     <td style="text-align: left">
                                         <center>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
                                         </center>
@@ -251,17 +261,17 @@
                                     </td>
                                     <td>
                                         <center>
-                                            {{-- <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}" download="coba.pdf" class=" btn btn-sm btn-primary">
-                                                <i class=" fa fa-download"></i>
-                                            </a> --}}
-                                            <a href="/admin/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
+                                            <a href="/bukti-pembayaran/{{ $t->tipe }}/{{ $t->nama_pembayaran }}/{{ $t->id }}"
                                                 target="_blank" class=" btn btn-success btn-sm popover-trigger"
-                                                id="popover-trigger-3-{{ $loop->index }}" data-toggle="popover"
+                                                id="popover-trigger-2-{{ $loop->index }}" data-toggle="popover"
                                                 title="Lihat & Cetak PDF">
                                                 <i class=" fa fa-print"></i>
                                             </a>
                                         </center>
                                     </td>
+                                </tr>
+                                <tr class="spacer">
+                                    <td colspan="100"></td>
                                 </tr>
                             </tbody>
                         @endforeach
@@ -270,6 +280,16 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="{{ asset('css/siswa/owl.carousel.min.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('css/siswa/bootstrap.min.css') }}">
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ asset('css/siswa/style.css') }}">
+
+    <script src=" {{ asset('jquery-3.7.1.min.js') }}"></script>
+    <script src=" {{ asset('js/siswa/popper.min.js') }}"></script>
+    <script src=" {{ asset('js/siswa/bootstrap.min.js') }}"></script>
+    <script src=" {{ asset('js/siswa/main.js') }}"></script>
     <style>
         a {
             text-decoration: none;

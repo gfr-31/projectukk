@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tagihan_bulanan', function (Blueprint $table) {
+        Schema::create('transaksi_bebas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_pembayaran_id');
-            $table->foreignId('siswa_id');
+            $table->string('kode_transaksi');
+            $table->string('tahun_ajaran');
             $table->foreignId('kelas_id');
-            $table->foreignId('bulan_id');
+            $table->foreignId('siswa_id');
+            $table->string('nama_pembayaran');
+            $table->enum('tipe', ['Bulanan','Bebas']);
+            $table->integer('tarif');
             $table->integer('jumlah_bayar');
-            $table->dateTime('tanggal_bayar');
-            $table->dateTime('tanggal_update');
+            $table->integer('sisa_tagihan');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tagihan_bulanan');
+        Schema::dropIfExists('transaksi_bebas');
     }
 };

@@ -25,35 +25,43 @@ class TahunAjaranController extends Controller
         // dd($request->customRadio);
 
         $this->validate($request, [
-            'tj1' => 'required',
-            'tj2' => 'required',
+            'tj1' => 'required|integer',
+            'tj2' => 'required|integer',
             'customRadio' => 'required',
         ], [
             'tj1.required' => 'Tahun ajaran harus diisi lengkap.',
+            'tj1.integer' => 'Data harus berupa angka',
             'tj2.required' => 'Tahun ajaran harus diisi lengkap.',
+            'tj2.integer' => 'Data harus berupa angka',
             'customRadio.required' => 'Pilih salah satu opsi pada keterangan.',
         ]);
 
         // Mulai transaksi database
-        DB::beginTransaction();
-        try {
-            // Nonaktifkan semua tahun ajaran yang lain
-            DB::table('tahun_ajaran')->update(['keterangan' => 'Tidak Aktif']);
+        $a = $request->tj1 . '-' . $request->tj2;
+        $b = (TahunAjaran::where('tahun_ajaran', $a)->pluck('tahun_ajaran')->first());
 
-            // Insert tahun ajaran baru
-            DB::table('tahun_ajaran')->insert([
-                'tahun_ajaran' => $request->tj1 . "-" . $request->tj2,
-                'keterangan' => $request->customRadio,
-                'created_at' => now()
-            ]);
+        if ($b == null) {
+            DB::beginTransaction();
+            try {
+                // Nonaktifkan semua tahun ajaran yang lain
+                DB::table('tahun_ajaran')->update(['keterangan' => 'Tidak Aktif']);
 
-            // Commit transaksi
-            DB::commit();
-        } catch (\Exception $e) {
-            // Rollback transaksi jika terjadi kesalahan
-            DB::rollBack();
+                // Insert tahun ajaran baru
+                DB::table('tahun_ajaran')->insert([
+                    'tahun_ajaran' => $request->tj1 . "-" . $request->tj2,
+                    'keterangan' => $request->customRadio,
+                    'created_at' => now()
+                ]);
+                // Commit transaksi
+                DB::commit();
+            } catch (\Exception $e) {
+                // Rollback transaksi jika terjadi kesalahan
+                DB::rollBack();
+            }
+            return redirect('/admin/tahun-ajaran')->with('berhasil', 'Data Berhasil Disimpan');
+        } else {
+            return back()->with('tjsama', 'Tahun Ajaran Sudah Ada');
         }
-        return redirect('/admin/tahun-ajaran')->with('berhasil', 'Data Berhasil Disimpan');
     }
     public function editTh(Request $request)
     {

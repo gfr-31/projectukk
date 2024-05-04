@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use DateTime;
 
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Validator;
@@ -28,44 +27,36 @@ class SiswaController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'nama' => 'required',
-            'jk' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'no_hp_siswa' => 'required',
-            'alamat' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
-            'no_hp_ortu' => 'required',
-            'nis' => 'required',
-            'nisn' => 'required',
-            'kelas_id' => 'required',
-            'fotos' => 'required',
+            'nama' => 'regex:/^[\pL\s]+$/u',
+            'tempat_lahir' => 'regex:/^[\pL\s]+$/u',
+            'tanggal_lahir' => 'date',
+            'no_hp_siswa' => 'numeric',
+            'alamat' => 'max:500|min:10',
+            'nama_ayah' => 'regex:/^[\pL\s]+$/u',
+            'nama_ibu' => 'regex:/^[\pL\s]+$/u',
+            'no_hp_ortu' => 'numeric',
+            'nis' => 'numeric|unique:siswas,nis',
+            'nisn' => 'numeric|unique:siswas,nisn',
+            'fotos' => 'required|mimes:jpeg,png,jpg|max:2048',
         ], [
-            'nama.required' => 'Nama harus diisi lengkap.',
-            'jk.required' => 'Jenis Kelamin harus diisi lengkap.',
-            'tempat_lahir.required' => 'Tempat Lahir harus diisi lengkap.',
-            'tanggal_lahir.required' => 'Tanggal Lahir harus diisi lengkap.',
-            'no_hp_siswa.required' => 'No Hp harus diisi lengkap.',
-            'alamat.required' => 'Alamat harus diisi lengkap.',
-            'nama_ayah.required' => 'Nama Ayah harus diisi lengkap.',
-            'nama_ibu.required' => 'Nama Ibu harus diisi lengkap.',
-            'no_hp_ortu.required' => 'No HP Orang Tua harus diisi lengkap.',
-            'nis.required' => 'NIS harus diisi lengkap.',
-            'nisn.required' => 'NISN harus diisi lengkap.',
-            'kelas_id.required' => 'Kelas harus diisi lengkap.',
-            'fotos.required' => 'Foto Siswa harus diisi lengkap.',
+            'nama.regex' => 'Nama Harus Diisi Dengan Huruf.',
+            'tempat_lahir.regex' => 'Tempat Lahir Harus Diisi Dengan Huruf',
+            'tanggal_lahir.date' => 'Tanggal Lahir Harus Diisi Dengan Format Tanggal Yang Benar.',
+            'no_hp_siswa.numeric' => 'No Hp Harus Diisi Dengan Angka.',
+            'alamat.max' => 'Maximal Input 500 Karakter.',
+            'alamat.min' => 'Minimum Input 10 Karakter.',
+            'nama_ayah.regex' => 'Nama Ayah Harus Diisi Dengan Huruf.',
+            'nama_ibu.regex' => 'Nama Ibu Harus Diisi Dengan Huruf.',
+            'no_hp_ortu.numeric' => 'No Hp Orang Tua Harus Diisi Dengan Angka.',
+            'nis.numeric' => 'NIS Harus Diisi Dengan Angka.',
+            'nisn.numeric' => 'NISN Harus Diisi Dengan Angka.',
+            'nis.unique' => 'NIS Sudah Ada Pada Data Siswa Lain.',
+            'nisn.unique' => 'NISN Sudah Ada Pada Data Siswa Lain.',
+            'fotos.mimes' => 'Foto Siswa Harus Berupa JPEG, PNG, JPG.',
+            'fotos.max' => 'Size Foto Siswa Harus Dibawah 2MB',
+            'fotos.required' => 'Foto Siswa Wajib Diisi',
         ]);
 
-        $validasi = Validator::make($request->all(), [
-            'nis' => 'unique:siswas,nis'
-        ]);
-        // dd($validasi);
-        if($validasi->fails()){
-            return redirect()->back()->with('gagalInput', 'NIS Tidak Boleh Sama Atau Data Sudah Ada');
-            // return redirect()->back()->withErrors($validasi)->withInput();
-        }
-        
         $file_foto = $request->file('fotos');
         $foto_ekstensi = $file_foto->getClientOriginalName();
 
@@ -102,6 +93,39 @@ class SiswaController extends Controller
     }
     public function updateSiswa(Request $request)
     {
+        // dd($request->all());
+        $this->validate($request, [
+            'nama' => 'regex:/^[\pL\s]+$/u',
+            'tempat_lahir' => 'regex:/^[\pL\s]+$/u',
+            'tanggal_lahir' => 'date',
+            'no_hp_siswa' => 'numeric',
+            'alamat' => 'max:500|min:10',
+            'nama_ayah' => 'regex:/^[\pL\s]+$/u',
+            'nama_ibu' => 'regex:/^[\pL\s]+$/u',
+            'no_hp_ortu' => 'numeric',
+            'nis' => 'numeric|unique:siswas,nis',
+            'nisn' => 'numeric|unique:siswas,nisn',
+            'fotos' => 'mimes:jpeg,png,jpg|max:2048',
+            'kelas_id' => 'required',
+        ], [
+            'nama.regex' => 'Nama Harus Diisi Dengan Huruf.',
+            'tempat_lahir.regex' => 'Tempat Lahir Harus Diisi Dengan Huruf',
+            'tanggal_lahir.date' => 'Tanggal Lahir Harus Diisi Dengan Format Tanggal Yang Benar.',
+            'no_hp_siswa.numeric' => 'No Hp Harus Diisi Dengan Angka.',
+            'alamat.max' => 'Maximal Input 500 Karakter.',
+            'alamat.min' => 'Minimum Input 10 Karakter.',
+            'nama_ayah.regex' => 'Nama Ayah Harus Diisi Dengan Huruf.',
+            'nama_ibu.regex' => 'Nama Ibu Harus Diisi Dengan Huruf.',
+            'no_hp_ortu.numeric' => 'No Hp Orang Tua Harus Diisi Dengan Angka.',
+            'nis.numeric' => 'NIS Harus Diisi Dengan Angka.',
+            'nisn.numeric' => 'NISN Harus Diisi Dengan Angka.',
+            'nis.unique' => 'NIS Sudah Ada Pada Data Siswa Lain.',
+            'nisn.unique' => 'NISN Sudah Ada Pada Data Siswa Lain.',
+            'fotos.mimes' => 'Foto Siswa Harus Berupa JPEG, PNG, JPG.',
+            'fotos.max' => 'Size Foto Siswa Harus Dibawah 2MB',
+            'kelas_id.required' => 'Kelas Wajib Diisi',
+        ]);
+
         if ($request->hasFile('foto')) {
             $file_foto = $request->file('foto');
             $foto_ekstensi = $file_foto->getClientOriginalName();
