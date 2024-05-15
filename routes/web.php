@@ -78,6 +78,8 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('jenis-pembayaran', [KeuanganController::class, 'JenisPembayaran']);
     Route::get('tambah-jenis-pembayaran', [KeuanganController::class, 'tambahJenisPembayaran']);
     Route::post('tambah/jenis-pembayaran', [KeuanganController::class, 'insertJenisPembayaran']);
+    Route::get('edit-jenis-pembayaran/{id}', [KeuanganController::class, 'editJenisPembayaran']);
+    Route::post('edit-jenis-pembayaran', [KeuanganController::class, 'updateJenisPembayaran']);
     Route::get('jenis-pembayaran/hapus{id}', [KeuanganController::class, 'deleteJenisPembayaran']);
 
     // Tarif Pembayaran
@@ -127,8 +129,11 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::post('insert/data', [DataController::class, 'insert_data']);
     Route::get('edit/informasi{id}', [DataController::class, 'edit_informasi']);
     Route::get('data/hapus{id}', [DataController::class, 'hapus_data']);
+    Route::delete('data/hsemua', [DataController::class, 'hapus_semua']);
+    // Route::get('data/hsemua', [DataController::class, 'hapus_semua']);
     Route::post('update/data', [DataController::class, 'update_data']);
     Route::post('NotifWa', [DataController::class, 'NotifWa']);
+    
 
     //Setting Aplikasi
     Route::get('developers', [SettingController::class, 'developers']);

@@ -93,8 +93,12 @@
                                         </div>
                                         <div class=" col-9">
                                             <div class="form-select ">
+                                                @error('siswa')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                                 <select class="form-control " name="siswa"
-                                                    aria-label="Default select example" required>
+                                                    aria-label="Default select example">
                                                     <option value="" class=" text-center" selected>-- siswa --
                                                     </option>
                                                     @foreach ($siswa as $s)
@@ -113,8 +117,11 @@
                                             <label for="" class=" col-form-label">Tarif (Rp.)</label>
                                         </div>
                                         <div class=" col-9">
-                                            <input type="text" class=" form-control" id="tarifInput" name="tarif"
-                                                required>
+                                            @error('tarif')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
+                                            <input type="text" class=" form-control" id="tarifInput" name="tarif">
                                         </div>
                                     </div>
                                 </div>

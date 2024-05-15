@@ -25,7 +25,7 @@ class SettingController extends Controller
     //User Admin
     public function user_admin()
     {
-        $admin = User::get();
+        $admin = User::orderByRaw("CASE WHEN name = 'admin' THEN 1 ELSE 0 END")->orderBy('created_at','desc')->get();
         return view('admin.layout.setting_aplikasi.user_admin.user', compact('admin'));
     }
     public function insert(Request $request)
@@ -45,7 +45,7 @@ class SettingController extends Controller
             'created_at' => now()
         ];
         $jumlah_user = User::count();
-        if ($jumlah_user >= 3) {
+        if ($jumlah_user >= 4) {
             return redirect()->back()->with('userPenuh', 'Batas Pengguna Telah Mencapai Maksimum.');
         }
 
@@ -63,13 +63,19 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'email' => 'required|email:dns|unique:users,email',
-            'password' => 'required',
-        ], [
-            'email.unique' => 'Email sudah terdaftar.',
-        ]);
+        // dd($request->all());
+        $this->validate(
+            $request,
+            [
+                'username' => 'required',
+                'password' => 'required',
+                // 'email' => 'required|email:dns|unique:users,email',
+                'email' => 'required|email:dns',
+            ],
+            // [
+            //     'email.unique' => 'Email sudah terdaftar.',
+            // ]
+        );
         $data = [
             'name' => $request->username,
             'email' => $request->email,

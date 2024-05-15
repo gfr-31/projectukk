@@ -145,16 +145,15 @@
                                         <i class="fa fa-pencil"></i>
                                         Edit
                                     </a>
-                                    {{-- <button type="button" class="btn btn-sm btn-success btn-lg" data-toggle="modal"
-                                            data-target="#myModal">
-                                            <i class="fa fa-pencil"></i>
-                                            Edit
-                                        </button> --}}
                                     |
-                                    <a href="/admin/pos-keuangan/hapus/{{ $p->id }}" class="btn btn-danger btn-sm">
+                                    {{-- <a href="/admin/pos-keuangan/hapus/{{ $p->id }}" class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i>
-                                    </a>
-                                    </a>
+                                    </a> --}}
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#konfirmasiModal{{ $p->id }}"
+                                        id="hapusButton{{ $p->id }}" onclick="submitDelete({{ $p->id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -163,7 +162,34 @@
             </div>
         </div>
     </div>
-
+    @foreach ($pos as $jp)
+        <!-- Modal Konfirmasi -->
+        <div class="modal fade" id="konfirmasiModal{{ $jp->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="konfirmasiModalLabel{{ $jp->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h5 class="modal-title" id="konfirmasiModalLabel{{ $jp->id }}">Konfirmasi Menghapus Data
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                        Apakah Anda Yakin Untuk Menghapus Data?
+                    </div>
+                    <div class=" modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm mx-1" data-dismiss="modal"
+                            onclick="batal({{ $jp->id }})">Batal</button>
+                        <button type="button" onclick="submitForm({{ $jp->id }})" class="btn btn-danger btn-sm "
+                            id="confirmButton{{ $jp->id }}" disabled>
+                            <i class=" fa fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <script src="{{ asset('js/main/keuangan/pos_keuangan/pos_keuangan.js') }}"></script>
     @if ($errors->any())
         <script type="text/javascript">

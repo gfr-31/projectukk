@@ -70,10 +70,10 @@
                         </div>
                     </div>
                 </div>
-                <a data-toggle="modal" data-target="#popupModalEditKelas" id="EDK"
-                    class="btn btn-primary btn-sm float-right">
+                <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
+                    data-target="#konfirmasiModal" id="perbaharuiButton">
                     <i class="fa fa-cog"></i> Edit Berdasarkan Kelas
-                </a>
+                </button>
             </div>
             <div class="card-body table-responsive p-0">
                 <table id="myTable" class="table table-hover text-nowrap">
@@ -106,12 +106,17 @@
                                             Edit
                                         </a>
                                         |
-                                        <a href="/admin/tarif-pembayaran-bebas/{{ $t->tahun_ajaran }}/hapus{{ $t->id }}"
+                                        {{-- <a href="/admin/tarif-pembayaran-bebas/{{ $t->tahun_ajaran }}/hapus{{ $t->id }}"
                                             class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash"></i>
-                                        </a>
+                                        </a> --}}
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target="#konfirmasiModal{{ $t->id }}"
+                                            id="hapusButton{{ $t->id }}"
+                                            onclick="submitDelete({{ $t->id }})">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </center>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -163,6 +168,35 @@
                             <button href="submit" class="btn btn-success btn-sm">Lanjut Tambah Data</button>
                         </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Konfirmasi -->
+            <div class="modal fade" id="konfirmasiModal" tabindex="-1" role="dialog"
+                aria-labelledby="konfirmasiModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header m-0">
+                            <h5 class="modal-title" id="konfirmasiModalLabel">Apakah Anda Yakin Untuk Memperbarui Data?
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body " style="color: red">
+                            <b>
+                                Apakah Anda Yakin Untuk Melanjutkannya?
+                            </b>
+                            <div class=" mt-2 text-center">
+                                <button type="button" class="btn btn-danger btn-sm mx-1"
+                                    data-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-primary btn-sm"data-toggle="modal"
+                                    data-target="#popupModalEditKelas" data-dismiss="modal">
+                                    <i class="fa fa-save"></i> Lanjut
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,15 +254,55 @@
             </div>
         </div>
     </div>
+
+    @foreach ($tpb as $t)
+        <!-- Modal Konfirmasi Delete -->
+        <div class="modal fade" id="konfirmasiModal{{ $t->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="konfirmasiModalLabel{{ $t->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header m-0">
+                        <h5 class="modal-title" id="konfirmasiModalLabel{{ $t->id }}">Konfirmasi Menghapus
+                            Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                        Apakah Anda Yakin Untuk Menghapus Data?
+                    </div>
+                    <div class=" modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm mx-1" data-dismiss="modal"
+                            onclick="batal('{{ $t->id }}')">Batal</button>
+                        <button type="button" onclick="submitForm('{{ $t->id }}', '{{ $t->tahun_ajaran }}')"
+                            class="btn btn-danger btn-sm " id="confirmButton{{ $t->id }}" disabled>
+                            <i class=" fa fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <script>
-        $(document).ready(function() {
-            $("#EDK").click(function() {
-                var confirmation = confirm("Apakah Anda yakin ingin melanjutkan?");
-                if (confirmation) {} else {
-                    return false;
-                }
-            });
-        });
+        // /admin/tarif-pembayaran-bebas/{{ $t->tahun_ajaran }}/hapus{{ $t->id }}
+        function submitDelete(jpId) {
+            // console.log(jpId);
+            setTimeout(function() {
+                // document.getElementById("perbaharuiButton").removeAttribute("disabled");
+                document.getElementById("confirmButton" + jpId).removeAttribute("disabled");
+            }, 3000);
+        }
+
+        function submitForm(jpId, jpTa) {
+            // Ganti window.location.href dengan URL halaman yang ingin Anda tuju
+            window.location.href = "/admin/tarif-pembayaran-bebas/" + jpTa + "/hapus" + jpId;
+            // console.log(jpId);
+        }
+
+        function batal(jpId) {
+            document.getElementById("confirmButton" + jpId).setAttribute("disabled", "disabled")
+            // console.log(jpId);
+        }
     </script>
 
     <script src="{{ asset('js/main/keuangan/tarif_pembayaran/tarif_pembayaran_bebas.js') }}"></script>

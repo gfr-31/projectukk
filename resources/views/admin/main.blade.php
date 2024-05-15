@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MH | Aplikas Pembayaran Siswa</title>
     <link rel="icon" href="{{ asset('gambar/icon1.png') }}">
     {{-- LightBox --}}
@@ -263,8 +264,9 @@
                 @yield('pembayaran')
                 @yield('kirimTagihan')
                 @yield('posKeuangan')
-                @yield('posPembayaran')
-                @yield('tambahPosPembayaran')
+                @yield('jenisPembayaran')
+                @yield('tambahJenisPembayaran')
+                @yield('editJenisPembayaran')
                 @yield('tarifPembayaranBulanan')
                 @yield('tambahTarifPembayaranBulanan')
                 @yield('tambahTarifPembayaranBulananSiswa')

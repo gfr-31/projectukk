@@ -41,7 +41,7 @@
                                     </div>
                                     <div class=" col-8">
                                         <input class=" form-control" type="text" name="tj" id=""
-                                        value="{{ $jp->tahun_ajaran }}" readonly>
+                                            value="{{ $jp->tahun_ajaran }}" readonly>
                                         {{-- <input class=" form-control" type="hidden" name="tj" id=""
                                             value="{{ $jp->id }}" readonly> --}}
                                     </div>
@@ -76,8 +76,12 @@
                                         </div>
                                         <div class=" col-9">
                                             <div class="form-select ">
+                                                @error('kelas')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                                 <select class="form-control " name="kelas"
-                                                    aria-label="Default select example" required>
+                                                    aria-label="Default select example" >
                                                     <option value="" class=" text-center" selected>-- Kelas --
                                                     </option>
                                                     @foreach ($kelas as $k)
@@ -96,8 +100,11 @@
                                             <label for="" class=" col-form-label">Tarif (Rp.)</label>
                                         </div>
                                         <div class=" col-9">
-                                            <input type="text" class=" form-control" id="tarifInput" name="tarif"
-                                                required>
+                                            @error('tarif')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
+                                            <input type="text" class=" form-control" id="tarifInput" name="tarif">
                                         </div>
                                     </div>
                                 </div>

@@ -7,7 +7,7 @@
             </div>
             <div class=" col-6">
                 @foreach ($jp as $jp)
-                    <a href="/admin/tarif-pembayaran/{{ $jp->tahun_ajaran}}/{{ $jp->tipe }}/id={{ $jp->id }}/{{ $jp->nama_pembayaran }}"
+                    <a href="/admin/tarif-pembayaran/{{ $jp->tahun_ajaran }}/{{ $jp->tipe }}/id={{ $jp->id }}/{{ $jp->nama_pembayaran }}"
                         class=" btn btn-danger btn-sm float-right">
                         <i class=" fa fa-reply"></i> Kembali
                     </a>
@@ -35,8 +35,7 @@
                                                 <div class=" col-8">
                                                     <input class="form-control" type="text" name="namaPembayaran"
                                                         id=""
-                                                        value="{{ $jp->pos }} - T.A {{ $jp->tahun_ajaran }}"
-                                                        readonly>
+                                                        value="{{ $jp->pos }} - T.A {{ $jp->tahun_ajaran }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +85,7 @@
                                                 @foreach ($kelas as $k)
                                                     <input class="form-control" type="text" id=""
                                                         value="{{ $k->kelas }}" readonly>
-                                                    <input type="hidden"  name="kelas" value="{{ $k->id }}">
+                                                    <input type="hidden" name="kelas" value="{{ $k->id }}">
                                                 @endforeach
                                             </div>
                                         </div>
@@ -101,6 +100,10 @@
                                             </div>
                                             <div class=" col-8">
                                                 <div class="form-select">
+                                                    @error('siswa')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                     <select class="form-control " name="siswa" id="siswa"
                                                         aria-label="Default select example">
                                                         <option value="" selected>-- Siswa --</option>
@@ -141,6 +144,10 @@
                                                         (Rp.)</label>
                                                 </div>
                                                 <div class=" col-7">
+                                                    @error('totalTagihan')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                     <input class="form-control" type="text" name="totalTagihan"
                                                         id="totalTagihan" readonly>
                                                 </div>
@@ -166,8 +173,12 @@
                                             <p for="" class=" col-form-label">Juli</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('juli')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="juli"
-                                                id="tagihan1">
+                                                id="tagihan1" oninput="formatRupiahs('tagihan1')">
                                         </div>
                                     </div>
                                 </div>
@@ -182,8 +193,12 @@
                                             <p for="" class=" col-form-label">Agustus</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('agustus')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="agustus"
-                                                id="tagihan2">
+                                                id="tagihan2" oninput="formatRupiahs('tagihan2')">
                                         </div>
                                     </div>
                                 </div>
@@ -198,8 +213,12 @@
                                             <p for="" class=" col-form-label">September</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('september')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="september"
-                                                id="tagihan3">
+                                                id="tagihan3" oninput="formatRupiahs('tagihan3')">
                                         </div>
                                     </div>
                                 </div>
@@ -214,8 +233,12 @@
                                             <p for="" class=" col-form-label">Oktober</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('oktober')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="oktober"
-                                                id="tagihan4">
+                                                id="tagihan4" oninput="formatRupiahs('tagihan4')">
                                         </div>
                                     </div>
                                 </div>
@@ -230,8 +253,12 @@
                                             <p for="" class=" col-form-label">November</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('november')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="november"
-                                                id="tagihan5">
+                                                id="tagihan5" oninput="formatRupiahs('tagihan5')">
                                         </div>
                                     </div>
                                 </div>
@@ -246,8 +273,12 @@
                                             <p for="" class=" col-form-label">Desember</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('desember')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="desember"
-                                                id="tagihan6">
+                                                id="tagihan6"oninput="formatRupiahs('tagihan6')">
                                         </div>
                                     </div>
                                 </div>
@@ -262,8 +293,12 @@
                                             <p for="" class=" col-form-label">January</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('january')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="january"
-                                                id="tagihan7">
+                                                id="tagihan7"oninput="formatRupiahs('tagihan7')">
                                         </div>
                                     </div>
                                 </div>
@@ -278,8 +313,12 @@
                                             <p for="" class=" col-form-label">Februari</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('februari')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="februari"
-                                                id="tagihan8">
+                                                id="tagihan8"oninput="formatRupiahs('tagihan8')">
                                         </div>
                                     </div>
                                 </div>
@@ -294,8 +333,12 @@
                                             <p for="" class=" col-form-label">Maret</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('maret')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="maret"
-                                                id="tagihan9">
+                                                id="tagihan9"oninput="formatRupiahs('tagihan9')">
                                         </div>
                                     </div>
                                 </div>
@@ -310,8 +353,12 @@
                                             <p for="" class=" col-form-label">April</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('april')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="april"
-                                                id="tagihan10">
+                                                id="tagihan10"oninput="formatRupiahs('tagihan10')">
                                         </div>
                                     </div>
                                 </div>
@@ -326,8 +373,12 @@
                                             <p for="" class=" col-form-label">Mei</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('mei')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="mei"
-                                                id="tagihan11">
+                                                id="tagihan11"oninput="formatRupiahs('tagihan11')">
                                         </div>
                                     </div>
                                 </div>
@@ -342,8 +393,12 @@
                                             <p for="" class=" col-form-label">Juni</p>
                                         </div>
                                         <div class=" col-9">
+                                            @error('juni')
+                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                    {{ $message }} </small>
+                                            @enderror
                                             <input class="form-control form-control-sm" type="text" name="juni"
-                                                id="tagihan12">
+                                                id="tagihan12"oninput="formatRupiahs('tagihan12')">
                                         </div>
                                     </div>
                                 </div>

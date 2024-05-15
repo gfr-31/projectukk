@@ -37,10 +37,13 @@
                                                 <div class="form-group mt-2">
                                                     <label>Judul Informasi</label>
                                                     <input type="text" name="judul" class="form-control" id=""
-                                                        placeholder="Data Informasi" required value="{{ $di->judul }}">
+                                                        placeholder="Data Informasi" value="{{ $di->judul }}">
+                                                    @error('judul')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -48,6 +51,10 @@
                                     <div class="form-group">
                                         <label>Deskripsi Informasi</label>
                                         <textarea id="content" name="deskripsi">{{ $di->deskripsi }}</textarea>
+                                        @error('deskripsi')
+                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                {{ $message }} </small>
+                                        @enderror
                                     </div>
                                     <div class=" row">
                                         <div class=" col-sm-8">
@@ -63,9 +70,15 @@
                                                         <label for="">Unggah Gambar</label>
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="foto"
-                                                                name="fotos" accept="image/*" >
-                                                            <input type="hidden" name="fotos" value="{{ $di->gambar }}">
-                                                            <label class="custom-file-label" for="foto">{{ substr($di->gambar, 20) }}</label>
+                                                                name="fotos" accept="image/*">
+                                                            <input type="hidden" name="fotos"
+                                                                value="{{ $di->gambar }}">
+                                                            <label class="custom-file-label"
+                                                                for="foto">{{ substr($di->gambar, 20) }}</label>
+                                                            @error('fotos')
+                                                                <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                    {{ $message }} </small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +88,11 @@
                                             <div class=" card card-blue card-outline ">
                                                 <div class=" form-group mx-3 mt-2">
                                                     <label>Status</label>
-                                                    <div class="form-group">
+                                                    <div class="form-group ">
+                                                        @error('status')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                         <div class=" row">
                                                             @if ($di->status == 'Draft')
                                                                 <div class="form-group">

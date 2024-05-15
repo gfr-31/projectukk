@@ -109,7 +109,7 @@
                                                 <label for="" class=" col-form-label">Tarif (Rp.)</label>
                                             </div>
                                             <div class=" col-9">
-                                                <input type="text" class=" form-control" id="tarifInput" name="tarif"
+                                                <input type="text" class=" form-control" id="tarifInput" name="tarif" oninput="formatRupiahs('tarifInput')"
                                                     value="{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}"
                                                     required>
                                             </div>

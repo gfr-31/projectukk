@@ -1,3 +1,19 @@
+function formatRupiahs(tarif) {
+    let inputElement = document.getElementById(tarif)
+    let value = inputElement.value
+    // alert(inputElement)
+    let numberValue = parseFloat(value.replace(/[^\d]/g, ''))
+    if (isNaN(numberValue)) {
+        inputElement.value = "Rp. 0"
+    } else {
+        inputElement.value = numberValue.toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        })
+    }
+}
+
 // Fungsi untuk mengonversi angka menjadi format mata uang Rupiah
 function formatRupiah(angka) {
     // Mengonversi angka menjadi format Rupiah dengan koma sebagai pemisah ribuan
@@ -14,27 +30,27 @@ function formatRupiah(angka) {
 }
 
 // Event listener untuk menangani input tarif
-document.getElementById('tarifInput').addEventListener('keypress', function(event) {
-    if(event.key == 'Enter'){
-    // Mendapatkan nilai dari input
-    var tarifInput = event.target.value;
+document.getElementById('tarifInput').addEventListener('keypress', function (event) {
+    if (event.key == 'Enter') {
+        // Mendapatkan nilai dari input
+        var tarifInput = event.target.value;
 
-    // Menghapus karakter selain digit
-    tarifInput = tarifInput.replace(/\D/g, '');
-    
-    // Mengonversi nilai menjadi format Rupiah
-    var tarifRupiah = formatRupiah(tarifInput);
+        // Menghapus karakter selain digit
+        tarifInput = tarifInput.replace(/\D/g, '');
 
-    document.getElementById('sisaTagihan').value = tarifRupiah
+        // Mengonversi nilai menjadi format Rupiah
+        var tarifRupiah = formatRupiah(tarifInput);
 
-    // Menampilkan nilai dalam format Rupiah di dalam input
-    event.target.value = tarifRupiah;
+        document.getElementById('sisaTagihan').value = tarifRupiah
+
+        // Menampilkan nilai dalam format Rupiah di dalam input
+        event.target.value = tarifRupiah;
     }
 
 });
 
 // Event listener untuk menangani input tarif
-document.getElementById('sisaTagihan').addEventListener('input', function(event) {
+document.getElementById('sisaTagihan').addEventListener('input', function (event) {
     // Mendapatkan nilai dari input
     var sisaTagihan = event.target.value;
 

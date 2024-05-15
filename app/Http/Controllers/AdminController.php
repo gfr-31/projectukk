@@ -14,7 +14,8 @@ class AdminController extends Controller
 
     public function authenticat(Request $request){
         $credentials = $request -> validate([
-            'email' => 'required|email:dns',
+            // 'email' => 'required|email:dns',
+            'name' => 'required',
             'password' => 'required'
         ]);
 

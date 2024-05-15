@@ -23,17 +23,5 @@ class UsersTableSeeders extends Seeder
             'password' => Hash::make('admin')
         ]);
 
-        DB::table('siswaas')->insert([
-            'id' => '1',
-            'nama' => 'Joko',
-            'password' => '1234',
-        ]);
-
-        
-        DB::table('siswaas')->insert([
-            'id' => '2',
-            'nama' => 'Saepul',
-            'password' => '234',
-        ]);
     }
 }

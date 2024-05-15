@@ -96,6 +96,7 @@ class TahunAjaranController extends Controller
     }
     public function hapus_tahun_ajaran($id)
     {
+        // dd($id);
         DB::table('tahun_ajaran')->where('id', $id)->delete();
         return redirect('/admin/tahun-ajaran')->with('berhasilHapus', 'Data Berhasil Dihapus');
     }

@@ -57,7 +57,7 @@
                                                     <input class="form-control" id=""
                                                         value="{{ $t->tahun_ajaran }}" type="text" readonly>
                                                     <input class="form-control" name="tj" id=""
-                                                        value="{{ $t->id }}" type="hidden">
+                                                        value="{{ $t->tahun_ajaran }}" type="hidden">
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                                         <div class=" col-7 mt-3">
                                             <input class="form-control" type="text" name="totalTagihan" id="totalTagihan"
                                                 value="{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}"
-                                                readonly>
+                                                oninput="formatRupiahs('totalTagihan')">
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="juli"
-                                            id="tagihan1"
+                                            id="tagihan1" oninput="formatRupiahs('tagihan1')"
                                             value="{{is_numeric($t->juli) ? 'Rp. ' . number_format((float) $t->juli, 0, ',', '.') : $t->juli }}">
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="agustus"
-                                            id="tagihan2"
+                                            id="tagihan2" oninput="formatRupiahs('tagihan2')"
                                             value="{{is_numeric($t->agustus) ? 'Rp. ' . number_format((float) $t->agustus, 0, ',', '.') : $t->agustus }}">
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="september"
-                                            id="tagihan3"
+                                            id="tagihan3" oninput="formatRupiahs('tagihan3')"
                                             value="{{ is_numeric($t->september) ? 'Rp. ' . number_format((float) $t->september, 0, ',', '.') : $t->september }}">
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="oktober"
-                                            id="tagihan4"
+                                            id="tagihan4" oninput="formatRupiahs('tagihan4')"
                                             value="{{ is_numeric($t->oktober) ? 'Rp. ' . number_format((float) $t->oktober, 0, ',', '.') : $t->oktober }}">
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="november"
-                                            id="tagihan5"
+                                            id="tagihan5" oninput="formatRupiahs('tagihan5')"
                                             value="{{ is_numeric($t->november) ? 'Rp. ' . number_format((float) $t->november, 0, ',', '.') : $t->november }}">
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="desember"
-                                            id="tagihan6"
+                                            id="tagihan6" oninput="formatRupiahs('tagihan6')"
                                             value="{{ is_numeric($t->desember) ? 'Rp. ' . number_format((float) $t->desember, 0, ',', '.') : $t->desember }}">
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="january"
-                                            id="tagihan7"
+                                            id="tagihan7" oninput="formatRupiahs('tagihan7')"
                                             value="{{ is_numeric($t->january) ? 'Rp. ' . number_format((float) $t->january, 0, ',', '.') : $t->january }}">
                                     </div>
                                 </div>
@@ -244,7 +244,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="februari"
-                                            id="tagihan8"
+                                            id="tagihan8" oninput="formatRupiahs('tagihan8')"
                                             value="{{ is_numeric($t->february) ? 'Rp. ' . number_format((float) $t->february, 0, ',', '.') : $t->february }}">
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="maret"
-                                            id="tagihan9"
+                                            id="tagihan9" oninput="formatRupiahs('tagihan9')"
                                             value="{{ is_numeric($t->maret) ? 'Rp. ' . number_format((float) $t->maret, 0, ',', '.') : $t->maret }}">
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="april"
-                                            id="tagihan10"
+                                            id="tagihan10" oninput="formatRupiahs('tagihan10')"
                                             value="{{ is_numeric($t->april) ? 'Rp. ' . number_format((float) $t->april, 0, ',', '.') : $t->april }}">
                                     </div>
                                 </div>
@@ -295,7 +295,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="mei"
-                                            id="tagihan11"
+                                            id="tagihan11" oninput="formatRupiahs('tagihan11')"
                                             value="{{ is_numeric($t->mei) ? 'Rp. ' . number_format((float) $t->mei, 0, ',', '.') : $t->mei }}">
                                     </div>
                                 </div>
@@ -312,7 +312,7 @@
                                     </div>
                                     <div class=" col-9">
                                         <input class="form-control form-control-sm" type="text" name="juni"
-                                            id="tagihan12"
+                                            id="tagihan12" oninput="formatRupiahs('tagihan12')"
                                             value="{{ is_numeric($t->juni) ? 'Rp. ' . number_format((float) $t->juni, 0, ',', '.') : $t->juni }}">
                                     </div>
                                 </div>

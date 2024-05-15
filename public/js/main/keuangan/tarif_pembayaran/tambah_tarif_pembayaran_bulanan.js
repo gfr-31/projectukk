@@ -1,3 +1,21 @@
+function formatRupiahs(tagihanId) {
+    // alert(123)
+    let inputElement = document.getElementById(tagihanId)
+    let value = inputElement.value
+
+    let numberValue = parseFloat(value.replace(/[^\d]/g, ''))
+
+    if (isNaN(numberValue)) {
+        inputElement.value = "Rp. 0"
+    } else {
+        inputElement.value = numberValue.toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        })
+    }
+}
+
 function formatRupiah(tagihanId) {
     // Mengonversi angka menjadi format Rupiah dengan koma sebagai pemisah ribuan
     var rupiah = new Intl.NumberFormat('id-ID', {
@@ -10,9 +28,8 @@ function formatRupiah(tagihanId) {
     rupiah = rupiah.replace(/\d(?=(\d{3})+,)/g, '');
 
     return rupiah;
-    alert
 }
-document.getElementById('tarif_bulanan').addEventListener('input', function(event) {
+document.getElementById('tarif_bulanan').addEventListener('input', function (event) {
     // Mendapatkan nilai dari input
     var tarifInput = event.target.value;
 
@@ -26,7 +43,7 @@ document.getElementById('tarif_bulanan').addEventListener('input', function(even
     event.target.value = tarifRupiah;
 });
 
-document.getElementById('tarif_bulanan').addEventListener('keypress', function(event) {
+document.getElementById('tarif_bulanan').addEventListener('keypress', function (event) {
     // Periksa apakah tombol yang ditekan adalah tombol enter
     if (event.key === 'Enter') {
         event.preventDefault(); // Mencegah pengiriman form secara otomatis

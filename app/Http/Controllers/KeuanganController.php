@@ -49,7 +49,7 @@ class KeuanganController extends Controller
     public function updatePosKeuangan(Request $request)
     {
         // dd($request->all());
-        DB::table('pos')->where('id', $request->id)->update([
+        Pos::where('id', $request->id)->update([
             'pos' => $request->pos,
             'keterangan' => $request->keterangan,
             'tipe' => $request->tipe,
@@ -60,7 +60,8 @@ class KeuanganController extends Controller
 
     public function hapusPosKeuangan($id)
     {
-        DB::table('pos')->where('id', $id)->delete();
+        // dd($id);
+        Pos::where('id', $id)->delete();
         return redirect('/admin/pos-keuangan')->with('berhasilHapusPos', 'Data Berhasil Dihapus');
     }
 
@@ -81,31 +82,72 @@ class KeuanganController extends Controller
     }
     public function insertJenisPembayaran(Request $request)
     {
-        // dd($request->tahun_ajaran);
-        // $this->validate($request, [
-        //     'pos' => 'required',
-        //     'tipe' => 'required',
-        //     'tahun_ajaran' => 'required',
-        // ],[
-        //     'pos.required' => 'POS harus diisi lengkap.',
-        //     'tipe.required' => 'Tipe harus diisi lengkap.',
-        //     'tahun_ajaran.required' => 'Tahun Ajaran harus diisi lengkap.',
-        // ]);
-        if ($request->Filled('tipe', 'tahun_ajaran', 'pos')) {
-            DB::table('jenis_pembayaran')->insert([
-                'pos' => $request->pos,
-                'nama_pembayaran' => $request->pos . " - T.A " . $request->tahun_ajaran,
-                'tipe' => $request->tipe,
-                'tahun_ajaran' => $request->tahun_ajaran
-            ]);
-
-            return redirect('/admin/jenis-pembayaran')->with('berhasilPosPembayaran', 'Data Berhasil ditambahkan');
-        } else {
-            return redirect()->back();
+        // dd($request->all());
+        $this->validate($request, [
+            'pos' => 'required',
+            'tipe' => 'required',
+            'tahun_ajaran' => 'required',
+        ], [
+            'pos.required' => 'POS Harus Diisi Terlebih Dahulu.',
+            'tipe.required' => 'Tipe Harus Diisi Terlebih Dahulu.',
+            'tahun_ajaran.required' => 'Tahun Ajaran Harus Diisi Terlebih Dahulu.',
+        ]);
+        $np = $request->pos . " - T.A " . $request->tahun_ajaran;
+        $a = JenisPembayaran::where('nama_pembayaran', $np)->exists();
+        // dd($np);
+        if (!$a) {
+            if ($request->Filled('tipe', 'tahun_ajaran', 'pos')) {
+                DB::table('jenis_pembayaran')->insert([
+                    'pos' => $request->pos,
+                    'nama_pembayaran' => $request->pos . " - T.A " . $request->tahun_ajaran,
+                    'tipe' => $request->tipe,
+                    'tahun_ajaran' => $request->tahun_ajaran,
+                    'created_at' => now(),
+                ]);
+                return redirect('/admin/jenis-pembayaran')->with('berhasilPosPembayaran', 'Data Berhasil ditambahkan');
+            } else {
+                return redirect()->back();
+            }
         }
+        return back()->with('gagalJenisPembayaran', 'Jenis Pembayaran Sudah Ada');
+    }
+    public function editJenisPembayaran($id)
+    {
+        // dd(123);
+        $pos = DB::table('pos')->get();
+        $tahunAjaran = DB::table('tahun_ajaran')->where('keterangan', 'Aktif')->get();
+        $admin = DB::table('users')->get();
+        $jenisPembayaran = JenisPembayaran::where('id', $id)->get();
+        return view('admin.layout.keuangan.jenis_pembayaran.edit_jenis_pembayaran', compact('admin', 'tahunAjaran', 'pos', 'jenisPembayaran'));
+    }
+    public function updateJenisPembayaran(Request $request)
+    {
+        // dd($request->all());
+        $jenisPembayaran = JenisPembayaran::where('id', $request->id)->get();
+        $tipe = $jenisPembayaran->pluck('tipe')->first();
+        $np = $jenisPembayaran->pluck('nama_pembayaran')->first();
+        DB::table('tarif_pembayaran_' . $tipe)->where('nama_pembayaran', $np)->delete();
+        $this->validate($request, [
+            'pos' => 'required',
+            'tipe' => 'required',
+            'tahun_ajaran' => 'required',
+        ], [
+            'pos.required' => 'POS Harus Diisi Terlebih Dahulu.',
+            'tipe.required' => 'Tipe Harus Diisi Terlebih Dahulu.',
+            'tahun_ajaran.required' => 'Tahun Ajaran Harus Diisi Terlebih Dahulu.',
+        ]);
+        JenisPembayaran::where('id', $request->id)->update([
+            'pos' => $request->pos,
+            'nama_pembayaran' => $request->pos . " - T.A " . $request->tahun_ajaran,
+            'tipe' => $request->tipe,
+            'tahun_ajaran' => $request->tahun_ajaran,
+            'updated_at' => now(),
+        ]);
+        return redirect('/admin/jenis-pembayaran')->with('berhasilUpdateJenisPembayaran', 'Data Berhsail Diperbaharui');
     }
     public function deleteJenisPembayaran($id)
     {
+        // dd(123);
         DB::table('jenis_pembayaran')->where('id', $id)->delete();
         return redirect('/admin/jenis-pembayaran')->with('berhasilHapusPos', 'Data Berhasil Dihapus');
     }

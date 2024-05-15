@@ -25,3 +25,19 @@ function removeInput(button) {
     // Mengurangkan counter
     inputCounter--;
 }
+
+function batal(jpId) {
+    document.getElementById("confirmButton" + jpId).setAttribute("disabled", "disabled")
+}
+function submitForm(jpId) {
+    // Ganti window.location.href dengan URL halaman yang ingin Anda tuju
+    window.location.href = "/admin/kelas/hapus" + jpId;
+}
+
+function submitDelete(jpId) {
+    // console.log(jpId);
+    setTimeout(function() {
+        // document.getElementById("perbaharuiButton").removeAttribute("disabled");
+        document.getElementById("confirmButton" + jpId).removeAttribute("disabled");
+    }, 3000);
+}

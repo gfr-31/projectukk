@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('pos');
             $table->string('nama_pembayaran');
-            $table->string('tipe');
+            $table->enum('tipe',['Bulanan', 'Bebas']);
             $table->string('tahun_ajaran');
             $table->timestamps();
         });

@@ -1,31 +1,37 @@
 @extends('admin.main')
-@section('tambahJenisPembayaran')
+@section('editJenisPembayaran')
     <div class=" container-fluid">
         <div class="row mb-2 border-bottom">
             <div class="col-sm-6">
-                <h1 class="m-0">Tambah Jenis Pembayaran</h1>
+                @foreach ($jenisPembayaran as $jp)
+                    <h1 class="m-0">Edit {{ $jp->nama_pembayaran }}</h1>
+                @endforeach
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
                     <li class="breadcrumb-item active">Data Keuangan</li>
-                    <li class="breadcrumb-item active">Tambah Jenis Pembayaran</li>
+                    <li class="breadcrumb-item active">Edit Jenis Pembayaran </li>
                 </ol>
             </div>
         </div>
 
         <div class="">
-            <form action="/admin/tambah/jenis-pembayaran" method="post">
+            <form action="/admin/edit-jenis-pembayaran" method="post">
                 @csrf
                 <div class=" row">
+                    @foreach ($jenisPembayaran as $jp)
+                        <input type="hidden" value="{{ $jp->id }}" name="id">
+                    @endforeach
                     <div class=" col-sm-8 mt-2">
                         {{-- POS --}}
-
                         <div class=" form-group ">
                             <label for="">POS</label>
                             <select name="pos" id="" class=" form-control float-right "
                                 aria-label="Default select example">
-                                <option value="" selected>-- Pilih POS --</option>
+                                @foreach ($jenisPembayaran as $jp)
+                                    <option value="{{ $jp->pos }}" selected>{{ $jp->pos }}</option>
+                                @endforeach
                                 @foreach ($pos as $p)
                                     <option value="{{ $p->pos }}" {{ old('pos') == $p->pos ? 'selected' : '' }}>
                                         {{ $p->pos }}</option>
@@ -41,7 +47,9 @@
                         <div class=" form-group">
                             <label for="">Tahun Ajaran</label>
                             <select name="tahun_ajaran" id="" class=" form-control float-right">
-                                <option value="" selected>-- Pilih Tahun Ajaran --</option>
+                                @foreach ($jenisPembayaran as $jp)
+                                    <option value="{{ $jp->tahun_ajaran }}" selected>{{ $jp->tahun_ajaran }}</option>
+                                @endforeach
                                 @foreach ($tahunAjaran as $ta)
                                     <option value="{{ $ta->tahun_ajaran }}"
                                         {{ old('tahun_ajaran') == $ta->tahun_ajaran ? 'selected' : '' }}>
@@ -58,7 +66,9 @@
                         <div class=" form-group">
                             <label for="">Tipe</label>
                             <select name="tipe" id="" class=" form-control float-right">
-                                <option value="" selected>-- Pilih Tipe --</option>
+                                @foreach ($jenisPembayaran as $jp)
+                                    <option value="{{ $jp->tipe }}" selected>{{ $jp->tipe }}</option>
+                                @endforeach
                                 <option value="Bebas" {{ old('tipe') == 'Bebas' ? 'selected' : '' }}>Bebas</option>
                                 <option value="Bulanan" {{ old('tipe') == 'Bulanan' ? 'selected' : '' }}>Bulanan</option>
                             </select>
@@ -72,8 +82,9 @@
                     <div class=" col-sm-4 mt-4 btn-sm">
                         <div class=" row">
                             <div class=" col-sm-12 ">
-                                <button type="submit" style="width: 100%" class="btn btn-primary btn-sm">
-                                    <i class=" fa fa-plus"></i> Tambah
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    style="width: 100%" data-target="#konfirmasiModal" id="perbaharuiButton">
+                                    <i class="fa fa-save"></i> Perbaharui
                                 </button>
                             </div>
                             <div class=" col-sm-12 mt-1">
@@ -87,9 +98,39 @@
             </form>
         </div>
     </div>
-    @if (session()->has('gagalJenisPembayaran'))
-        <script type="text/javascript">
-            toastr.error('{{ session('gagalJenisPembayaran') }}')
-        </script>
-    @endif
+
+    <!-- Modal Konfirmasi -->
+    <div class="modal fade" id="konfirmasiModal" tabindex="-1" role="dialog" aria-labelledby="konfirmasiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header m-0">
+                    <h5 class="modal-title" id="konfirmasiModalLabel">Apakah Anda Yakin Untuk Memperbarui Data?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body " style="color: red">
+                    <b>
+                        Jika data diperbaharui, secara otomatis menghapus seluruh data Tarif Pembayaran
+                    </b>
+                    <div class=" mt-2 text-center">
+                        <button type="button" class="btn btn-danger btn-sm mx-1" data-dismiss="modal">Batal</button>
+                        <!-- Tombol Perbarui -->
+                        <button type="button" onclick="submitForm()" class="btn btn-primary btn-sm " id="confirmButton"
+                            disabled>Perbaharui</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            document.querySelector("form").submit();
+        }
+        setTimeout(function() {
+            // document.getElementById("perbaharuiButton").removeAttribute("disabled");
+            document.getElementById("confirmButton").removeAttribute("disabled");
+        }, 5000);
+    </script>
 @endsection

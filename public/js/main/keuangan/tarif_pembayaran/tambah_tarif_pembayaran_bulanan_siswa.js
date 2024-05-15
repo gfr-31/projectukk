@@ -1,3 +1,21 @@
+function formatRupiahs(tagihanId) {
+
+    let inputElement = document.getElementById(tagihanId)
+    let value = inputElement.value
+
+    let numberValue = parseFloat(value.replace(/[^\d]/g, ''))
+    
+    if (isNaN(numberValue)) {
+        inputElement.value = "Rp. 0"
+    } else {
+        inputElement.value = numberValue.toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        })
+    }
+}
+
 function formatRupiah(tagihanId) {
     // Mengonversi angka menjadi format Rupiah dengan koma sebagai pemisah ribuan
     var rupiah = new Intl.NumberFormat('id-ID', {

@@ -45,12 +45,24 @@
                 <form action="/masuk" method="post">
                     @csrf
                     {{-- Email --}}
-                    <div class="mx-3 mb-2">
+                    {{-- <div class="mx-3 mb-2">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror" autofocus required
                             value="{{ old('email') }}">
                         @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div> --}}
+                    {{-- Username --}}
+                    <div class="mx-3 mb-2">
+                        <label for="name">Username</label>
+                        <input type="text" name="name" id="email"
+                            class="form-control @error('name') is-invalid @enderror" autofocus required
+                            value="{{ old('name') }}">
+                        @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

@@ -103,8 +103,8 @@ class SiswaController extends Controller
             'nama_ayah' => 'regex:/^[\pL\s]+$/u',
             'nama_ibu' => 'regex:/^[\pL\s]+$/u',
             'no_hp_ortu' => 'numeric',
-            'nis' => 'numeric|unique:siswas,nis',
-            'nisn' => 'numeric|unique:siswas,nisn',
+            'nis' => 'numeric',
+            'nisn' => 'numeric',
             'fotos' => 'mimes:jpeg,png,jpg|max:2048',
             'kelas_id' => 'required',
         ], [
@@ -119,8 +119,6 @@ class SiswaController extends Controller
             'no_hp_ortu.numeric' => 'No Hp Orang Tua Harus Diisi Dengan Angka.',
             'nis.numeric' => 'NIS Harus Diisi Dengan Angka.',
             'nisn.numeric' => 'NISN Harus Diisi Dengan Angka.',
-            'nis.unique' => 'NIS Sudah Ada Pada Data Siswa Lain.',
-            'nisn.unique' => 'NISN Sudah Ada Pada Data Siswa Lain.',
             'fotos.mimes' => 'Foto Siswa Harus Berupa JPEG, PNG, JPG.',
             'fotos.max' => 'Size Foto Siswa Harus Dibawah 2MB',
             'kelas_id.required' => 'Kelas Wajib Diisi',
@@ -180,6 +178,7 @@ class SiswaController extends Controller
     }
     public function hapus_siswa($id)
     {
+        // dd($id);
         DB::table('siswas')->where('id', $id)->delete();
         return redirect('/admin/siswa')->with('berhasilHapusSiswa', 'Data Berhasil Dihapus');
     }

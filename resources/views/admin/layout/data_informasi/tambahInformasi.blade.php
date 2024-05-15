@@ -34,7 +34,11 @@
                                             <div class="form-group mt-2">
                                                 <label>Judul Informasi</label>
                                                 <input type="text" name="judul" class="form-control" id=""
-                                                    placeholder="Data Informasi" required>
+                                                    placeholder="Data Informasi" >
+                                                @error('judul')
+                                                    <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                        {{ $message }} </small>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -45,6 +49,10 @@
                                 <div class="form-group">
                                     <label>Deskripsi Informasi</label>
                                     <textarea id="content" name="deskripsi"></textarea>
+                                    @error('deskripsi')
+                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                            {{ $message }} </small>
+                                    @enderror
                                 </div>
                                 <div class=" row">
                                     <div class=" col-sm-8">
@@ -62,6 +70,10 @@
                                                             name="fotos" accept="image/*">
                                                         <label class="custom-file-label" for="foto">Masukan
                                                             Gambar</label>
+                                                        @error('fotos')
+                                                            <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                                {{ $message }} </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +81,7 @@
                                     </div>
                                     <div class=" col-sm-4">
                                         <div class=" card card-blue card-outline ">
-                                            <div class=" form-group mx-3">                                             
+                                            <div class=" form-group mx-3">
                                                 <div class="form-group mt-2">
                                                     <label>Status</label>
                                                     <div class="form-group clearfix ml-1">
@@ -88,6 +100,10 @@
                                                             </label>
                                                         </div>
                                                     </div>
+                                                    @error('status')
+                                                        <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
+                                                            {{ $message }} </small>
+                                                    @enderror
                                                 </div>
                                                 <button type="submit" class="btn btn-danger btn-sm">Submit</button>
                                             </div>

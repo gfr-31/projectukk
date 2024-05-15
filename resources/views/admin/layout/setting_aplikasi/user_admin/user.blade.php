@@ -35,13 +35,13 @@
                 <table id="myTable" class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th >No</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Tanggal Pembuatan</th>
                             <th>Tanggal Pembaharuan</th>
                             {{-- <th>Status</th> --}}
-                            <th>
+                            <th >
                                 <center>
                                     Aksi
                                 </center>
@@ -59,15 +59,21 @@
                                 <td>{{ $a->updated_at }}</td>
                                 <td>
                                     <center>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                            data-target="#exampleModalEdit{{ $a->id }}">
-                                            <i class="fa fa-pencil"></i> Edit
-                                        </button>
-                                        |
-                                        <a href="/admin/list-user/hapus-user/{{ $a->id }}"
-                                            class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                        @if ($a->name == 'admin')
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class=" fa fa-lock"> </i> Tidak Bisa Edit & Hapus
+                                            </button>
+                                        @else
+                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#exampleModalEdit{{ $a->id }}">
+                                                <i class="fa fa-pencil"></i> Edit
+                                            </button>
+                                            |
+                                            <a href="/admin/list-user/hapus-user/{{ $a->id }}"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        @endif
                                     </center>
                                 </td>
                             </tr>
@@ -138,8 +144,10 @@
                         </button>
                     </div>
                     <div class=" modal-body">
-                        <form class="form-horizontal" method="post" action="/admin/list-user/edit-user/{{ $a->id }}">
+                        <form class="form-horizontal" method="post"
+                            action="/admin/list-user/edit-user/{{ $a->id }}">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $a->id }}">
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Username</label>
@@ -165,7 +173,7 @@
                             </div>
                             <div class="card-footer">
                                 <a class="btn btn-default  btn-sm" data-dismiss="modal">Cancel</a>
-                                <button type="submit" class="btn bg-olive float-right btn-sm">Tambah</button>
+                                <button type="submit" class="btn bg-olive float-right btn-sm">perbaharui</button>
                             </div>
                         </form>
                     </div>
