@@ -1,3 +1,13 @@
+$('#example').DataTable({
+    "paging": true, // Aktifkan pagination
+    "lengthChange": true, // Nonaktifkan opsi perubahan jumlah entri per halaman
+    "searching": true, // Aktifkan pencarian
+    "ordering": false, // Aktifkan pengurutan kolom
+    "info": true, // Aktifkan informasi tentang jumlah entri dan halaman
+    "autoWidth": false, // Nonaktifkan otomatis lebar kolom
+    "responsive": true // Aktifkan responsif
+});
+
 var inputCounter = 0;
 
 function addInput() {

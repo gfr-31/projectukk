@@ -20,8 +20,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tahun Ajaran</label>
-                        <div class="row mb-1">
-                            <div class=" col-5 ">
+                        <div class="row mb-1 bgda">
+                            <div class=" col-6 ">
                                 <input name="tj1" type="text" class="form-control mb-2" id=""
                                     placeholder="Ex: 2023" value="{{ old('tj1') }}">
                                 @error('tj1')
@@ -29,8 +29,8 @@
                                     </small>
                                 @enderror
                             </div>
-                            <h1>-</h1>
-                            <div class=" col-5">
+                            <div class=" col-6">
+                                {{-- <h1>-</h1> --}}
                                 <input id="tahun_ajaran" name="tj2" type="text" class="form-control mb-2"
                                     id="" placeholder="Ex: 2024" value="{{ old('tj2') }}">
                                 @error('tj2')
@@ -39,34 +39,26 @@
                             </div>
                         </div>
                         <div class=" form-group">
-                            <label for="">Keterangan</label>
-                            <div class="form-group">
-                                <div class=" row">
-                                    <div>
-                                        <p class=" col-1"></p>
-                                    </div>
-                                    <div class=" colsm-3 custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio1"
-                                            name="customRadio" value="Aktif"
-                                            {{ old('customRadio') == 'Aktif' ? 'checked' : '' }}>
-                                        <label for="customRadio1" class="custom-control-label">Aktif</label>
-                                    </div>
-                                    <div>
-                                        <p class=" col-1"></p>
-                                    </div>
-                                    <div class="colsm-3 custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio2"
-                                            name="customRadio" value="Tidak Aktif"
-                                            {{ old('customRadio') == 'Tidak Aktif' ? 'checked' : '' }}>
-                                        <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
-                                    </div>
-                                </div>
+                            <label for="">Keterangan</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="customRadio" id="inlineRadio1"
+                                    {{ old('customRadio') == 'Aktif' ? 'checked' : '' }} value="Aktif">
+                                <label class="form-check-label" for="inlineRadio1">Aktif</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="customRadio" id="inlineRadio2"
+                                    {{ old('customRadio') == 'Tidak Aktif' ? 'checked' : '' }} value="Tidak Aktif">
+                                <label class="form-check-label" for="inlineRadio2">Tidak Aktif</label>
+                            </div>
+                            <div>
                                 @error('customRadio')
                                     <small class=" text-danger ml-1"><i class=" fa fa-warning"></i> {{ $message }} </small>
                                 @enderror
-                                {{-- <p>(*wajib diisi</p> --}}
                             </div>
                         </div>
+
+
+
                         <div class="card-footer">
                             <a href="/admin/tahun-ajaran" class="btn btn-danger btn-sm float-right">
                                 <i class=" fa fa-reply"></i> Kembali

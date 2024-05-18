@@ -120,9 +120,9 @@
             </div>
         @endforeach
 
-        <div class="card">
-            <div class="card-body p-0">
-                <table class="table table-striped">
+        <div class="card card-olive card-outline">
+            <div class="card-body ">
+                <table id="example" class="table table-striped">
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
@@ -190,6 +190,11 @@
             </div>
         </div>
     @endforeach
+    {{-- DataTabel --}}
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.bootstrap5.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTables.bootstrap5.css') }}">
     <script src="{{ asset('js/main/keuangan/pos_keuangan/pos_keuangan.js') }}"></script>
     @if ($errors->any())
         <script type="text/javascript">

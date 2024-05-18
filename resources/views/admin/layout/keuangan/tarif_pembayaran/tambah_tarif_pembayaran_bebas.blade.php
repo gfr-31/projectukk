@@ -75,12 +75,12 @@
                                             <label for="" class=" col-form-label">Kelas</label>
                                         </div>
                                         <div class=" col-9">
-                                            <div class="form-select ">
+                                            <div class=" ">
                                                 @error('kelas')
                                                     <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                         {{ $message }} </small>
                                                 @enderror
-                                                <select class="form-control " name="kelas"
+                                                <select class="form-select " name="kelas"
                                                     aria-label="Default select example" >
                                                     <option value="" class=" text-center" selected>-- Kelas --
                                                     </option>
@@ -104,7 +104,7 @@
                                                 <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                     {{ $message }} </small>
                                             @enderror
-                                            <input type="text" class=" form-control" id="tarifInput" name="tarif">
+                                            <input type="text" class=" form-control" id="tarifInput" name="tarif" value="{{ old('tarif') }}">
                                         </div>
                                     </div>
                                 </div>

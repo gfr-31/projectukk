@@ -11,6 +11,7 @@ class TahunAjaranController extends Controller
     // Tahun Ajaran
     public function tahun_ajaran()
     {
+
         $admin = DB::table('users')->get();
         $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('created_at', 'desc')->get();
         return view('admin.layout.master_data.tahun_ajaran.tahun_ajaran', ['admin' => $admin], ['tahun_ajaran' => $tahun_ajaran]);

@@ -205,9 +205,9 @@
                             </div>
                         </div>
                         <div class=" mt-4 text-center">
-                            <button class="btn btn-danger profile-button btn-sm" type="button">
+                            <a href="/logout_siswa" class="btn btn-danger profile-button btn-sm" type="button">
                                 Logout
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

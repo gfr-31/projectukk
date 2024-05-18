@@ -9,7 +9,7 @@
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
                     <li class="breadcrumb-item active">Data Keuangan</li>
-                    <li class="breadcrumb-item active"><a href="/admin/pos_pembayaran">Jenis Pembayaran</a></li>
+                    <li class="breadcrumb-item active"><a href="/admin/jenis-pembayaran">Jenis Pembayaran</a></li>
                     <li class="breadcrumb-item active">Setting Tarif</li>
                 </ol>
             </div>
@@ -26,7 +26,7 @@
                     {{-- @endforeach --}}
                     {{-- <p>Tarif - Uang Gedung - T.A 2023/2024</p> --}}
                     <div class=" row ml-5">
-                        <div class=" col-6">
+                        <div class=" col-4">
                             <div class=" form-group">
                                 <div class="row align-items-center">
                                     <div class=" col-auto">
@@ -39,44 +39,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" col-6 ">
-                            <div class=" form-group float-right mr-3">
-                                <div class="row align-items-center">
-                                    <label for="" class=" col-form-label mr-3">Tambah Tarif</label>
-                                    <a href="/admin/tambah/tarif-pembayaran/{{ $jp->tahun_ajaran }}/{{ $jp->tipe }}/id={{ $jp->id }}"
-                                        class="btn btn-primary col-auto btn-sm">
-                                        <i class=" fa fa-plus"></i> Berdasarkan Kelas
-                                    </a>
-                                    <a data-toggle="modal" data-target="#popupModal" class="btn btn-primary btn-sm ml-2">
-                                        <i class="fa fa-plus"></i> Berdasarkan Siswa
-                                    </a>
-                                </div>
+                        <div class=" col-8 ">
+                            <div class=" form-group justify-content-between  float-right mr-2">
+                                <label for="" class=" col-form-label mr-3">Tambah Tarif</label>
+                                <a href="/admin/tambah/tarif-pembayaran/{{ $jp->tahun_ajaran }}/{{ $jp->tipe }}/id={{ $jp->id }}"
+                                    class="btn btn-primary col-auto btn-sm">
+                                    <i class=" fa fa-plus"></i> Berdasarkan Kelas
+                                </a>
+                                <a data-toggle="modal" data-target="#popupModal" class="btn btn-primary btn-sm ml-2">
+                                    <i class="fa fa-plus"></i> Berdasarkan Siswa
+                                </a>
+                                |
+                                <button type="button" class="btn btn-success btn-sm " data-toggle="modal"
+                                    data-target="#konfirmasiModal" id="perbaharuiButton">
+                                    <i class="fa fa-cog"></i> Edit Berdasarkan Kelas
+                                </button>
                             </div>
                         </div>
                     </div>
             </div>
         </div>
         <div class="card card-blue card-outline">
-            <div class="card-header">
-                <div class=" float-left">
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
-                    data-target="#konfirmasiModal" id="perbaharuiButton">
-                    <i class="fa fa-cog"></i> Edit Berdasarkan Kelas
-                </button>
-            </div>
-            <div class="card-body table-responsive p-0">
-                <table id="myTable" class="table table-hover text-nowrap">
+            <div class="card-body table-responsive ">
+                {{-- <table id="myTable" class="table table-hover text-nowrap"> --}}
+                <table id="example" class="table table-hover text-nowrap">
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
@@ -148,10 +134,10 @@
                                             <label for="" class=" col-form-label">Kelas</label>
                                         </div>
                                         <div class=" col-10">
-                                            <div class="form-select">
-                                                <select class="form-control" name="kelas"
+                                            <div class="">
+                                                <select class="form-select" name="kelas"
                                                     aria-label="Default select example" required>
-                                                    <option value="" selected>-- Kelas --</option>
+                                                    <option value="" class=" text-center" selected>-- Kelas --</option>
                                                     @foreach ($kelas as $k)
                                                         <option value="{{ $k->id }}">{{ $k->kelas }}
                                                         </option>
@@ -229,10 +215,10 @@
                                             <label for="" class=" col-form-label">Kelas</label>
                                         </div>
                                         <div class=" col-10">
-                                            <div class="form-select">
-                                                <select class="form-control" name="kelas"
+                                            <div class="">
+                                                <select class="form-select" name="kelas"
                                                     aria-label="Default select example" required>
-                                                    <option value="" selected>-- Kelas --</option>
+                                                    <option value="" class=" text-center" selected>-- Kelas --</option>
                                                     @foreach ($kelas as $k)
                                                         <option value="{{ $k->id }}">{{ $k->kelas }}
                                                         </option>
@@ -283,8 +269,13 @@
             </div>
         </div>
     @endforeach
+    {{-- DataTabel --}}
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.bootstrap5.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTables.bootstrap5.css') }}">
+
     <script>
-        // /admin/tarif-pembayaran-bebas/{{ $t->tahun_ajaran }}/hapus{{ $t->id }}
         function submitDelete(jpId) {
             // console.log(jpId);
             setTimeout(function() {

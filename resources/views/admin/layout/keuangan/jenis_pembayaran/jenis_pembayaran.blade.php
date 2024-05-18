@@ -20,9 +20,9 @@
             </a>
         </div>
 
-        <div class="card">
-            <div class="card-body p-0">
-                <table class="table table-striped">
+        <div class="card card-olive card-outline">
+            <div class="card-body ">
+                <table id="example" class="table table-striped">
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
@@ -91,7 +91,8 @@
                         Apakah Anda Yakin Untuk Menghapus Data?
                     </div>
                     <div class=" modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm mx-1" data-dismiss="modal" onclick="batal({{ $jp->id }})">Batal</button>
+                        <button type="button" class="btn btn-secondary btn-sm mx-1" data-dismiss="modal"
+                            onclick="batal({{ $jp->id }})">Batal</button>
                         <button type="button" onclick="submitForm({{ $jp->id }})" class="btn btn-danger btn-sm "
                             id="confirmButton{{ $jp->id }}" disabled>
                             <i class=" fa fa-trash"></i> Hapus
@@ -101,10 +102,27 @@
             </div>
         </div>
     @endforeach
+    {{-- DataTabel --}}
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.bootstrap5.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTables.bootstrap5.css') }}">
+
     <script>
+        $('#example').DataTable({
+            "paging": true, // Aktifkan pagination
+            "lengthChange": true, // Nonaktifkan opsi perubahan jumlah entri per halaman
+            "searching": true, // Aktifkan pencarian
+            "ordering": false, // Aktifkan pengurutan kolom
+            "info": true, // Aktifkan informasi tentang jumlah entri dan halaman
+            "autoWidth": false, // Nonaktifkan otomatis lebar kolom
+            "responsive": true // Aktifkan responsif
+        });
+
         function batal(jpId) {
             document.getElementById("confirmButton" + jpId).setAttribute("disabled", "disabled")
         }
+
         function submitForm(jpId) {
             // Ganti window.location.href dengan URL halaman yang ingin Anda tuju
             window.location.href = "/admin/jenis-pembayaran/hapus" + jpId;

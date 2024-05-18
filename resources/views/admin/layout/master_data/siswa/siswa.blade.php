@@ -3,7 +3,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Siswa</h1>
+                <h1 class="m-0">Siswa
+                    <a class=" btn btn-primary btn-sm text-white" href="/admin/tambah/siswa">
+                        <i class=" fa fa-plus"></i>
+                        Tambah
+                    </a>
+                </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -15,11 +20,7 @@
         </div>
 
         <div class="card card-blue card-outline mt-3">
-            <div class="card-header">
-                <a class=" btn btn-primary btn-sm text-white" href="/admin/tambah/siswa">
-                    <i class=" fa fa-plus"></i>
-                    Tambah
-                </a>
+            {{-- <div class="card-header">
                 <div class="card-tools ">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="text" name="table_search" id="searchInput" class="form-control float-right"
@@ -31,9 +32,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body table-responsive p-0">
-                <table id="myTable" class="table table-hover text-nowrap">
+            </div> --}}
+            <div class="card-body table-responsive ">
+                {{-- <table id="myTable" class="table table-hover text-nowrap"> --}}
+                <table id="example" class="table table-hover text-nowrap">
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
@@ -130,6 +132,12 @@
             </div>
         </div>
     @endforeach
+    {{-- DataTabel --}}
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.bootstrap5.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTables.bootstrap5.css') }}">
+
     <script src="{{ asset('js/main/master_data/siswa/siswa.js') }}"></script>
     @if (session()->has('berhasilSiswa'))
         <script type="text/javascript">

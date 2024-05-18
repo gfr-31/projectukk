@@ -15,7 +15,7 @@ class DataController extends Controller
     public function dataInformasi()
     {
         $admin = User::get();
-        $data_informasi = DB::table('data_informasi')->get();
+        $data_informasi = DataInformasi::get();
         return view('admin.layout.data_informasi.data_informasi', compact('admin', 'data_informasi'));
     }
 
@@ -80,7 +80,7 @@ class DataController extends Controller
         $ids = $request->ids;
         // dd($ids);
         DataInformasi::whereIn('id',explode(",",$ids))->delete();
-        return back();
+        return back()->with('berhasilHapusDataSemua', 'Data Yang Dipilih Berhasil Dihapus');
     }
 
     public function edit_informasi($id)

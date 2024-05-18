@@ -75,9 +75,9 @@
                                             <label for="" class=" col-form-label">Kelas</label>
                                         </div>
                                         <div class=" col-9">
-                                            <div class="form-select ">
+                                            <div class=" ">
                                                 @foreach ($kelas as $k)
-                                                    <input class="form-control" type="text" id=""
+                                                    <input class=" form-control" type="text" id=""
                                                         value="{{ $k->kelas }}" readonly>
                                                     <input type="hidden" name="kelas" value="{{ $k->id }}">
                                                 @endforeach
@@ -92,12 +92,12 @@
                                             <label for="" class=" col-form-label">Siswa</label>
                                         </div>
                                         <div class=" col-9">
-                                            <div class="form-select ">
+                                            <div class=" ">
                                                 @error('siswa')
                                                     <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                         {{ $message }} </small>
                                                 @enderror
-                                                <select class="form-control " name="siswa"
+                                                <select class="form-select " name="siswa"
                                                     aria-label="Default select example">
                                                     <option value="" class=" text-center" selected>-- siswa --
                                                     </option>
@@ -121,7 +121,7 @@
                                                 <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                     {{ $message }} </small>
                                             @enderror
-                                            <input type="text" class=" form-control" id="tarifInput" name="tarif">
+                                            <input type="text" class=" form-control" id="tarifInput" name="tarif" value="{{ old('tarif') }}">
                                         </div>
                                     </div>
                                 </div>

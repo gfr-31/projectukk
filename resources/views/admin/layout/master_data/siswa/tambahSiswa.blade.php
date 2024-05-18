@@ -148,7 +148,7 @@
                                                         <i class=" fas fa-home"></i>
                                                     </span>
                                                 </div>
-                                                <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat Lengkap" required>{{ old('alamat') }}</textarea>
+                                                <textarea name="alamat" class="form-control" rows="3" placeholder="Min. 10 Huruf" required>{{ old('alamat') }}</textarea>
                                             </div>
                                             @error('alamat')
                                                 <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
@@ -313,12 +313,12 @@
     <script src="{{ asset('js/main/master_data/siswa/tambahSiswa.js') }}"></script>
     @yield('toastr')
     @if ($errors->any())
-    <script type="text/javascript">
-        toastr.error('Ada Data Yang Belum Diisi Atau Salah', "", {
-            "closeButton": true,
-            "timeOut": 2500,
-        });
-    </script>
+        <script type="text/javascript">
+            toastr.error('Ada Data Yang Belum Diisi Atau Salah', "", {
+                "closeButton": true,
+                "timeOut": 2500,
+            });
+        </script>
     @endif
     @if (session()->has('gagalInput'))
         <script type="text/javascript">

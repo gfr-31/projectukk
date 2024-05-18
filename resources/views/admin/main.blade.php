@@ -30,6 +30,8 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTableBootstrap.min.css') }}">
+
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -66,7 +68,8 @@
                 @if (isset($admin))
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('gambar/icon.png') }}" class="user-image img-circle " alt="User Image" loading="lazy">
+                            <img src="{{ asset('gambar/icon.png') }}" class="user-image img-circle " alt="User Image"
+                                loading="lazy">
                             <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

@@ -3,7 +3,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Kelas</h1>
+                <h1 class="m-0">Kelas
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        <i class=" fa fa-plus"></i> Tambah
+                    </button>
+                </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -83,11 +87,9 @@
     @endforeach
 
     <div class="card card-blue card-outline mt-3">
-        <div class="card-header">
+        {{-- <div class="card-header">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-                <i class=" fa fa-plus"></i> Tambah
-            </button>
+
             <div class="card-tools ">
                 <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" id="searchInput" class="form-control float-right"
@@ -99,9 +101,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-            <table id="myTable" class="table table-hover text-nowrap">
+        </div> --}}
+        <div class="card-body table-responsive">
+            <table id="example" class="table table-hover text-nowrap">
                 <thead>
                     <tr>
                         <th style="width: 10px">No</th>
@@ -179,36 +181,14 @@
         </div>
     @endforeach
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <script>
-        document.getElementById("searchInput").addEventListener("keyup", function() {
-            var input, filter, table, tr, td, i, j;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.querySelector(".table-responsive table");
-            tr = table.getElementsByTagName("tr");
-
-            // Loop melalui semua baris tabel
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td");
-                // Loop melalui semua sel dalam baris
-                for (j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        // Jika teks dalam sel cocok dengan pencarian, tampilkan baris, jika tidak, sembunyikan
-                        if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            break; // Keluar dari loop saat pencocokan ditemukan
-                        } else {
-                            tr[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+    {{-- DataTabel --}}
+    <script src="{{ asset('dataTable/dataTables.js') }}"></script>
+    <script src="{{ asset('dataTable/dataTables.bootstrap5.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dataTable/dataTables.bootstrap5.css') }}">
 
     <script src="{{ asset('js/main/master_data/kelas/kelas.js') }}"></script>
     @if ($errors->any())

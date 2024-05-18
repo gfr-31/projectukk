@@ -83,14 +83,14 @@
                                                     <label for="" class=" col-form-label">Kelas</label>
                                                 </div>
                                                 <div class=" col-8">
-                                                    <div class="form-select" style="width: 200px">
+                                                    <div class="" style="width: 200px" aria-label="Default select example">
                                                         @error('kelas')
                                                             <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                                 {{ $message }} </small>
                                                         @enderror
-                                                        <select class="form-control " name="kelas"
+                                                        <select class=" form-select"  name="kelas"
                                                             aria-label="Default select example">
-                                                            <option value="" selected>-- Kelas --</option>
+                                                            <option value="" class=" text-center" selected>-- Kelas --</option>
                                                             @foreach ($kelas as $k)
                                                                 <option value="{{ $k->id }}">{{ $k->kelas }}
                                                                 </option>

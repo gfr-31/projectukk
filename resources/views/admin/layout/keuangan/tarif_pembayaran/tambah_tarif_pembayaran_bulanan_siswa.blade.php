@@ -99,14 +99,14 @@
                                                 <label for="" class=" col-form-label">Siswa</label>
                                             </div>
                                             <div class=" col-8">
-                                                <div class="form-select">
+                                                <div class="">
                                                     @error('siswa')
                                                         <small class=" text-danger ml-1"><i class=" fa fa-warning"></i>
                                                             {{ $message }} </small>
                                                     @enderror
-                                                    <select class="form-control " name="siswa" id="siswa"
+                                                    <select class="form-select " name="siswa" id="siswa"
                                                         aria-label="Default select example">
-                                                        <option value="" selected>-- Siswa --</option>
+                                                        <option value=""  class=" text-center" selected>-- Siswa --</option>
                                                         @foreach ($siswa as $s)
                                                             <option value="{{ $s->id }}">{{ $s->nama_lengkap }}
                                                             </option>
@@ -178,7 +178,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="juli"
-                                                id="tagihan1" oninput="formatRupiahs('tagihan1')">
+                                                id="tagihan1" value="{{ old('juli') }}" oninput="formatRupiahs('tagihan1')">
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="agustus"
-                                                id="tagihan2" oninput="formatRupiahs('tagihan2')">
+                                                id="tagihan2" value="{{ old('agustus') }}" oninput="formatRupiahs('tagihan2')">
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="september"
-                                                id="tagihan3" oninput="formatRupiahs('tagihan3')">
+                                                id="tagihan3" value="{{ old('september') }}" oninput="formatRupiahs('tagihan3')">
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="oktober"
-                                                id="tagihan4" oninput="formatRupiahs('tagihan4')">
+                                                id="tagihan4" value="{{ old('oktober') }}" oninput="formatRupiahs('tagihan4')">
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +258,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="november"
-                                                id="tagihan5" oninput="formatRupiahs('tagihan5')">
+                                                id="tagihan5" value="{{ old('november') }}" oninput="formatRupiahs('tagihan5')">
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="desember"
-                                                id="tagihan6"oninput="formatRupiahs('tagihan6')">
+                                                id="tagihan6" value="{{ old('desember') }}" oninput="formatRupiahs('tagihan6')">
                                         </div>
                                     </div>
                                 </div>
@@ -298,7 +298,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="january"
-                                                id="tagihan7"oninput="formatRupiahs('tagihan7')">
+                                                id="tagihan7" value="{{ old('january') }}" oninput="formatRupiahs('tagihan7')">
                                         </div>
                                     </div>
                                 </div>
@@ -318,7 +318,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="februari"
-                                                id="tagihan8"oninput="formatRupiahs('tagihan8')">
+                                                id="tagihan8" value="{{ old('februari') }}" oninput="formatRupiahs('tagihan8')">
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +338,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="maret"
-                                                id="tagihan9"oninput="formatRupiahs('tagihan9')">
+                                                id="tagihan9" value="{{ old('maret') }}" oninput="formatRupiahs('tagihan9')">
                                         </div>
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="april"
-                                                id="tagihan10"oninput="formatRupiahs('tagihan10')">
+                                                id="tagihan10" value="{{ old('april') }}" oninput="formatRupiahs('tagihan10')">
                                         </div>
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="mei"
-                                                id="tagihan11"oninput="formatRupiahs('tagihan11')">
+                                                id="tagihan11" value="{{ old('mei') }}" oninput="formatRupiahs('tagihan11')">
                                         </div>
                                     </div>
                                 </div>
@@ -398,7 +398,7 @@
                                                     {{ $message }} </small>
                                             @enderror
                                             <input class="form-control form-control-sm" type="text" name="juni"
-                                                id="tagihan12"oninput="formatRupiahs('tagihan12')">
+                                                id="tagihan12" value="{{ old('juni') }}" oninput="formatRupiahs('tagihan12')">
                                         </div>
                                     </div>
                                 </div>
