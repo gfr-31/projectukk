@@ -12,12 +12,18 @@ function validasiEdit(tipe, id) {
 var dateButtons = document.querySelectorAll("button");
 dateButtons.forEach(function (button) {
     var value = button.value;
+    // console.log(dateButtons);
     // RegEx untuk mencocokkan format tanggal "DD/MM/YYYY"
     var regex = /^\d{2}\/\d{2}\/\d{4}$/;
     if (regex.test(value)) {
-        button.classList.add("red-button");
+        // Tambahkan gaya langsung
+        button.style.backgroundColor = "red";
+        button.style.color = "white";
         button.disabled = true; // Nonaktifkan tombol
     } else {
+        // Reset gaya langsung
+        button.style.backgroundColor = ""; // Menghapus warna latar belakang
+        button.style.color = ""; // Menghapus warna teks
         button.disabled = false; // Aktifkan tombol
     }
 });
@@ -26,22 +32,22 @@ var nis = document.getElementById("nis").value;
 // Hitung Pembayaran
 // parseInt(a.replace(/\D/g, ""));
 // Kembalian
-function enterDibayar(event){
+function enterDibayar(event) {
     if (event.key === 'Enter') {
         var dibayar = document.getElementById('dibayar' + nis).value
         var a = parseInt(dibayar.replace(/\D/g, ""));
-        var total = sessionStorage.getItem('total' + nis) 
+        var total = sessionStorage.getItem('total' + nis)
         // alert(total)
         var b = parseInt(total);
         if (!a) {
             a = '0'
-            var kembalian = b-a
+            var kembalian = b - a
             var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            document.getElementById('kembalian'+nis).value = rp
-        }else{
-            var kembalian = a-b
+            document.getElementById('kembalian' + nis).value = rp
+        } else {
+            var kembalian = a - b
             var rp = 'Rp. ' + kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            document.getElementById('kembalian'+nis).value = rp
+            document.getElementById('kembalian' + nis).value = rp
         }
     }
 }
@@ -94,7 +100,7 @@ if (!bulan && !bebas) {
         }
     }
 }
-sessionStorage.setItem('total'+nis, total)
+sessionStorage.setItem('total' + nis, total)
 // Bebas
 function btnbebas(id) {
     var nis = document.getElementById("nis").value;
@@ -148,9 +154,7 @@ function setTanggal(bulan, id) {
         if (isNaN(nilaiBulan) || isNaN(nilaiSisaTagihan)) {
             alert("Nilai bulan atau sisa tagihan tidak valid.");
         }
-    } else {
-        window.history.back();
-    }
+    } 
 
     // Mendapatkan tanggal saat ini
     var tanggalSekarang = new Date();
@@ -199,36 +203,36 @@ function tampilkanDivTerakhir() {
 
 // Tambahkan event listener untuk setiap hyperlink
 document.getElementById("bulanan_link").addEventListener("click", function (event) {
-        event.preventDefault();
-        // Tampilkan div untuk jenis pembayaran bulanan
-        document.getElementById("bulanan").style.display = "block";
-        // Menyembunyikan div untuk jenis pembayaran bebas
-        document.getElementById("bebas").style.display = "none";
+    event.preventDefault();
+    // Tampilkan div untuk jenis pembayaran bulanan
+    document.getElementById("bulanan").style.display = "block";
+    // Menyembunyikan div untuk jenis pembayaran bebas
+    document.getElementById("bebas").style.display = "none";
 
-        // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
-        document.getElementById("bulanan_link").classList.add("selected");
-        // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
-        document.getElementById("bebas_link").classList.remove("selected");
+    // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
+    document.getElementById("bulanan_link").classList.add("selected");
+    // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
+    document.getElementById("bebas_link").classList.remove("selected");
 
-        // Simpan status terakhir ke penyimpanan lokal
-        localStorage.setItem("jenis_pembayaran", "bulanan");
-    });
+    // Simpan status terakhir ke penyimpanan lokal
+    localStorage.setItem("jenis_pembayaran", "bulanan");
+});
 
 document.getElementById("bebas_link").addEventListener("click", function (event) {
-        event.preventDefault();
-        // Menyembunyikan div untuk jenis pembayaran bulanan
-        document.getElementById("bulanan").style.display = "none";
-        // Tampilkan div untuk jenis pembayaran bebas
-        document.getElementById("bebas").style.display = "block";
+    event.preventDefault();
+    // Menyembunyikan div untuk jenis pembayaran bulanan
+    document.getElementById("bulanan").style.display = "none";
+    // Tampilkan div untuk jenis pembayaran bebas
+    document.getElementById("bebas").style.display = "block";
 
-        // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
-        document.getElementById("bebas_link").classList.add("selected");
-        // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
-        document.getElementById("bulanan_link").classList.remove("selected");
+    // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
+    document.getElementById("bebas_link").classList.add("selected");
+    // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
+    document.getElementById("bulanan_link").classList.remove("selected");
 
-        // Simpan status terakhir ke penyimpanan lokal
-        localStorage.setItem("jenis_pembayaran", "bebas");
-    });
+    // Simpan status terakhir ke penyimpanan lokal
+    localStorage.setItem("jenis_pembayaran", "bebas");
+});
 
 // Panggil fungsi untuk menampilkan div terakhir saat halaman dimuat
 tampilkanDivTerakhir();
@@ -250,15 +254,15 @@ window.onload = function () {
 // Format Rp Jumlah Buyar Bebas
 function rpBayar(id) {
     // Falidasi Form Bebas
-    var jumlahBayar = document.getElementById('inputJumlahBayar'+id);
-    var keterangan =  document.getElementById('keterangan'+id);
-    var button = document.getElementById('submit'+id);
+    var jumlahBayar = document.getElementById('inputJumlahBayar' + id);
+    var keterangan = document.getElementById('keterangan' + id);
+    var button = document.getElementById('submit' + id);
 
-    function check(){
+    function check() {
         return jumlahBayar.value.trim() !== '' && keterangan.value.trim() !== ''
     }
-    
-    function updateButton(){
+
+    function updateButton() {
         button.disabled = !check();
     };
 
@@ -276,7 +280,7 @@ function rpBayar(id) {
         return `${day}-${month}-${year}`;
     }
     // Set nilai input dengan tanggal dan waktu saat ini saat halaman dimuat
-    
+
     // var id = document.getElementById(idw).value
     // alert(id);
     var a = document.getElementById("waktu" + id);
@@ -313,22 +317,23 @@ function rpBayar(id) {
         event.target.value = tarifRupiah;
     });
 
-// document.getElementById('submit'+id).disabled = true;
+    // document.getElementById('submit'+id).disabled = true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Format Rupiah
-function formatrp(input){
+function formatrp(input) {
     // Mengambil nilai input tanpa tanda titik atau Rp
     var nilai = input.value.replace(/\D/g, '');
-    
+
     // Memformat nilai ke format mata uang Rupiah
     var formatted = formatRupiah(nilai);
-    
+
     // Memperbarui nilai input dengan format Rupiah
     input.value = formatted;
 }
-function formatRupiah(angka){
+
+function formatRupiah(angka) {
     var reverse = angka.toString().split('').reverse().join('');
     var ribuan = reverse.match(/\d{1,3}/g);
     ribuan = ribuan.join('.').split('').reverse().join('');
@@ -363,42 +368,42 @@ function tampilkanDivTerakhir2() {
 
 // Tambahkan event listener untuk setiap hyperlink
 document.getElementById("bulanan_link2").addEventListener("click", function (event) {
-        event.preventDefault();
-        // Tampilkan div untuk jenis pembayaran bulanan
-        document.getElementById("bulanan2").style.display = "block";
-        // Menyembunyikan div untuk jenis pembayaran bebas
-        document.getElementById("bebas2").style.display = "none";
+    event.preventDefault();
+    // Tampilkan div untuk jenis pembayaran bulanan
+    document.getElementById("bulanan2").style.display = "block";
+    // Menyembunyikan div untuk jenis pembayaran bebas
+    document.getElementById("bebas2").style.display = "none";
 
-        // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
-        document.getElementById("bulanan_link2").classList.add("selected");
-        // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
-        document.getElementById("bebas_link2").classList.remove("selected");
+    // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
+    document.getElementById("bulanan_link2").classList.add("selected");
+    // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
+    document.getElementById("bebas_link2").classList.remove("selected");
 
-        // Simpan status terakhir ke penyimpanan lokal
-        localStorage.setItem("jenis_pembayaran2", "bulanan2");
-    });
+    // Simpan status terakhir ke penyimpanan lokal
+    localStorage.setItem("jenis_pembayaran2", "bulanan2");
+});
 
 document.getElementById("bebas_link2").addEventListener("click", function (event) {
-        event.preventDefault();
-        // Menyembunyikan div untuk jenis pembayaran bulanan
-        document.getElementById("bulanan2").style.display = "none";
-        // Tampilkan div untuk jenis pembayaran bebas
-        document.getElementById("bebas2").style.display = "block";
+    event.preventDefault();
+    // Menyembunyikan div untuk jenis pembayaran bulanan
+    document.getElementById("bulanan2").style.display = "none";
+    // Tampilkan div untuk jenis pembayaran bebas
+    document.getElementById("bebas2").style.display = "block";
 
-        // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
-        document.getElementById("bebas_link2").classList.add("selected");
-        // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
-        document.getElementById("bulanan_link2").classList.remove("selected");
+    // Tambahkan kelas 'selected' untuk menampilkan border pada hyperlink yang dipilih
+    document.getElementById("bebas_link2").classList.add("selected");
+    // Hapus kelas 'selected' dari hyperlink yang tidak dipilih
+    document.getElementById("bulanan_link2").classList.remove("selected");
 
-        // Simpan status terakhir ke penyimpanan lokal
-        localStorage.setItem("jenis_pembayaran2", "bebas2");
-    });
+    // Simpan status terakhir ke penyimpanan lokal
+    localStorage.setItem("jenis_pembayaran2", "bebas2");
+});
 
 // Panggil fungsi untuk menampilkan div terakhir saat halaman dimuat
 tampilkanDivTerakhir2();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-document.getElementById("searchInput").addEventListener("keyup", function() {
+document.getElementById("searchInput").addEventListener("keyup", function () {
     var input, filter, tableBulan, tableBebas, tr1, tr2, td, i, j;
     input = document.getElementById("searchInput");
     filter = input.value.toUpperCase();
@@ -442,9 +447,9 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).ready(function(){
+$(document).ready(function () {
     // Menampilkan popover saat mouse masuk ke setiap tombol unduh
-    $('.popover-trigger').mouseenter(function(){
+    $('.popover-trigger').mouseenter(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover({
             trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
@@ -453,14 +458,14 @@ $(document).ready(function(){
     });
 
     // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
-    $('.popover-trigger').mouseleave(function(){
+    $('.popover-trigger').mouseleave(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover('hide'); // Menyembunyikan popover
     });
 });
-$(document).ready(function(){
+$(document).ready(function () {
     // Menampilkan popover saat mouse masuk ke setiap tombol unduh
-    $('.popover-trigger2').mouseenter(function(){
+    $('.popover-trigger2').mouseenter(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover({
             trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
@@ -469,14 +474,14 @@ $(document).ready(function(){
     });
 
     // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
-    $('.popover-trigger2').mouseleave(function(){
+    $('.popover-trigger2').mouseleave(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover('hide'); // Menyembunyikan popover
     });
 });
-$(document).ready(function(){
+$(document).ready(function () {
     // Menampilkan popover saat mouse masuk ke setiap tombol unduh
-    $('.popover-trigger3').mouseenter(function(){
+    $('.popover-trigger3').mouseenter(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover({
             trigger: 'manual', // Agar popover hanya muncul saat diaktifkan secara manual
@@ -485,7 +490,7 @@ $(document).ready(function(){
     });
 
     // Menyembunyikan popover saat mouse keluar dari setiap tombol unduh
-    $('.popover-trigger3').mouseleave(function(){
+    $('.popover-trigger3').mouseleave(function () {
         var popoverId = $(this).attr('id');
         $('#' + popoverId).popover('hide'); // Menyembunyikan popover
     });

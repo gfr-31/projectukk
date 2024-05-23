@@ -33,65 +33,55 @@
                                             placeholder="Tahun Ajaran"  value="{{ $th->tahun_ajaran }}">
                                     </div> --}}
                             </div>
-                            <div class=" form-group">
+                            <div class=" form-group mt-2">
                                 <label for="">Keterangan</label>
-                                <div class="form-group">
-                                    <div class=" row">
-                                        @if ($th->keterangan == 'Aktif')
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class=" colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio1"
-                                                    name="customRadio" value="Aktif" checked>
-                                                <label for="customRadio1" class="custom-control-label">Aktif</label>
-                                            </div>
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class="colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio2"
-                                                    name="customRadio" value="Tidak Aktif">
-                                                <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
-                                            </div>
-                                        @elseif ($th->keterangan == 'Tidak Aktif')
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class=" colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio1"
-                                                    name="customRadio" value="Aktif">
-                                                <label for="customRadio1" class="custom-control-label">Aktif</label>
-                                            </div>
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class="colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio2"
-                                                    name="customRadio" value="Tidak Aktif" checked>
-                                                <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
-                                            </div>
-                                        @elseif ($th->keterangan == '')
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class=" colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio1"
-                                                    name="customRadio" value="Aktif">
-                                                <label for="customRadio1" class="custom-control-label">Aktif</label>
-                                            </div>
-                                            <div>
-                                                <p class=" col-1"></p>
-                                            </div>
-                                            <div class="colsm-3 custom-control custom-radio">
-                                                <input class="custom-control-input" type="radio" id="customRadio2"
-                                                    name="customRadio" value="Tidak Aktif">
-                                                <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
-                                            </div>
-                                        @endif
+                                <br>
+                                @if ($th->keterangan == 'Aktif')
+                                    <div class=" form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="inlineRadio1" name="customRadio"
+                                            value="Aktif" checked>
+                                        <label for="inlineRadio1" class="form-check-label">Aktif</label>
                                     </div>
-                                    <p>(*wajib diisi</p>
-                                </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="inlineRadio2" name="customRadio"
+                                            value="Tidak Aktif">
+                                        <label for="inlineRadio2" class="form-check-label">Tidak Aktif</label>
+                                    </div>
+                                @elseif ($th->keterangan == 'Tidak Aktif')
+                                    <div>
+                                        <p class=" col-1"></p>
+                                    </div>
+                                    <div class=" colsm-3 custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" id="customRadio1"
+                                            name="customRadio" value="Aktif">
+                                        <label for="customRadio1" class="custom-control-label">Aktif</label>
+                                    </div>
+                                    <div>
+                                        <p class=" col-1"></p>
+                                    </div>
+                                    <div class="colsm-3 custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" id="customRadio2"
+                                            name="customRadio" value="Tidak Aktif" checked>
+                                        <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
+                                    </div>
+                                @elseif ($th->keterangan == '')
+                                    <div>
+                                        <p class=" col-1"></p>
+                                    </div>
+                                    <div class=" colsm-3 custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" id="customRadio1"
+                                            name="customRadio" value="Aktif">
+                                        <label for="customRadio1" class="custom-control-label">Aktif</label>
+                                    </div>
+                                    <div>
+                                        <p class=" col-1"></p>
+                                    </div>
+                                    <div class="colsm-3 custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" id="customRadio2"
+                                            name="customRadio" value="Tidak Aktif">
+                                        <label for="customRadio2" class="custom-control-label">Tidak Aktif</label>
+                                    </div>
+                                @endif
                             </div>
                             <div class="card-footer">
                                 <a href="/admin/tahun-ajaran" class="btn btn-danger btn-sm float-right">

@@ -39,7 +39,7 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
-                            <th>Nis</th>
+                            <th class=" text-left">Nis</th>
                             <th>
                                 <center>Nama</center>
                             </th>
@@ -61,14 +61,22 @@
                         @foreach ($siswa as $s)
                             <tr>
                                 <td>{{ ++$no }}</td>
-                                <td>{{ $s->nis }}</td>
+                                <td class=" text-left">{{ $s->nis }}</td>
                                 <td>
                                     <center>{{ $s->nama_lengkap }}</center>
                                 </td>
                                 @if ($s && $s->kelas)
-                                    <td>
-                                        <center>{{ $s->kelas->kelas }}</center>
-                                    </td>
+                                    @if ($s->kelas->kelas == 'Lulus')
+                                        <td>
+                                            <center>
+                                                <button class=" btn btn-danger btn-sm">{{ $s->kelas->kelas }}</button>
+                                            </center>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <center>{{ $s->kelas->kelas }}</center>
+                                        </td>
+                                    @endif
                                 @else
                                     <td>
                                         <center>

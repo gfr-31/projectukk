@@ -52,7 +52,6 @@ class KeuanganController extends Controller
         Pos::where('id', $request->id)->update([
             'pos' => $request->pos,
             'keterangan' => $request->keterangan,
-            'tipe' => $request->tipe,
             'updated_at' => now()
         ]);
         return redirect('/admin/pos-keuangan')->with('berhasilUpdatePos', 'Data Pos Berhasil Diperbaharui');

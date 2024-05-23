@@ -60,6 +60,7 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::get('pembayaran', [PembayaranController::class, 'transaksi']);
     Route::get('pembayaran-', [PembayaranController::class, 'cariSiswa']);
     Route::post('simpan-pembayaran/{tipe}', [PembayaranController::class, 'simpanPembayaran']);
+    // Route::post('simpan-pembayaran', [PembayaranController::class, 'simpanPembayaran']);
     Route::get('bukti-pembayaran{tipe}/hapus/{kode_transaksi}', [PembayaranController::class, 'hapus_bukti']);
     Route::get('kirim-tagihan-wa/{tipe}-{nama_pembayaran}/{id}', [PembayaranController::class, 'kirim_wa']);
     Route::get('kirim-semua-tagihan-wa/{id}', [PembayaranController::class, 'kirim_semua_wa']);
@@ -113,6 +114,7 @@ Route::prefix('admin')->middleware('isLogin')->group(function () {
     Route::post('tambah/kelas', [KelasController::class, 'tambah_kelas']);
     Route::get('kelas/hapus{id}', [KelasController::class, 'hapus_kelas']);
     Route::get('edit/kelas{id}', [KelasController::class, 'editKelas']);
+    Route::get('edit/kelas{id}/up', [KelasController::class, 'up']);
     Route::post('update/kelas', [KelasController::class, 'updateKelas']);
 
     // Siswa

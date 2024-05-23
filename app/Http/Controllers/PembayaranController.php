@@ -29,7 +29,17 @@ class PembayaranController extends Controller
         $admin = DB::table('users')->get();
         $nis = $request->input('nis');
         $siswa = Siswa::with('kelas')->where('nis', $nis)->first();
-        // dd($siswa);
+
+        $kelasId = Siswa::with('kelas')->where('nis', $nis)->pluck('kelas_id')->first();
+        $siswaId = Siswa::with('kelas')->where('nis', $nis)->pluck('id')->first();
+        $coba = DB::table('coba')->get();
+        $pembayaran = DB::table('coba')
+            ->where('kelas_id', $kelasId)
+            ->where('siswa_id', $siswaId)
+            ->first();
+        // dd($pembayaran);
+        $bulanLunas = $pembayaran ? json_decode($pembayaran->bulan_lunas, true) : [];
+        // dd($bulanLunas);
         if ($siswa) {
             // Mengambil data TarifPembayaranBulanan berdasarkan NIS siswa
             $tpBulanan = TarifPembayaranBulanan::whereHas('siswa', function ($query) use ($nis) {
@@ -50,7 +60,7 @@ class PembayaranController extends Controller
             // $transaksi = $transaksi_bulanan->union($transaksi_bebas)->get();
             // dd($transaksi);
             // dd($tpBebas);
-            return view('admin.layout.pembayaran.pembayaran', compact('admin', 'siswa', 'tpBulanan', 'tpBebas', 't_bulanan', 't_bebas'));
+            return view('admin.layout.pembayaran.pembayaran', compact('admin', 'siswa', 'tpBulanan', 'tpBebas', 't_bulanan', 't_bebas', 'coba', 'bulanLunas'));
         } else {
             $pesan = "Data Siswa Tidak Ditemukan";
             // dd($pesan);
@@ -60,7 +70,6 @@ class PembayaranController extends Controller
 
     public function simpanPembayaran(Request $request)
     {
-        // dd($request->all());
         try {
             if ($request->tipe == "Bulanan") {
                 $st = $request->input('sisa_tagihan' . $request->id);
@@ -222,8 +231,7 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
                 $b = TransaksiBebas::max('id') + 1;
                 $huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $c = substr(str_shuffle($huruf), 0, 3);
-                $d = mt_rand(100, 999);
-                ;
+                $d = mt_rand(100, 999);;
                 $kode = 'BPS' . $d . '-' . $a . '-' . $c . $b;
                 // dd($kode);
                 DB::table('transaksi_bebas')->insert([
@@ -249,11 +257,9 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
                 session()->flash('key', $pesan);
                 return redirect()->back();
             }
-
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
-
     }
 
     public function bukti(Request $request)
@@ -283,7 +289,6 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
             }
             return view('admin.layout.bukti_pembayaran', compact('t_bebas'));
         }
-
     }
     private function terbilang($angka)
     {
@@ -377,7 +382,7 @@ Sisa Tagihan " . $np . " sudah *LUNAS*. " .
 *Kelas : ' . $kelas . '*
 *Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
 *Tagihan  : ' . $nama_pembayaran . '*
-*TA : ' . $ta . '*
+*Tahun Ajaran : ' . $ta . '*
                 
     Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Administrasi untuk melakukan pembayaran dengan membawa kartu SPP atau kartu Bayaran
                 
@@ -393,7 +398,6 @@ Admin SPP
             } else {
                 return redirect()->back()->with('gKirimWa', 'Tidak Ada Tagihan');
             }
-
         } elseif ($tipe === 'Bebas') {
             // dd($nama_pembayaran);
             $id_siswa = TarifPembayaranBebas::where('nama_pembayaran', $nama_pembayaran)->where('id', $id)->pluck('siswa_id');
@@ -413,7 +417,7 @@ Admin SPP
 *Kelas : ' . $kelas . '*
 *Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
 *Tagihan  : ' . $nama_pembayaran . '*
-*TA : ' . $ta . '*
+*Tahun Ajaran : ' . $ta . '*
 
     Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Administrasi untuk melakukan pembayaran dengan membawa kartu SPP atau kartu Bayaran
 
@@ -444,11 +448,10 @@ Admin SPP
         $sisaTagihan = $tagihan->sum('sisa_tagihan');
         $a = "";
         foreach ($tagihan as $t) {
-            if($t->sisa_tagihan > 0){
+            if ($t->sisa_tagihan > 0) {
                 $a .= $t->nama_pembayaran . " - T.A " . $t->tahun_ajaran . "\n";
                 $a .= "*Sebesar : " . 'Rp. ' . number_format($t->sisa_tagihan, 0, ',', '.') . ',' . 0 . "" . 0 . "*\n\n";
             }
-            
         }
         // dd($a);
         $target = Siswa::where('id', $id)->pluck('no_hp_ortu')->first();
@@ -479,5 +482,4 @@ Admin SPP
         NotifWa::NotifWa($target, $pesan);
         return back()->with('bKirimSemuaW', 'Tagihan Berhasil Dikirim Semua');
     }
-
 }

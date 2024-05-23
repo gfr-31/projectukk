@@ -51,7 +51,7 @@ class KirimTagihanController extends Controller
 *Kelas : ' . $kelas . '*
 *Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
 *Tagihan  : ' . $nama_pembayaran . '*
-*TA : ' . $ta . '*
+*Tahun Ajaran : ' . $ta . '*
 
     Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
 
@@ -95,7 +95,7 @@ Admin SPP
 *Kelas : ' . $kelas . '*
 *Jumlah Tagihan : ' . 'Rp. ' . number_format($tagihan, 0, ',', '.') . '*
 *Tagihan  : ' . $nama_pembayaran . '*
-*TA : ' . $ta . '*
+*Tahun Ajaran : ' . $ta . '*
 
     Diharapkan untuk segera melunasi Tagihan tersebut, dan segera datang ke bagian Aministrasi untuk melakukan pembayaran dengan membawa kartu SPP atau Kartu Bayaran
 

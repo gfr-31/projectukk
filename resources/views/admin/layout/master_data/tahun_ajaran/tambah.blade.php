@@ -57,8 +57,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="card-footer">
                             <a href="/admin/tahun-ajaran" class="btn btn-danger btn-sm float-right">
                                 <i class=" fa fa-reply"></i> Kembali

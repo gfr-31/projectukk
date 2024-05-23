@@ -22,9 +22,9 @@ class TarifPembayaranController extends Controller
         try {
             $admin = User::get();
             $kelas = Kelas::get();
-            // dd($tahunAjaranAktif );
+            // dd($request->all());
             if ($request->tipe == 'Bulanan') {
-                $jp = JenisPembayaran::with('TahunAjaran')->where([['tipe', $request->tipe], ['tahun_ajaran', $request->tahun_ajaran]])->get();
+                $jp = JenisPembayaran::with('TahunAjaran')->where([['tipe', $request->tipe], ['tahun_ajaran', $request->tahun_ajaran], ['id', $request->id]])->get();
                 // Tarif Pembyaran Bulanan
                 $tpb = TarifPembayaranBulanan::with('siswa')->where([['tahun_ajaran', $request->tahun_ajaran], ['nama_pembayaran', $request->nama_pembayaran]])->orderBy('kelas_id', 'asc')->get();
                 // dd($tpb);
@@ -502,7 +502,7 @@ class TarifPembayaranController extends Controller
     }
     public function hapus_tpBebas(Request $request)
     {
-        dd($request->id);
+        // dd($request->id);
         $id = $request->id;
         try {
             TarifPembayaranBebas::where('id', $id)->delete();

@@ -107,9 +107,12 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">No</th>
-                        <th>Nama Kelas</th>
+                        <th> Kelas</th>
                         <th>
                             <center>ID Kelas</center>
+                        </th>
+                        <th>
+                            <center>Tanggal Dibuat</center>
                         </th>
                         <th>
                             <center>
@@ -123,12 +126,27 @@
                     @foreach ($kelas as $k)
                         <tr>
                             <td>{{ ++$no }}</td>
-                            <td>{{ $k->kelas }}</td>
+                            @if ($k->kelas == 'Lulus')
+                                <td>
+                                    <button class=" btn btn-sm btn-danger">
+                                        <b>{{ $k->kelas }}</b>
+                                    </button>
+                                </td>
+                            @else
+                                <td>{{ $k->kelas }}</td>
+                            @endif
                             <td>
                                 <center>{{ $k->id }}</center>
                             </td>
                             <td>
+                                <center>{{ $k->created_at }}</center>
+                            </td>
+                            <td>
                                 <center>
+                                    <a href="/admin/edit/kelas{{ $k->id }}/up" class=" btn btn-primary btn-sm">
+                                        <i class=" fa fa-arrow-up"></i> Up
+                                    </a>
+                                    |
                                     <a href="{{ $k->id }}" data-toggle="modal"
                                         data-target="#exampleModalEdit{{ $k->id }}" type="button"
                                         class="btn btn-success btn-sm">

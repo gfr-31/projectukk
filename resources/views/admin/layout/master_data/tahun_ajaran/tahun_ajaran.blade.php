@@ -1,5 +1,7 @@
 @extends('admin.main')
 @section('tahunAjaran')
+    {{-- <link rel="stylesheet" href="{{ asset('dataTable/dataTableBootstrap.min.css') }}"> --}}
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -69,8 +71,7 @@
                                         </a> --}}
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                             data-target="#konfirmasiModal{{ $ta->id }}"
-                                            id="hapusButton{{ $ta->id }}"
-                                            onclick="submitDelete({{ $ta->id }})">
+                                            id="hapusButton{{ $ta->id }}" onclick="submitDelete({{ $ta->id }})">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </center>

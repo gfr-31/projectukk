@@ -265,8 +265,6 @@
                                                     <table class=" table table-sm table-striped table-responsive-xl">
                                                         <thead>
                                                             <tr>
-                                                                {{-- <th style="text-align: left">Nama Pembayaran</th>
-                                                                <th style="text-align: left">Sisa Tagihan</th> --}}
                                                                 <th style="text-align: left">Juli</th>
                                                                 <th style="text-align: left">Agustus</th>
                                                                 <th style="text-align: left">September</th>
@@ -287,7 +285,7 @@
                                                                     action="/admin/simpan-pembayaran/{{ $t->tipe }}"
                                                                     method="post" id="form-pembayaran">
                                                                     @csrf
-                                                                    {{-- supaya ada data nya --}}
+
                                                                     <input type="hidden" name="id"
                                                                         value="{{ $t->id }}" id="id">
                                                                     <input type="hidden" name="ta"
@@ -344,8 +342,6 @@
                                                                     <input type="hidden" name="juni{{ $t->id }}"
                                                                         value="{{ $t->juni }}">
 
-                                                                    {{-- memunculkan data di button --}}
-                                                                    {{-- Fungsi is_numeric = memeriksa apakah suatu nilai adalah angka atau bukan --}}
                                                                     <td style="text-align: left">
                                                                         <button type="submit" class="btn-sm btn"
                                                                             name="juli{{ $t->id }}"
@@ -501,6 +497,31 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Bulan Yang Sudah Lunas</th>
+                                            <th>Sisa Tagihan</th>
+                                            <th>Update At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 0;
+                                        @endphp
+                                        @foreach ($coba as $c)
+                                            <tr>
+                                                <td>{{ ++$no }}</td>
+                                                <td>{{ Str::upper(implode(', ', json_decode($c->bulan_lunas))) }}</td>
+                                                <td>{{ $c->sisa_tagihan }}</td>
+                                                <td>{{ $c->updated_at }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <div id="bebas" class=" table-responsive" style="height: 190px">
                                 <table class="table table-sm table-striped">
@@ -549,7 +570,7 @@
                                                     <center>
                                                         <button type="button" class="btn btn-sm btn-success btn-bayar"
                                                             data-toggle="modal"
-                                                            data-target="#popupModal{{ $t->id }}"
+                                                            data-target="#popupModalBebas{{ $t->id }}"
                                                             onclick="rpBayar({{ $t->id }})" <i
                                                             class="fa fa-money"></i> Bayar
                                                         </button>
@@ -573,7 +594,7 @@
                                         <input type="hidden" name="kelas" value="{{ $t->kelas_id }}">
                                         <input type="hidden" name="siswa" value="{{ $t->siswa_id }}">
                                         <input type="hidden" name="tipe" value="{{ $t->tipe }}">
-                                        <div class="modal fade" id="popupModal{{ $t->id }}" tabindex="-1"
+                                        <div class="modal fade" id="popupModalBebas{{ $t->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="popupModalLabel{{ $t->id }}"
                                             aria-hidden="true">
                                             <div class="modal-dialog " role="document" style="max-width: 40%">
@@ -784,11 +805,15 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td style="text-align: left">{{ $t->kode_transaksi }}</td>
-                                            <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
-                                            <td style="text-align: left">{{ ucfirst($t->bulan) }}</td>
+                                            <td style="text-align: left">{{ $t->kode_transaksi }}
+                                            </td>
+                                            <td style="text-align: left">{{ $t->nama_pembayaran }}
+                                            </td>
+                                            <td style="text-align: left">{{ ucfirst($t->bulan) }}
+                                            </td>
                                             <td style="text-align: left">
-                                                <center>{{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
+                                                <center>
+                                                    {{ 'Rp. ' . number_format((float) $t->tagihan, 0, ',', '.') }}
                                                 </center>
                                             </td>
                                             <td style="text-align: left">
@@ -797,7 +822,8 @@
                                                 </center>
                                             </td>
                                             <td>
-                                                <center>{{ $t->created_at->format('d-m-Y') }}</center>
+                                                <center>{{ $t->created_at->format('d-m-Y') }}
+                                                </center>
                                             </td>
                                             <td>
                                                 <center>
@@ -855,11 +881,14 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td style="text-align: left">{{ $t->kode_transaksi }}</td>
-                                            <td style="text-align: left">{{ $t->nama_pembayaran }}</td>
+                                            <td style="text-align: left">{{ $t->kode_transaksi }}
+                                            </td>
+                                            <td style="text-align: left">{{ $t->nama_pembayaran }}
+                                            </td>
                                             <td style="text-align: left">{{ $t->keterangan }}</td>
                                             <td style="text-align: left">
-                                                <center>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
+                                                <center>
+                                                    {{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}
                                                 </center>
                                             </td>
                                             <td style="text-align: left">
@@ -868,7 +897,8 @@
                                                 </center>
                                             </td>
                                             <td>
-                                                <center>{{ $t->created_at->format('d-m-Y') }}</center>
+                                                <center>{{ $t->created_at->format('d-m-Y') }}
+                                                </center>
                                             </td>
                                             <td>
                                                 <center>
@@ -906,11 +936,6 @@
     <script src="{{ asset('js/main/pembayaran/pembayaran.js') }}"></script>
 
     <style>
-        .red-button {
-            background-color: red;
-            color: white;
-        }
-
         /* Gaya khusus untuk pesan konfirmasi */
         .confirmation-toast {
             background-color: #007bff;

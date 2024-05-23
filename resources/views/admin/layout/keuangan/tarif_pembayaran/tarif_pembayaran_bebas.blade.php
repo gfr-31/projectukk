@@ -66,7 +66,7 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
-                            <th>NIS</th>
+                            <th class=" text-left">NIS</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Tarif</th>
@@ -80,9 +80,17 @@
                         @foreach ($tpb as $t)
                             <tr>
                                 <td>{{ ++$no }}</td>
-                                <td>{{ $t->siswa->nis }}</td>
+                                <td class=" text-left">{{ $t->siswa->nis }}</td>
                                 <td>{{ $t->siswa->nama_lengkap }}</td>
-                                <td>{{ $t->siswa->kelas->kelas }}</td>
+                                @if ($t->siswa->kelas->kelas == 'Lulus')
+                                    <td>
+                                        <button class=" btn btn-danger btn-sm">
+                                            {{ $t->siswa->kelas->kelas }}
+                                        </button>
+                                    </td>
+                                @else
+                                    <td>{{ $t->siswa->kelas->kelas }}</td>
+                                @endif
                                 <td>{{ 'Rp. ' . number_format((float) $t->tarif, 0, ',', '.') }}</td>
                                 <td>
                                     <center>
@@ -137,7 +145,8 @@
                                             <div class="">
                                                 <select class="form-select" name="kelas"
                                                     aria-label="Default select example" required>
-                                                    <option value="" class=" text-center" selected>-- Kelas --</option>
+                                                    <option value="" class=" text-center" selected>-- Kelas --
+                                                    </option>
                                                     @foreach ($kelas as $k)
                                                         <option value="{{ $k->id }}">{{ $k->kelas }}
                                                         </option>
@@ -218,7 +227,8 @@
                                             <div class="">
                                                 <select class="form-select" name="kelas"
                                                     aria-label="Default select example" required>
-                                                    <option value="" class=" text-center" selected>-- Kelas --</option>
+                                                    <option value="" class=" text-center" selected>-- Kelas --
+                                                    </option>
                                                     @foreach ($kelas as $k)
                                                         <option value="{{ $k->id }}">{{ $k->kelas }}
                                                         </option>

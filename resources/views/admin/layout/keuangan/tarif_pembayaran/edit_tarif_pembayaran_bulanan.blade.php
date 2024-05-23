@@ -71,7 +71,7 @@
                                                 </div>
                                                 <div class=" col-8">
                                                     <input class="form-control" type="text" name="namaPembayaran"
-                                                        id="" value="{{ $t->nama_pembayaran }}">
+                                                        id="" value="{{ $t->nama_pembayaran }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                                 </div>
                                                 <div class=" col-8">
                                                     <input class="form-control" id="" name="tj"
-                                                        value="{{ $t->tahun_ajaran }}" type="text">
+                                                        value="{{ $t->tahun_ajaran }}" type="text" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class=" col-8">
                                                     <input class="form-control" type="text" name="tipe" id=""
-                                                        value="{{ $t->tipe }}">
+                                                        value="{{ $t->tipe }}" readonly>
                                                 </div>
                                             </div>
                                         </div>

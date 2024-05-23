@@ -83,11 +83,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
                                         @foreach ($tagihan as $t)
                                             @if ($t->sisa_tagihan > 0)
                                                 <tr>
                                                     {{-- <td></td> --}}
-                                                    <td class="text-center">#-{{ $t->id }}</td>
+                                                    <td class="text-center">{{ $no++ }}</td>
                                                     <td class="text-start">{{ $t->nama_pembayaran }} </td>
                                                     <td class="text-end">
                                                         {{ 'Rp. ' . number_format((float) $t->sisa_tagihan, 0, ',', '.') }}
